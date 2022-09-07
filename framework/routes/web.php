@@ -11,6 +11,9 @@
 |
  */
 
+// use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Route;
+
 Auth::routes();
 
 Route::get('install', 'LaravelWebInstaller@index');
@@ -26,6 +29,8 @@ Route::group(['middleware' => ['installed_or_not', 'auth']], function () {
         return redirect('/admin/dashboard');
     });
     Route::get('/admin/dashboard', 'HomeController@index')->name('home');
+
+    Route::get('/admin/calendar', 'HomeController@calendar');
 
     Route::get('admin/change-password', 'ChangePasswordController@changePassword')->name('change-password');
     Route::post('admin/change-password', 'ChangePasswordController@updatePassword')->name('change-password.store');

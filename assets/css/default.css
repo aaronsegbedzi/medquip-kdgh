@@ -93,3 +93,11 @@
 .register-page {
     background: #f39637 !important;
 }
+
+.box-header .box-title {
+    width: 100% !important;
+}
+
+.box-header .box-title .btn {
+    float: right !important;
+}

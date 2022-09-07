@@ -10,15 +10,15 @@
 @endsection
 @section('content')
 <div class="row ">
-   <div class="col-lg-3 col-xs-6">
-      <!-- small box -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
         <div class="small-box bg-green">
             <div class="inner">
                 <h3>{{ \App\Hospital::all()->count() }}</h3>
                 <p>@lang('equicare.hospitals')</p>
             </div>
             <div class="icon">
-              <i class="fa fa-hospital-o"></i>
+                <i class="fa fa-hospital-o"></i>
             </div>
             <a href="{{ url('admin/hospitals') }}" class="small-box-footer">@lang('equicare.more_info')
                 <i class="fa fa-arrow-circle-right"></i>
@@ -56,7 +56,7 @@
         </div>
     </div>
     <div class="col-lg-3 col-xs-6">
-        <div class="small-box bg-teal">
+        <div class="small-box bg-olive">
             <div class="inner">
                 <h3>{{ \App\CallEntry::where('call_type','preventive')->count() }}</h3>
                 <p>@lang('equicare.preventive_maintenance')</p>
@@ -69,7 +69,7 @@
             </a>
         </div>
     </div>
-     <div class="col-lg-3 col-xs-6">
+    <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-red">
             <div class="inner">
                 <h3>{{ \App\Calibration::all()->count() }}</h3>
@@ -112,7 +112,7 @@
         </div>
     </div>
     <div class="col-lg-3 col-xs-6">
-        <div class="small-box bg-olive">
+        <div class="small-box bg-gray">
             <div class="inner">
                 <h3>{{ \App\Calibration::all()->count() }}</h3>
                 <p>@lang('equicare.calibrations_reminder')</p>
@@ -128,16 +128,18 @@
 </div>
 <div class="box">
     <div class="box-header with-border">
-        <h4 class="box-title">@lang('equicare.call_entries_chart')</h4>
+        <h4 class="box-title">@lang('equicare.calendar_title')</h4>
     </div>
     <div class="box-body">
         <div class="row">
             <div class="col-md-12" id="chart-container">
 
 
-                <canvas id="myChart">
+                <!-- <canvas id="myChart">
                     @lang('equicare.call_entries_chart_render')
-                </canvas>
+                </canvas> -->
+
+                <div id='custom-calendar'></div>
 
             </div>
         </div>
@@ -145,7 +147,7 @@
 </div>
 @endsection
 @section('scripts')
-    <script type="text/javascript" src="{{ asset('assets/bower_components/chart.js/Chart.bundle.min.js') }}"></script>
+<!-- <script type="text/javascript" src="{{ asset('assets/bower_components/chart.js/Chart.bundle.min.js') }}"></script>
     <script type="text/javascript">
         $(function(){
 
@@ -187,12 +189,34 @@
             });
 
         });
-    </script>
+    </script> -->
+<script type="text/javascript" src="{{ asset('assets/plugins/fullcalendar/main.min.js') }}"></script>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('custom-calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            displayEventTime: false,
+            eventDisplay: 'block',
+            timeZone: 'UTC',
+            initialView: 'dayGridMonth',
+            businessHours: true,
+            handleWindowResize: true,
+            dayMaxEvents: true,
+            events: "{!! url('admin/calendar') !!}",
+            headerToolbar: {
+                left: 'dayGridMonth,timeGridWeek,timeGridDay',
+                center: 'title',
+                right: 'prevYear,prev,next,nextYear'
+            },
+        });
+        calendar.render();
+    });
+</script>
 @endsection
 @section('styles')
-  <style type="text/css">
-    .bg-gray-active:hover{
-        color:#000;
+<style type="text/css">
+    .bg-gray-active:hover {
+        color: #000;
     }
-  </style>
+</style>
 @endsection

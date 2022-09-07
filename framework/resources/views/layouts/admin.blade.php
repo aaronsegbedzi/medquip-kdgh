@@ -23,6 +23,9 @@
   <link rel="stylesheet" href="{{ asset('assets/dist/css/skins/_all-skins.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.css') }}">
 
+  <!-- Full Calender JS -->
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/fullcalendar/main.min.css') }}">
+
   <!-- Date Picker -->
   <link rel="stylesheet" href="{{ asset('assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
   {{-- PNotify  --}}

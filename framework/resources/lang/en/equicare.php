@@ -262,5 +262,6 @@ return [
     'qr_code' => 'QR Code',
     'response_time' => 'Response Time',
     'no_data_around' => 'No Data Available',
+    'calendar_title' => 'Maintenance Events Calender'
 
 ];
