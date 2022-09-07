@@ -47,3 +47,4 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
+framework/bootstrap/cache

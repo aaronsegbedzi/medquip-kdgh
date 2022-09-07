@@ -27,13 +27,13 @@ class ForgotPasswordController extends Controller {
 	 * @return void
 	 */
 
-	function sendResetLinkEmail() {
-		if (!$this->email_setup()) {
-			return redirect(route('login'))->with('flash_message_error', 'No Email Setup done.');
-		}
-		return $this->traitsendResetLinkEmail($response);
+	// function sendResetLinkEmail() {
+	// 	if (!$this->email_setup()) {
+	// 		return redirect(route('login'))->with('flash_message_error', 'No Email Setup done.');
+	// 	}
+	// 	return $this->traitsendResetLinkEmail($response);
 
-	}
+	// }
 
 	public function __construct() {
 		$this->middleware('guest');

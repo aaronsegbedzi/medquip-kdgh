@@ -256,7 +256,7 @@ return [
     'email_add' => 'E-mail Address',
     'send_reset_link' => 'Send Reset Password Link',
     'reset_password' => 'Reset Password',
-    'forgot_your_password' => 'Forgot Your Password?',
+    'forgot_your_password' => 'Reset My Password',
     'history' => 'History',
     'equipment_history' => 'Equipments History',
     'qr_code' => 'QR Code',

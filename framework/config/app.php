@@ -13,7 +13,7 @@ return [
     |
      */
 
-    'name' => 'KDGH',
+    'name' => 'KDGH Equipment Maintenance Software',
 
     /*
     |--------------------------------------------------------------------------
