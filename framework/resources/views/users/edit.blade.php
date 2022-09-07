@@ -31,7 +31,10 @@
 							<label for="email"> @lang('equicare.email') </label>
 							<input type="email" name="email" value="{{ $user->email }}" class="form-control"/>
 						</div>
-
+						<div class="form-group col-md-6">
+							<label for="phone"> @lang('equicare.phone') </label>
+							<input type="phone" name="phone" value="{{ $user->phone }}" class="form-control"/>
+						</div>
 
 						<div class="form-group col-md-6">
 							<label for="role"> @lang('equicare.role') </label>

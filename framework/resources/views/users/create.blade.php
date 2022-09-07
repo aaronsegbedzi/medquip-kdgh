@@ -34,6 +34,10 @@
 							<input type="email" name="email" class="form-control" value="{{ old('email') }}"/>
 						</div>
 						<div class="form-group col-md-6">
+							<label for="phone"> @lang('equicare.phone') </label>
+							<input type="phone" name="phone" class="form-control" value="{{ old('phone') }}"/>
+						</div>
+						<div class="form-group col-md-6">
 							<label for="role"> @lang('equicare.role') </label>
 							<select name="role" class="form-control">
 								<option value=""> </option>

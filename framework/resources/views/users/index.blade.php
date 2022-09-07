@@ -27,6 +27,7 @@
 								<th> # </th>
 								<th> @lang('equicare.name') </th>
 								<th> @lang('equicare.email') </th>
+								<th> @lang('equicare.phone') </th>
 								<th> @lang('equicare.created_on') </th>
 								<th> @lang('equicare.role') </th>
 								@if(Auth::user()->can('Edit Users') || Auth::user()->can('Delete Users'))
@@ -47,6 +48,7 @@
 							<td> {{ $count }} </td>
 							<td> {{ ucfirst($user->name) }} </td>
 							<td> {{  $user->email }}</td>
+							<td> {{  $user->phone }}</td>
 							<td> {{ $user->created_at->diffForHumans() }}</td>
 							<td> {{ $user->roles->pluck('name')->toArray()[0] ?? '' }} </td>
 							@if(Auth::user()->can('Edit Users') || Auth::user()->can('Delete Users'))
@@ -73,6 +75,7 @@
 								<th> # </th>
 								<th> @lang('equicare.name') </th>
 								<th> @lang('equicare.email') </th>
+								<th> @lang('equicare.phone') </th>
 								<th> @lang('equicare.created_on') </th>
 								<th> @lang('equicare.role') </th>
 								@if(Auth::user()->can('Edit Users') || Auth::user()->can('Delete Users'))

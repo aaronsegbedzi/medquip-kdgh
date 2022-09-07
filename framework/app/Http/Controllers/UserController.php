@@ -43,7 +43,7 @@ class UserController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(UserCreateRequest $request) {
-		$user = User::create($request->only('name', 'email'));
+		$user = User::create($request->only('name', 'email', 'phone'));
 		$user->password = bcrypt($request->password);
 		$user->assignRole($request->role);
 		$user->save();
@@ -82,7 +82,7 @@ class UserController extends Controller {
 	 */
 	public function update(UserUpdateRequest $request, $id) {
 		$user = User::findOrFail($id);
-		$user->update($request->only('name', 'email'));
+		$user->update($request->only('name', 'email', 'phone'));
 		$user->password = bcrypt($request->password);
 		if ($request->role) {
 			$user->roles()->sync($request->role);
