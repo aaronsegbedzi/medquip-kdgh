@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 framework/vendor/
 framework/node_modules/
 framework/npm-debug.log
@@ -48,4 +47,3 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
->>>>>>> 4f151a2930be39ac68ad22ab0440e5788a465af7
