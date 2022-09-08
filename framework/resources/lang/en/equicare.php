@@ -8,7 +8,7 @@ return [
     'unique_id' => 'Unique ID',
     'equipment_name' => 'Equipment Name',
     'serial_number' => 'Serial Number',
-    'company' => 'Company',
+    'company' => 'Manufacturer',
     'model' => 'Model',
     'calibration_date' => 'Calibration Date',
     'due_date' => 'Due Date',
@@ -70,8 +70,8 @@ return [
     'call_register_date_time' => 'Call Register Date &amp; Time',
     'call_complete_date_time' => 'Call Complete Date &amp; Time',
     'enter_service' => 'Enter New Service',
-    'sign_of_engineer' => 'Sign of Engineer',
-    'sign_stamp_of_incharge' => 'Sign Stamp of Incharge',
+    'sign_of_engineer' => 'Signature of Engineer',
+    'sign_stamp_of_incharge' => 'Signature Stamp of Supervisor',
     'manage_departments' => 'Manage Departments',
     'name' => 'Name',
     'short_name' => 'Short Name',
@@ -262,6 +262,8 @@ return [
     'qr_code' => 'QR Code',
     'response_time' => 'Response Time',
     'no_data_around' => 'No Data Available',
-    'calendar_title' => 'Maintenance Events Calender'
+    'calendar_title' => 'Maintenance Events Calender',
+    'cost_Type' => 'Cost Type',
+    'wokring_status' => 'Working Status'
 
 ];

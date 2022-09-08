@@ -93,12 +93,21 @@ class HomeController extends Controller {
 			->where('call_type', 'preventive')->get();
 
 		foreach ($preventives as $key => $preventive) {
+
 			$entries[] = array(
 				'title' => $preventive['unique_id'].' ('.$preventive['name'].')',
 				'start' => $preventive['next_due_date'],
 				'url' => url('/equipments/history/'.$preventive['equip_id']),
 				'color' => '#3d9970'
 			);
+
+			$entries[] = array(
+				'title' => $preventive['unique_id'].' ('.$preventive['name'].')',
+				'start' => $preventive['call_register_date_time'],
+				'url' => url('/equipments/history/'.$preventive['equip_id']),
+				'color' => '#3d9970'
+			);
+
 		}
 
 		$calibrations = Calibration::select('calibrations.*', 'equipments.name', 'equipments.unique_id')
@@ -108,6 +117,12 @@ class HomeController extends Controller {
 			$entries[] = array(
 				'title' => $calibration['unique_id'].' ('.$calibration['name'].')',
 				'start' => $calibration['due_date'],
+				'url' => url('/equipments/history/'.$calibration['equip_id']),
+				'color' => '#919191'
+			);
+			$entries[] = array(
+				'title' => $calibration['unique_id'].' ('.$calibration['name'].')',
+				'start' => $calibration['date_of_calibration'],
 				'url' => url('/equipments/history/'.$calibration['equip_id']),
 				'color' => '#919191'
 			);

@@ -83,15 +83,15 @@
 								<th> @lang('equicare.qr_code') </th>
 								<th> @lang('equicare.name') </th>
 								<th> @lang('equicare.short_name') </th>
-								<th> @lang('equicare.user') </th>
+								<!-- <th> @lang('equicare.user') </th> -->
 								<th> @lang('equicare.company') </th>
 								<th> @lang('equicare.model') </th>
 								<th> @lang('equicare.hospital') </th>
 								<th> @lang('equicare.serial_no') </th>
 								<th> @lang('equicare.department') </th>
 								<th> @lang('equicare.unique_id') </th>
-								<th> @lang('equicare.purchase_date') </th>
-								<th> @lang('equicare.order_date') </th>
+								<!-- <th> @lang('equicare.purchase_date') </th> -->
+								<!-- <th> @lang('equicare.order_date') </th> -->
 								<th> @lang('equicare.installation_date') </th>
 								<th> @lang('equicare.warranty_date') </th>
 								@if(Auth::user()->can('Edit Equipments') || Auth::user()->can('Delete Equipments'))
@@ -107,7 +107,7 @@
 								<td><img src="{{ asset('/uploads/qrcodes/'.$equipment->id.'.png') }}" width="80px" /></td>
 								<td> {{ ucfirst($equipment->name) }} </td>
 								<td>{{ $equipment->short_name }}</td>
-								<td>{{ $equipment->user?ucfirst($equipment->user->name):'-' }}</td>
+								<!-- <td>{{ $equipment->user?ucfirst($equipment->user->name):'-' }}</td> -->
 								<td>{{ $equipment->company?? '-' }}</td>
 								<td>{{ $equipment->model ?? '-' }}</td>
 								<td>{{ $equipment->hospital?$equipment->hospital->name:'-' }}</td>
@@ -123,8 +123,8 @@
 									$uids = implode('/',$uids);
 								@endphp
 								<td>{{ $uids }}</td>
-								<td>{{ $equipment->date_of_purchase?? '-' }}</td>
-								<td>{{ $equipment->order_date?? '-' }}</td>
+								<!-- <td>{{ $equipment->date_of_purchase?? '-' }}</td> -->
+								<!-- <td>{{ $equipment->order_date?? '-' }}</td> -->
 								<td>{{ $equipment->date_of_installation??'-' }}</td>
 								<td>{{ $equipment->warranty_due_date??'-' }}</td>
 								@if(Auth::user()->can('Edit Equipments') || Auth::user()->can('Delete Equipments'))
@@ -153,15 +153,15 @@
 								<th> @lang('equicare.qr_code') </th>
 								<th> @lang('equicare.name') </th>
 								<th> @lang('equicare.short_name') </th>
-								<th> @lang('equicare.user') </th>
+								<!-- <th> @lang('equicare.user') </th> -->
 								<th> @lang('equicare.company') </th>
 								<th> @lang('equicare.model') </th>
 								<th> @lang('equicare.hospital') </th>
 								<th> @lang('equicare.serial_no') </th>
 								<th> @lang('equicare.department') </th>
 								<th> @lang('equicare.unique_id') </th>
-								<th> @lang('equicare.purchase_date') </th>
-								<th> @lang('equicare.order_date') </th>
+								<!-- <th> @lang('equicare.purchase_date') </th> -->
+								<!-- <th> @lang('equicare.order_date') </th> -->
 								<th> @lang('equicare.installation_date') </th>
 								<th> @lang('equicare.warranty_date') </th>
 								@if(Auth::user()->can('Edit Equipments') || Auth::user()->can('Delete Equipments'))
