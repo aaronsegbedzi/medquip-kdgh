@@ -71,7 +71,7 @@ class ReportController extends Controller {
 
 			$call_entries = $call_entries->get();
 			$pdf = PDF::loadView('reports.export_time_indicator_pdf', ['call_entries' => $call_entries]);
-			return $pdf->download('time_indicator_report.pdf');
+			return $pdf->setPaper('a4', 'landscape')->download('time_indicator_report.pdf');
 		} else {
 			$index['call_entries'] = $call_entries->paginate(10);
 		}
@@ -125,7 +125,7 @@ class ReportController extends Controller {
 
 			$call_entries = $call_entries->get();
 			$pdf = PDF::loadView('reports.export_equipment_pdf', ['call_entries' => $call_entries]);
-			return $pdf->download('equipment_report.pdf');
+			return $pdf->setPaper('a4', 'landscape')->download('equipment_report.pdf');
 		} else {
 			$index['call_entries'] = $call_entries->paginate(10);
 			return view('reports.equipment_report', $index);

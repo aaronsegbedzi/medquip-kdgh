@@ -57,7 +57,7 @@
 					<table class="table table-bordered table-hover">
 						<thead class="thead-inverse">
 							<tr>
-								<th> # </th>
+								<th class="text-center"> # </th>
 								<th> @lang('equicare.hospital') </th>
 								<th> @lang('equicare.unique_id') </th>
 								<th> @lang('equicare.equipment') </th>
@@ -74,7 +74,7 @@
 							@foreach ($calibrations as $calibration)
 							@php($count++)
 							<tr>
-								<td> {{ $count }} </td>
+								<td class="text-center"> {{ $count }} </td>
 								<td>{{ $calibration->equipment?$calibration->equipment->hospital->name : '-' }}
 								</td>
 								<td>{{ $calibration->equipment->unique_id }}</td>
@@ -100,7 +100,7 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<th> # </th>
+								<th class="text-center"> # </th>
 								<th> @lang('equicare.hospital') </th>
 								<th> @lang('equicare.unique_id') </th>
 								<th> @lang('equicare.equipment') </th>

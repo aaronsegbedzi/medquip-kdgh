@@ -18,27 +18,29 @@
 <div class="container">
    <div class="row">
       <div class="col-md-12">
-         <div style="text-align: center;">
+         <div class="text-center">
             <img src="{{ asset('assets/1x/login-logo.png') }}" height="55px" alt="" />
             <h2 style="color: white !important;">@lang('equicare.equipment_history')</h2>
          </div>
-         <div class="box box-primary">
+         <hr />
+         <div class="box">
             <div class="box-header with-border">
                <h4 class="box-title" style="float:left;">
                   <b>@lang('equicare.name')</b> : {{$equipment->name}}
                   &nbsp;&nbsp;&nbsp;&nbsp;
                </h4>
-               @if(\Auth::user())
-               <h4 class="box-title" style="float:right;">
-                  <a href="{{ route('equipments.edit',$equipment->id) }}" class="h4" title="@lang('equicare.edit')"><i class="fa fa-edit purple-color"></i> @lang('equicare.edit')</a>
-               </h4>
-               @endif
+
             </div>
 
             <div class="box-body">
                <div class="row">
                   @include('equipments.equipment')
                </div>
+            </div>
+            <div class="box-footer text-right">
+               @if(\Auth::user())
+                  <a href="{{ route('equipments.edit',$equipment->id) }}" class="h4" title="@lang('equicare.edit')"><i class="fa fa-edit"></i> @lang('equicare.edit')</a>
+               @endif
             </div>
          </div>
 
@@ -67,23 +69,13 @@
                      <span class="time">
                         <i class="fa fa-clock-o"></i> {{date('h:i A',strtotime($d['created_at']))}}
                      </span>
-                     <span class="time">
-                        @if($d['type'] == 'Call' && $d['call_type'] == 'breakdown')
-                        <a href="{{ route('breakdown_maintenance.edit',$d['id']) }}" title="@lang('equicare.edit')" class="h4"><i class="fa fa-edit purple-color"></i> @lang('equicare.edit') </a>
-                        @elseif($d['type'] == 'Call' && $d['call_type'] == 'preventive')
-                        <a href="{{ route('preventive_maintenance.edit',$d['id']) }}" title="@lang('equicare.edit')" class="h4"><i class="fa fa-edit purple-color"></i> @lang('equicare.edit') </a>
-                        @else
-                        <a href="{{ route('calibration.edit',$d['id']) }}" title="@lang('equicare.edit')" class="h4"><i class="fa fa-edit purple-color"></i> @lang('equicare.edit') </a>
-                        @endif
-                     </span>
                      <h3 class="timeline-header text-blue">
                         <b>{{$d['type']}}
                            @if($d['type'] == 'Call')
-                           - {{$d['call_type']}}
+                           - {{ucwords($d['call_type'])}}
                            @endif
                         </b>
                      </h3>
-
                      <div class="timeline-body">
                         <div class="row">
                            @if($d['type'] == 'Call')
@@ -92,6 +84,17 @@
                            @include('equipments.calibration')
                            @endif
                         </div>
+                     </div>
+                     <div class="timeline-footer text-right">
+                        <span class="time">
+                           @if($d['type'] == 'Call' && $d['call_type'] == 'breakdown')
+                           <a href="{{ route('breakdown_maintenance.edit',$d['id']) }}" title="@lang('equicare.edit')" class="h4"><i class="fa fa-edit"></i> @lang('equicare.edit') </a>
+                           @elseif($d['type'] == 'Call' && $d['call_type'] == 'preventive')
+                           <a href="{{ route('preventive_maintenance.edit',$d['id']) }}" title="@lang('equicare.edit')" class="h4"><i class="fa fa-edit"></i> @lang('equicare.edit') </a>
+                           @else
+                           <a href="{{ route('calibration.edit',$d['id']) }}" title="@lang('equicare.edit')" class="h5"><i class="fa fa-edit"></i> @lang('equicare.edit') </a>
+                           @endif
+                        </span>
                      </div>
                   </div>
                </li>

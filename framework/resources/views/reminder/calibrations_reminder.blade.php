@@ -20,7 +20,7 @@
 					<table class="table table-hover table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>#</th>
+								<th class="text-center">#</th>
 								<th> @lang('equicare.equipment_id') </th>
 								<th> @lang('equicare.calibration_date') </th>
 								<th> @lang('equicare.due_date_r')</th>
@@ -42,7 +42,7 @@
 							}
 							@endphp
 							<tr>
-								<td>{{ $count }} </td>
+								<td class="text-center">{{ $count }} </td>
 								<td>{{ ucwords($calibration->equipment->unique_id??'-')?? '' }} </td>
 								<td>{{ $calibration->date_of_calibration }} </td>
 								<td>{{ $calibration->due_date?$calibration->due_date . " ($remaining_days)":'-' }} </td>
@@ -58,7 +58,7 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<th>#</th>
+								<th class="text-center">#</th>
 								<th> @lang('equicare.equipment_id') </th>
 								<th> @lang('equicare.calibration_date') </th>
 								<th> @lang('equicare.due_date_r')</th>

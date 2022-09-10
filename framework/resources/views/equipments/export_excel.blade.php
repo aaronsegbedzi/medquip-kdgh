@@ -9,7 +9,7 @@
 			<table class="table table-bordered table-hover">
 				<thead class="thead-inverse">
 					<tr>
-						<th> # </th>
+						<th class="text-center"> # </th>
 						<th> @lang('equicare.name') </th>
 						<th> @lang('equicare.short_name') </th>
 						<th> @lang('equicare.user') </th>
@@ -49,7 +49,7 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<th> # </th>
+						<th class="text-center"> # </th>
 						<th> @lang('equicare.name') </th>
 						<th> @lang('equicare.short_name') </th>
 						<th> @lang('equicare.user') </th>

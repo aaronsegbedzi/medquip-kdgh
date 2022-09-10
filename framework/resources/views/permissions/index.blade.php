@@ -23,7 +23,7 @@
 						<table class="table table-bordered table-hover dataTable bottom-padding" id="data_table">
 							<thead class="thead-inverse">
 								<tr>
-									<th> # </th>
+									<th class="text-center"> # </th>
 									<th> @lang('equicare.name') </th>
 									<th> @lang('equicare.created_on') </th>
 									@if (\Auth::user()->can('Edit Permissions') || \Auth::user()->can('Delete Permissions'))
@@ -41,7 +41,7 @@
 									$count++;
 								@endphp
 								<tr>
-								<td> {{ $count }} </td>
+								<td class="text-center"> {{ $count }} </td>
 								<td> {{ ucfirst($permission->name) }} </td>
 								<td> {{ $permission->created_at->diffForHumans() }}</td>
 								@if (\Auth::user()->can('Edit Permissions') || \Auth::user()->can('Delete Permissions'))
@@ -49,11 +49,11 @@
 									<div class="tools">
 										{!! Form::open(['url' => 'admin/permissions/'.$permission->id,'method'=>'DELETE','class'=>'form-inline']) !!}
 										@can('Edit Permissions')
-											<a href="{{ route('permissions.edit',$permission->id) }}" class="btn bg-purple btn-flat btn-sm" title="@lang('equicare.edit')"><i class="fa fa-edit"></i>  </a>
+											<a href="{{ route('permissions.edit',$permission->id) }}" class="btn btn-warning btn-flat btn-sm" title="@lang('equicare.edit')"><i class="fa fa-edit"></i>  </a>
 										@endcan &nbsp;
 										@can('Delete Permissions')
 				                            <input type="hidden" name="id" value="{{ $permission->id }}">
-				                            <button class="btn btn-warning btn-flat btn-sm" type="submit" onclick="return confirm('@lang('equicare.are_you_sure')')" title="@lang('equicare.delete')"><span class="fa fa-trash-o" aria-hidden="true"></span></button>
+				                            <button class="btn btn-danger btn-flat btn-sm" type="submit" onclick="return confirm('@lang('equicare.are_you_sure')')" title="@lang('equicare.delete')"><span class="fa fa-trash-o" aria-hidden="true"></span></button>
 				                        @endcan
 				                        {!! Form::close() !!}
 									</div>
@@ -65,7 +65,7 @@
 							</tbody>
 							<tfoot>
 								<tr>
-									<th> # </th>
+									<th class="text-center"> # </th>
 									<th> @lang('equicare.name') </th>
 									<th> @lang('equicare.created_on') </th>
 									@if (\Auth::user()->can('Edit Permissions') || \Auth::user()->can('Delete Permissions'))

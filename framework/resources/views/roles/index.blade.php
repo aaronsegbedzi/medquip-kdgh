@@ -23,7 +23,7 @@
 					<table class="table table-bordered table-hover dataTable bottom-padding" id="data_table">
 						<thead class="thead-inverse">
 							<tr>
-								<th> # </th>
+								<th class="text-center"> # </th>
 								<th> @lang('equicare.name') </th>
 								<th> @lang('equicare.created_on') </th>
 								<th> @lang('equicare.permissions') </th>
@@ -42,7 +42,7 @@
 							$count++;
 							@endphp
 							<tr>
-								<td> {{ $count }} </td>
+								<td class="text-center"> {{ $count }} </td>
 								<td> {{ ucfirst($role->name) }} </td>
 								<td> {{ $role->created_at->diffForHumans() }}</td>
 								<td> {{ str_limit(implode(', ',$role->permissions->pluck('name')->toArray()),70) }} </td>
@@ -51,11 +51,11 @@
 									<div class="tools">
 										{!! Form::open(['url' => 'admin/roles/'.$role->id,'method'=>'DELETE','class'=>'form-inline']) !!}
 										@can('Edit Roles')
-										<a href="{{ route('roles.edit',$role->id) }}" class="btn bg-purple btn-flat btn-sm" title="@lang('equicare.edit')"><i class="fa fa-edit"></i>  </a>
+										<a href="{{ route('roles.edit',$role->id) }}" class="btn btn-warning btn-flat btn-sm" title="@lang('equicare.edit')"><i class="fa fa-edit"></i>  </a>
 										@endcan &nbsp;
 										<input type="hidden" name="id" value="{{ $role->id }}">
 										@can('Delete Roles')
-										<button class="btn btn-warning btn-flat btn-sm" type="submit" onclick="return confirm('@lang('equicare.are_you_sure')')" title="@lang('equicare.delete')"><span class="fa fa-trash-o" aria-hidden="true"></span></button>
+										<button class="btn btn-danger btn-flat btn-sm" type="submit" onclick="return confirm('@lang('equicare.are_you_sure')')" title="@lang('equicare.delete')"><span class="fa fa-trash-o" aria-hidden="true"></span></button>
 										@endcan
 										{!! Form::close() !!}
 									</div>
@@ -67,7 +67,7 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<th> # </th>
+								<th class="text-center"> # </th>
 								<th> @lang('equicare.name') </th>
 								<th> @lang('equicare.created_on') </th>
 								<th> @lang('equicare.permissions') </th>

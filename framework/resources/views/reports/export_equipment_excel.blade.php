@@ -7,7 +7,7 @@
 <table class="table table-bordered table-hover">
 	<thead class="thead-inverse">
 		<tr>
-			<th> # </th>
+			<th class="text-center"> # </th>
 			<th> @lang('equicare.hospital') </th>
 			<th> @lang('equicare.unique_id') </th>
 			<th> @lang('equicare.status') </th>
@@ -27,7 +27,7 @@
 		$count++;
 		@endphp
 		<tr>
-			<td> {{ $count }} </td>
+			<td class="text-center"> {{ $count }} </td>
 			<td>{{ $call_entry->equipment?$call_entry->equipment->hospital->name : '-' }}
 			</td>
 			<td>{{ $call_entry->equipment->unique_id }}</td>
@@ -43,7 +43,7 @@
 	</tbody>
 	<tfoot>
 		<tr>
-			<th> # </th>
+			<th class="text-center"> # </th>
 			<th> @lang('equicare.hospital') </th>
 			<th> @lang('equicare.unique_id') </th>
 			<th> @lang('equicare.status') </th>

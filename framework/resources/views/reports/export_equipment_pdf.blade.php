@@ -16,17 +16,17 @@
 </head>
 <body>
 	<h2> @lang('equicare.equipment_report') </h2>
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover table-striped">
 	<thead class="thead-inverse">
 		<tr>
-			<th> # </th>
+			<th class="text-center"> # </th>
 			<th> @lang('equicare.hospital') </th>
 			<th> @lang('equicare.unique_id') </th>
 			<th> @lang('equicare.status') </th>
 			<th> @lang('equicare.call_attended_by')</th>
 			<th> @lang('equicare.call_register_date_time')</th>
 			<th> @lang('equicare.call_complete_date_time')</th>
-			<th> @lang('equicare.purchase_date') </th>
+			<!-- <th> @lang('equicare.purchase_date') </th> -->
 		</tr>
 	</thead>
 	<tbody>
@@ -39,7 +39,7 @@
 		$count++;
 		@endphp
 		<tr>
-			<td> {{ $count }} </td>
+			<td class="text-center"> {{ $count }} </td>
 			<td>{{ $call_entry->equipment?$call_entry->equipment->hospital->name : '-' }}
 			</td>
 			<td>{{ $call_entry->equipment->unique_id }}</td>
@@ -49,20 +49,20 @@
 			</td>
 			<td>{{$call_entry->call_register_date_time?date('Y-m-d h:i A',strtotime($call_entry->call_register_date_time)): '-' }}</td>
 			<td>{{$call_entry->call_complete_date_time?date('Y-m-d h:i A',strtotime($call_entry->call_complete_date_time)): '-' }}</td>
-			<td>{{ $call_entry->equipment->date_of_purchase?? '-' }}</td>
+			<!-- <td>{{ $call_entry->equipment->date_of_purchase?? '-' }}</td> -->
 		</tr>
 		@endforeach
 	</tbody>
 	<tfoot>
 		<tr>
-			<th> # </th>
+			<th class="text-center"> # </th>
 			<th> @lang('equicare.hospital') </th>
 			<th> @lang('equicare.unique_id') </th>
 			<th> @lang('equicare.status') </th>
 			<th> @lang('equicare.call_attended_by')</th>
 			<th> @lang('equicare.call_register_date_time')</th>
 			<th> @lang('equicare.call_complete_date_time')</th>
-			<th> @lang('equicare.purchase_date') </th>
+			<!-- <th> @lang('equicare.purchase_date') </th> -->
 		</tr>
 	</tfoot>
 </table>

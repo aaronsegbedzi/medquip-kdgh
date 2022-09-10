@@ -65,13 +65,14 @@
         @php($settings = App\Setting::first())
         @if ($settings != null)
         <span class="logo-mini">
-          <b>
+          <!-- <b>
             @if($settings->company != null)
             {{ strtoupper(substr($settings->company, 0, 1)) }}
             @else
             E
             @endif
-          </b>
+          </b> -->
+          <img class="" alt="Medical Logo" width="70%" src="{{ asset('assets/1x/favicon.png') }}"></img>
         </span>
         <span class="logo-lg">
           @if($settings->logo != null)
@@ -226,7 +227,7 @@
               </li>
             </ul>
           </li>
-          @php($date = date('Y-m-d',strtotime('+15 days')))
+          @php($date = date('Y-m-d',strtotime('+14 days')))
           @php($preventive_reminder_count = \App\CallEntry::where('call_type','preventive')->where('next_due_date','<=',$date)->count())
             @php($calibrations_reminder_count = \App\Calibration::where('due_date','<=',$date)->count())
               @if($page == "preventive_maintenance_reminder" || $page == "calibrations_reminder")

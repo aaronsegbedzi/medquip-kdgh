@@ -54,7 +54,7 @@ return [
     'create_preventive_maintenance' => 'Create Preventive Maintenance',
     'next_due_date' => 'Next Due Date',
     'edit_preventive_maintenance' => 'Edit Preventive Maintenance',
-    'user_attended' => 'User (Who Attended)',
+    'user_attended' => 'User (Engineer Attended)',
     'service_rendered' => 'Service Rendered',
     'remarks' => 'Remarks',
     'close' => 'Close',
@@ -127,7 +127,7 @@ return [
     'user_permission' => 'User &amp; Permissions',
     'users' => 'Users',
     'roles' => 'Roles',
-    'home' => 'Home',
+    'home' => 'Dashboard',
     'copyright' => 'Copyright',
     'all_rights_reserved' => 'All rights reserved',
     'maintenance_cost' => 'Maintenance Cost',
@@ -175,7 +175,7 @@ return [
     'call_attended_by' => 'Call Attended By',
     'equipment_pdf' => 'Equipment Report PDF',
     'time_excel_report' => 'Time Indicator Excel Report',
-    'time_pdf_report' => 'Time Indicator PDF Report',
+    'time_pdf_report' => 'Time Indicator Report',
     'equip_id' => 'Equipment ID',
     'call_type' => 'Call Type',
     'response_type' => 'Response Type',
@@ -262,8 +262,9 @@ return [
     'qr_code' => 'QR Code',
     'response_time' => 'Response Time',
     'no_data_around' => 'No Data Available',
-    'calendar_title' => 'Maintenance Events Calender',
+    'calendar_title' => 'Maintenance/Calibration Event Calender',
     'cost_Type' => 'Cost Type',
-    'wokring_status' => 'Working Status'
+    'wokring_status' => 'Working Status',
+    'equipment_report_pdf' => 'KDGH EMS Equipment Report'
 
 ];

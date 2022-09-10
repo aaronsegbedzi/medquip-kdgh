@@ -24,7 +24,7 @@
 					<table id="data_table" class="table table-hover table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>#</th>
+								<th class="text-center">#</th>
 								<th> @lang('equicare.equipment_name') </th>
 								<th> @lang('equicare.user') </th>
 								<th> @lang('equicare.call_handle') </th>
@@ -44,7 +44,7 @@
 							@foreach ($p_maintenance as $preventive)
 							@php $count++; @endphp
 							<tr>
-								<td> {{ $count }} </td>
+								<td class="text-center"> {{ $count }} </td>
 								<td> {{ $preventive->equipment->name?? '-' }} </td>
 								<td> {{ $preventive->user->name ?? '-'}}</td>
 								<td> {{ $preventive->call_handle?ucfirst($preventive->call_handle): '-' }} </td>
@@ -118,7 +118,7 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<th>#</th>
+								<th class="text-center">#</th>
 								<th> @lang('equicare.equipment_name') </th>
 								<th> @lang('equicare.user') </th>
 								<th> @lang('equicare.call_handle') </th>

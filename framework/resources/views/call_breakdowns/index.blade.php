@@ -24,7 +24,7 @@
 					<table id="data_table" class="table table-hover table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>#</th>
+								<th class="text-center">#</th>
 								<th> @lang('equicare.equipment_name') </th>
 								<th> @lang('equicare.user') </th>
 								<th> @lang('equicare.call_handle') </th>
@@ -43,7 +43,7 @@
 							@foreach ($b_maintenance as $breakdown)
 							@php $count++; @endphp
 							<tr>
-								<td> {{ $count }} </td>
+								<td class="text-center"> {{ $count }} </td>
 								<td> {{ $breakdown->equipment->name?? '-' }} </td>
 								<td> {{ $breakdown->user->name ?? '-'}}</td>
 								<td> {{ $breakdown->call_handle?ucfirst($breakdown->call_handle): '-' }} </td>
@@ -119,7 +119,7 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<th>#</th>
+								<th class="text-center">#</th>
 								<th> @lang('equicare.equipment_name') </th>
 								<th> @lang('equicare.user') </th>
 								<th> @lang('equicare.call_handle') </th>

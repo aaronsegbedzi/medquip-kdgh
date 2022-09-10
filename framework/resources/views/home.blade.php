@@ -204,10 +204,10 @@
             dayMaxEvents: true,
             events: "{!! url('admin/calendar') !!}",
             headerToolbar: {
-                left: 'dayGridMonth,timeGridWeek,timeGridDay',
-                center: 'title',
+                left: 'title',
+                center: '',
                 right: 'prevYear,prev,next,nextYear'
-            },
+            }
         });
         calendar.render();
     });

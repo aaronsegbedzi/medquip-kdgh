@@ -53,7 +53,7 @@ function calculateIntervalAverage() {
 	<table class="table table-striped table-hover table-bordered">
 		<thead>
 			<tr>
-				<th> # </th>
+				<th class="text-center"> # </th>
 				<th> @lang('equicare.equip_id') </th>
 				<th> @lang('equicare.hospital') </th>
 				<th> @lang('equicare.call_type') </th>
@@ -118,7 +118,7 @@ function calculateIntervalAverage() {
 
 		<tfoot>
 			<tr>
-				<th> # </th>
+				<th class="text-center"> # </th>
 				<th> @lang('equicare.equip_id') </th>
 				<th> @lang('equicare.hospital') </th>
 				<th> @lang('equicare.call_type') </th>

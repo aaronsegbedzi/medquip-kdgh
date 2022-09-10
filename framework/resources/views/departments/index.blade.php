@@ -20,10 +20,10 @@
 						</h4>
 					</div>
 					<div class="box-body table-responsive">
-						<table class="table table-bordered table-hover dataTable bottom-padding" id="data_table">
+						<table class="table table-striped table-bordered table-hover dataTable bottom-padding" id="data_table">
 							<thead class="thead-inverse">
 								<tr>
-									<th> # </th>
+									<th class="text-center"> # </th>
 									<th> @lang('equicare.name') </th>
 									<th> @lang('equicare.short_name') </th>
 									<th> @lang('equicare.created_on') </th>
@@ -42,7 +42,7 @@
 									$count++;
 								@endphp
 								<tr>
-								<td> {{ $count }} </td>
+								<td class="text-center"> {{ $count }} </td>
 								<td> {{ ucfirst($department->name) }} </td>
 								<td>{{ $department->short_name ?? "-" }}</td>
 								<td> {{ $department->created_at->diffForHumans() }}</td>
@@ -51,11 +51,11 @@
 									<div class="tools">
 										{!! Form::open(['url' => 'admin/departments/'.$department->id,'method'=>'DELETE','class'=>'form-inline']) !!}
 										@can('Edit Departments')
-											<a href="{{ route('departments.edit',$department->id) }}" class="btn bg-purple btn-flat btn-sm" title="@lang('equicare.edit')"><i class="fa fa-edit"></i>  </a>
+											<a href="{{ route('departments.edit',$department->id) }}" class="btn btn-warning btn-flat btn-sm" title="@lang('equicare.edit')"><i class="fa fa-edit"></i>  </a>
 										@endcan &nbsp;
 										@can('Delete Departments')
 				                            <input type="hidden" name="id" value="{{ $department->id }}">
-				                            <button class="btn btn-warning btn-flat btn-sm" type="submit" onclick="return confirm('@lang('equicare.are_you_sure')')" title="@lang('equicare.delete')"><span class="fa fa-trash-o" aria-hidden="true"></span></button>
+				                            <button class="btn btn-danger btn-flat btn-sm" type="submit" onclick="return confirm('@lang('equicare.are_you_sure')')" title="@lang('equicare.delete')"><span class="fa fa-trash-o" aria-hidden="true"></span></button>
 				                        @endcan
 				                        {!! Form::close() !!}
 									</div>
@@ -67,7 +67,7 @@
 							</tbody>
 							<tfoot>
 								<tr>
-									<th> # </th>
+									<th class="text-center"> # </th>
 									<th> @lang('equicare.name') </th>
 									<th> @lang('equicare.short_name') </th>
 									<th> @lang('equicare.created_on') </th>

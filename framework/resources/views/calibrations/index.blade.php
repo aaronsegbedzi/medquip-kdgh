@@ -20,11 +20,11 @@
 				</h4>
 			</div>
 			<div class="box-body">
-				<div class="table-responsive overflow_x_unset">
-					<table id="data_table" class="table table-hover table-bordered table-striped">
+				<div class="table-responsive">
+					<table id="data_table" class="table table-condensed table-bordered table-striped table-hover bottom-padding">
 						<thead>
 							<tr>
-								<th>#</th>
+								<th class="text-center">#</th>
 								<th> @lang('equicare.calibrations') </th>
 								<th> @lang('equicare.user') </th>
 								<th> @lang('equicare.calibration_date') </th>
@@ -43,7 +43,7 @@
 							@foreach ($calibrations as $calibration)
 							@php $count++; @endphp
 							<tr>
-								<td>{{ $count }} </td>
+								<td class="text-center">{{ $count }} </td>
 								<td>{{ $calibration->equipment->name?? '' }} </td>
 								<td>{{ucwords($calibration->user->name)?? '' }} </td>
 								<td>{{ $calibration->date_of_calibration }} </td>
@@ -55,11 +55,11 @@
 			                        <td >
 										{!! Form::open(['url' => 'admin/calibration/'.$calibration->id,'method'=>'DELETE','class'=>'form-inline']) !!}
 											@can('Edit Calibrations')
-											<a href="{{ route('calibration.edit',$calibration->id) }}" class="btn bg-purple btn-sm btn-flat" title="@lang('equicare.edit')"><i class="fa fa-edit"></i>  </a>
+											<a href="{{ route('calibration.edit',$calibration->id) }}" class="btn btn-warning btn-sm btn-flat" title="@lang('equicare.edit')"><i class="fa fa-edit"></i>  </a>
 											@endcan &nbsp;
 				                            <input type="hidden" name="id" value="{{ $calibration->id }}">
 				                            @can('Delete Calibrations')
-				                            <button class="btn btn-warning btn-sm btn-flat" type="submit" onclick="return confirm('@lang('equicare.are_you_sure')')" title="@lang('equicare.delete')"><span class="fa fa-trash-o" aria-hidden="true"></span></button>
+				                            <button class="btn btn-danger btn-sm btn-flat" type="submit" onclick="return confirm('@lang('equicare.are_you_sure')')" title="@lang('equicare.delete')"><span class="fa fa-trash-o" aria-hidden="true"></span></button>
 				                            @endcan
 				                        {!! Form::close() !!}
 
@@ -71,7 +71,7 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<th>#</th>
+								<th class="text-center">#</th>
 								<th> @lang('equicare.calibrations') </th>
 								<th> @lang('equicare.user') </th>
 								<th> @lang('equicare.calibration_date') </th>

@@ -24,7 +24,7 @@
 					<table id="data_table" class="table table-hover table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>#</th>
+								<th class="text-center">#</th>
 								<th> @lang('equicare.hospital') </th>
 								<th> @lang('equicare.cost_Type') </th>
 								<th> @lang('equicare.by') </th>
@@ -37,7 +37,7 @@
 							@foreach ($maintenance_costs as $cost)
 							@php $count++; @endphp
 							<tr>
-								<td> {{ $count }} </td>
+								<td class="text-center"> {{ $count }} </td>
 								<td> {{ ucwords($cost->hospital->name) }} </td>
 								<td> {{ $cost->type=='amc'?'AMC':'CMC' }} </td>
 								@php
@@ -51,12 +51,12 @@
 			                        <td >
 										{!! Form::open(['url' => 'admin/maintenance_cost/'.$cost->id,'method'=>'DELETE','class'=>'form-inline']) !!}
 											@can('Edit Maintenance Cost')
-											<a href="{{ route('maintenance_cost.edit',$cost->id) }}" class="btn bg-purple btn-sm btn-flat" title="@lang('equicare.edit')"><i class="fa fa-edit"></i>  </a>
+											<a href="{{ route('maintenance_cost.edit',$cost->id) }}" class="btn btn-warning btn-sm btn-flat" title="@lang('equicare.edit')"><i class="fa fa-edit"></i>  </a>
 											@endcan &nbsp;
 				                            <input type="hidden" name="id" value="{{ $cost->id }}">
 				                            <button class="btn btn-view btn-info btn-sm btn-flat" type="button" title="@lang('equicare.view')"  data-id="{{ $cost->id }}"><span class="fa fa-eye" aria-hidden="true"></span></button>
 				                            @can('Delete Maintenance Cost')
-				                            <button class="btn btn-warning btn-sm btn-flat" type="submit" onclick="return confirm('@lang('equicare.are_you_sure')')" title="@lang('equicare.delete')"><span class="fa fa-trash-o" aria-hidden="true"></span></button>
+				                            <button class="btn btn-danger btn-sm btn-flat" type="submit" onclick="return confirm('@lang('equicare.are_you_sure')')" title="@lang('equicare.delete')"><span class="fa fa-trash-o" aria-hidden="true"></span></button>
 				                            @endcan
 				                        {!! Form::close() !!}
 
@@ -67,7 +67,7 @@
 							</tbody>
 							<tfoot>
 								<tr>
-									<th> # </th>
+									<th class="text-center"> # </th>
 									<th> @lang('equicare.hospital') </th>
 									<th> @lang('equicare.cost_Type') </th>
 									<th> @lang('equicare.by') </th>

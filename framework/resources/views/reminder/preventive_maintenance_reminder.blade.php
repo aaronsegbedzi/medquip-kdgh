@@ -21,7 +21,7 @@
 					<table class="table table-hover table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>#</th>
+								<th class="text-center">#</th>
 								<th> @lang('equicare.equipment_id') </th>
 								<th> @lang('equicare.due_date_r') </th>
 								<th> @lang('equicare.working_status') </th>
@@ -43,7 +43,7 @@
 							}
 							@endphp
 							<tr>
-								<td> {{ $count }} </td>
+								<td class="text-center"> {{ $count }} </td>
 								<td> {{ $p_reminder->equipment->unique_id?? '-' }} </td>
 								<td> {{ $p_reminder->next_due_date?$p_reminder->next_due_date ." ($remaining_days)":'-' }}</td>
 								<td> {{ $p_reminder->working_status?ucfirst($p_reminder->working_status): '-' }}</td>
@@ -60,7 +60,7 @@
 							</tbody>
 							<tfoot>
 								<tr>
-									<th>#</th>
+									<th class="text-center">#</th>
 									<th> @lang('equicare.equipment_id') </th>
 									<th> @lang('equicare.due_date_r') </th>
 									<th> @lang('equicare.working_status') </th>

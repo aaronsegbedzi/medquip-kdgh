@@ -22,10 +22,10 @@
 				</div>
 
 				<div class="box-body table-responsive">
-					<table class="table table-bordered table-hover dataTable bottom-padding" id="data_table">
+					<table class="table table-striped table-bordered table-hover dataTable bottom-padding" id="data_table">
 						<thead class="thead-inverse">
 							<tr>
-								<th> # </th>
+								<th class="text-center"> # </th>
 								<th> @lang('equicare.name') </th>
 								<th> @lang('equicare.email') </th>
 								<th> @lang('equicare.user') </th>
@@ -47,7 +47,7 @@
 								$count++;
 							@endphp
 							<tr>
-							<td> {{ $count }} </td>
+							<td class="text-center"> {{ $count }} </td>
 							<td> {{ ucfirst($hospital->name) }} </td>
 							<td> {{  $hospital->email ?? '-' }}</td>
 							<td> {{ $hospital->user ? ucfirst($hospital->user->name) : '-' }}</td>
@@ -58,11 +58,11 @@
                         	<td>
 								{!! Form::open(['url' => 'admin/hospitals/'.$hospital->id,'method'=>'DELETE','class'=>'form-inline']) !!}
 									@can('Edit Hospitals')
-									<a href="{{ route('hospitals.edit',$hospital->id) }}" class="btn bg-purple btn-sm btn-flat" title="@lang('equicare.edit')"><i class="fa fa-edit"></i>  </a>
+									<a href="{{ route('hospitals.edit',$hospital->id) }}" class="btn btn-warning btn-sm btn-flat" title="@lang('equicare.edit')"><i class="fa fa-edit"></i>  </a>
 									@endcan &nbsp;
 		                            <input type="hidden" name="id" value="{{ $hospital->id }}">
 		                            @can('Delete Hospitals')
-		                            <button class="btn btn-warning btn-sm btn-flat" type="submit" onclick="return confirm('@lang('equicare.are_you_sure')')" title="@lang('equicare.delete')"><span class="fa fa-trash-o" aria-hidden="true"></span></button>
+		                            <button class="btn btn-danger btn-sm btn-flat" type="submit" onclick="return confirm('@lang('equicare.are_you_sure')')" title="@lang('equicare.delete')"><span class="fa fa-trash-o" aria-hidden="true"></span></button>
 		                            @endcan
 		                        {!! Form::close() !!}
 							</td>
@@ -73,7 +73,7 @@
 						</tbody>
 						<tfoot>
 							<tr>
-								<th> # </th>
+								<th class="text-center"> # </th>
 								<th> @lang('equicare.name') </th>
 								<th> @lang('equicare.email') </th>
 								<th> @lang('equicare.user') </th>
