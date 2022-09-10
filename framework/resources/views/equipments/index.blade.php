@@ -103,7 +103,7 @@
 							@foreach ($equipments as $key => $equipment)
 							<tr>
 								<td class="text-center"> {{ $key+1 }} </td>
-								<td class="text-center"><img src="{{ asset('/uploads/qrcodes/'.$equipment->id.'.png') }}" width="80px" /></td>
+								<td class="text-center"><img src="{{ asset('/uploads/qrcodes/'.$equipment->id.'.png') }}" width="50px" /></td>
 								<td> {{ ucfirst($equipment->name) }} </td>
 								<!-- <td>{{ $equipment->short_name }}</td> -->
 								<!-- <td>{{ $equipment->user?ucfirst($equipment->user->name):'-' }}</td> -->
@@ -133,7 +133,7 @@
 									<a href="{{ route('equipments.edit',$equipment->id) }}" class="btn btn-warning btn-sm btn-flat marginbottom" title="@lang('equicare.edit')"><i class="fa fa-edit"></i></a>
 									<a target="_blank" href="{{ route('equipments.history',$equipment->id) }}" class="btn bg-olive btn-sm btn-flat marginbottom" title="@lang('equicare.history')"><i class="fa fa-history"></i></a>
 									@endcan
-									<a href="#" class="btn bg-purple btn-sm btn-flat marginbottom" title="@lang('equicare.qr_code')" data-uniqueid="{{$equipment->unique_id}}" data-url="{{ asset('uploads/qrcodes/'.$equipment->id.'.png') }}" data-toggle="modal" data-target="#qr-modal"><i class="fa fa-qrcode"></i></a>
+									<a href="#" class="btn bg-purple btn-sm btn-flat marginbottom" title="@lang('equicare.qr_code')" data-srno="{{$equipment->sr_no}}" data-uniqueid="{{$equipment->unique_id}}" data-url="{{ asset('uploads/qrcodes/'.$equipment->id.'.png') }}" data-toggle="modal" data-target="#qr-modal"><i class="fa fa-qrcode"></i></a>
 									<input type="hidden" name="id" value="{{ $equipment->id }}">
 									@can('Delete Equipments')
 									<button class="btn btn-danger btn-sm btn-flat marginbottom" type="submit" onclick="return confirm('@lang('equicare.are_you_sure')')" title="@lang('equicare.delete')"><span class="fa fa-trash-o" aria-hidden="true"></span></button>
@@ -185,7 +185,7 @@
 			modal.find('#qr-modal-iframe').attr('src', '#');
 			modal.find('.modal-title').html('QR Code for <strong>' + button.data('uniqueid') + '</strong>');
 			modal.find('#qr-image').attr('src', button.data('url'));
-			modal.find('#qr-download').attr('download', button.data('uniqueid') + '.png');
+			modal.find('#qr-download').attr('download', button.data('srno') + '.png');
 			modal.find('#qr-download').attr('href', button.data('url'));
 		})
 	});
