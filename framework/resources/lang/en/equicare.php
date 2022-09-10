@@ -26,7 +26,7 @@ return [
     'delete' => 'Delete',
     'action' => 'Actions',
     'are_you_sure' => 'Are you sure?',
-    'call_entries' => 'Maintenance Entries',
+    'call_entries' => 'Maintenance',
     'breakdown_maintenance_call_entry' => 'Breakdown Maintenance Call Entry',
     'breakdown_maintenance' => 'Breakdown Maintenance',
     'create_breakdown_maintenance' => 'Create Breakdown Maintenance',

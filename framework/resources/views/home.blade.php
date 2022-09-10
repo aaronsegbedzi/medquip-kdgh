@@ -42,7 +42,7 @@
     </div>
 
     <div class="col-lg-3 col-xs-6">
-        <div class="small-box bg-aqua">
+        <div class="small-box bg-blue">
             <div class="inner">
                 <h3>{{ \App\CallEntry::where('call_type','breakdown')->count() }}</h3>
                 <p>@lang('equicare.breakdown_maintenance')</p>
@@ -84,7 +84,7 @@
         </div>
     </div>
     <div class="col-lg-3 col-xs-6">
-        <div class="small-box bg-blue">
+        <div class="small-box bg-aqua">
             <div class="inner">
                 <h3>{{ \App\Department::all()->count() }}</h3>
                 <p>@lang('equicare.departments')</p>
@@ -132,64 +132,22 @@
     </div>
     <div class="box-body">
         <div class="row">
-            <div class="col-md-12" id="chart-container">
-
-
-                <!-- <canvas id="myChart">
-                    @lang('equicare.call_entries_chart_render')
-                </canvas> -->
-
+            <div class="col-md-12">
+                <div class="text-left">
+                    <span class="text-bold">Event Types: &nbsp;</span>
+                    <label class="label bg-olive">Preventice Maintenance (PM) Due Dates</label>
+                    <label class="label bg-gray">Calibration Due Dates</label>
+                    <label class="label bg-blue">Breadown Maintenance (BM) Due Dates</label>
+                    <label class="label bg-red">Warranty Due Dates</label>
+                </div>
+                <br/>
                 <div id='custom-calendar'></div>
-
             </div>
         </div>
     </div>
 </div>
 @endsection
 @section('scripts')
-<!-- <script type="text/javascript" src="{{ asset('assets/bower_components/chart.js/Chart.bundle.min.js') }}"></script>
-    <script type="text/javascript">
-        $(function(){
-
-            var ctx = document.getElementById("myChart");
-            var myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: {!! json_encode($total_days_array) !!},
-                    datasets: [
-                    {
-                        label: '{{__("equicare.breakdown_maintenance")}}',
-                        data: {!! json_encode($breakdown) !!},
-                        fill:false,
-                        lineTension: 0.1,
-                        borderColor: 'rgba(0,192,239,0.9)',
-                    },
-                    {
-                        label: '{{__("equicare.preventive_maintenance")}}',
-                        data: {!! json_encode($preventive) !!},
-                        fill:false,
-                        lineTension: 0.1,
-                        borderColor:'rgba(57,204,204,0.7)'
-
-                    },
-                    ]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero:true,
-                                stepSize:1,
-                                suggestedMin: 0,
-                                suggestedMax: 3
-                            }
-                        }],
-                    }
-                }
-            });
-
-        });
-    </script> -->
 <script type="text/javascript" src="{{ asset('assets/plugins/fullcalendar/main.min.js') }}"></script>
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function() {

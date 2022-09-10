@@ -19,7 +19,7 @@
    <div class="row">
       <div class="col-md-12">
          <div class="text-center">
-            <img src="{{ asset('assets/1x/login-logo.png') }}" height="55px" alt="" />
+            <img style="padding-right: 10px;" src="{{ asset('assets/1x/login-logo.png') }}" height="55px" alt="" />
             <h2 style="color: white !important;">@lang('equicare.equipment_history')</h2>
          </div>
          <hr />
@@ -52,7 +52,7 @@
                @foreach($data as $d)
                <!-- timeline time label -->
                <li class="time-label">
-                  <span class="bg-red">
+                  <span class="bg-gray">
                      {{date('Y-m-d',strtotime($d['created_at']))}}
                   </span>
                </li>

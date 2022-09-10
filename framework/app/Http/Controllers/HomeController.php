@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Calibration;
 use App\CallEntry;
+use App\Equipment;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
@@ -84,7 +85,7 @@ class HomeController extends Controller {
 				'start' => $breakdown['call_register_date_time'],
 				'url' => url('/equipments/history/'.$breakdown['equip_id']),
 				'description' => $breakdown['nature_of_problem'],
-				'color' => '#00c0ef'
+				'color' => '#0073b7'
 			);
 		}
 
@@ -125,6 +126,17 @@ class HomeController extends Controller {
 				'start' => $calibration['date_of_calibration'],
 				'url' => url('/equipments/history/'.$calibration['equip_id']),
 				'color' => '#919191'
+			);
+		}
+
+		$equipments = Equipment::select('*')->get();
+
+		foreach ($equipments as $key => $equipment) {
+			$entries[] = array(
+				'title' => $equipment['unique_id'].' ('.$equipment['name'].')',
+				'start' => $equipment['warranty_due_date'],
+				'url' => url('/equipments/history/'.$equipment['id']),
+				'color' => '#dd4b39'
 			);
 		}
 

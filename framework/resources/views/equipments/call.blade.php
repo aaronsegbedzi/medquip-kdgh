@@ -3,11 +3,24 @@
 </div>
 
 <div class="col-md-4">
-   <b>@lang('equicare.call_handle') : </b> {{$d['call_handle']}}
+   <b>@lang('equicare.call_handle') : </b> {{ucwords($d['call_handle'])}}
 </div>
 
 <div class="col-md-4">
-   <b>@lang('equicare.working_status') : </b> {{$d['working_status']}}
+   <b>@lang('equicare.working_status') : </b>
+   @php
+      switch ($d['working_status']) {
+         case 'working':
+            echo '<label class="label label-success">'.ucwords($d['working_status']).'</label>';
+            break;
+         case 'not working':
+            echo '<label class="label label-danger">'.ucwords($d['working_status']).'</label>';
+            break;
+         default:
+            echo '<label class="label label-default">'.ucwords($d['working_status']).'</label>';
+            break;
+      }
+   @endphp
 </div>
 
 <div class="col-md-4">
