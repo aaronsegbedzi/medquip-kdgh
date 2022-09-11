@@ -49,6 +49,7 @@ Route::group(['middleware' => ['installed_or_not', 'auth']], function () {
     Route::delete('/admin/equipments/{equipment}', 'EquipmentController@destroy')->name('equipments.destroy');
     Route::patch('/admin/equipments/{equipment}', 'EquipmentController@update')->name('equipments.update');
     Route::get('/admin/equipments/{equipment}/edit', 'EquipmentController@edit')->name('equipments.edit');
+    Route::get('/admin/qrzip', 'EquipmentController@downloadZip');
     
 	 
     Route::resource('admin/departments', 'DepartmentController');

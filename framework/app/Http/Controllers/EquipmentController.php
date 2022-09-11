@@ -14,6 +14,8 @@ use App\Calibration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use App\Http\Requests\EquipmentRequest;
+use ZipArchive;
+use File;
 
 class EquipmentController extends Controller
 {
@@ -31,7 +33,7 @@ class EquipmentController extends Controller
         $index['companies'] = Equipment::distinct()->get(['company']);
         $index['hospital_id'] = isset($request->hospital_id) ? $request->hospital_id : "";
         $index['companyy'] = isset($request->company) ? $request->company : "";
-			
+
         $equipments = Equipment::select('*');
         if (isset($index['hospital_id']) && $index['hospital_id'] != "") {
             $equipments->where('hospital_id', $index['hospital_id']);
@@ -70,7 +72,7 @@ class EquipmentController extends Controller
         $index['page'] = 'equipments';
         $index['hospitals'] = Hospital::all();
         $index['departments'] =
-        Department::select('id', DB::raw('CONCAT(short_name," (" , name ,")") as full_name'))
+            Department::select('id', DB::raw('CONCAT(short_name," (" , name ,")") as full_name'))
             ->pluck('full_name', 'id')
             ->toArray();
         return view('equipments.create', $index);
@@ -112,7 +114,7 @@ class EquipmentController extends Controller
             ->count();
         $equipment_number = sprintf("%02d", $equipment_number + 1);
 
-        $equipment->unique_id="";
+        $equipment->unique_id = "";
         $hospital = Hospital::where('id', $request->hospital_id)->first();
         if ($hospital != "") {
             $unique_id = $hospital->slug . '/' . $equipment->department . '/' . $equipment->short_name . '/' . $equipment_number;
@@ -120,31 +122,33 @@ class EquipmentController extends Controller
             $equipment->unique_id = $unique_id;
         }
         $equipment->save();
-        $id=$equipment->id;
-        if(extension_loaded('imagick')){
+        $id = $equipment->id;
+        if (extension_loaded('imagick')) {
             // Generate QR Code
-            $url = env('APP_URL')."/equipments/history/".$id;
-            $image=QrCode::format('png')->size(300)->generate($url, 'uploads/qrcodes/'.$id.'.png');
+            $url = env('APP_URL') . "/equipments/history/" . $id;
+            $image = QrCode::format('png')->size(300)->generate($url, 'uploads/qrcodes/' . $id . '.png');
         }
 
         return redirect('admin/equipments')->with('flash_message', 'Equipment "' . $equipment->name . '" created');
     }
 
-    public function qr($id){
-        $equipment=Equipment::findOrFail($id);
-        $url = env('APP_URL')."/admin/equipments/history/".$equipment->id;
-        $qr_content=__('equicare.equipment_id').": ".$equipment->unique_id." \n\n".
-                    __('equicare.details').": ".$url;
-        return '<div style="text-align:center;"><img src="data:image/png;base64, '.base64_encode(QrCode::format('png')->size(150)->generate($qr_content)).'"></div>';
+    public function qr($id)
+    {
+        $equipment = Equipment::findOrFail($id);
+        $url = env('APP_URL') . "/admin/equipments/history/" . $equipment->id;
+        $qr_content = __('equicare.equipment_id') . ": " . $equipment->unique_id . " \n\n" .
+            __('equicare.details') . ": " . $url;
+        return '<div style="text-align:center;"><img src="data:image/png;base64, ' . base64_encode(QrCode::format('png')->size(150)->generate($qr_content)) . '"></div>';
     }
 
-    public function qr_image($id){
-        $equipment=Equipment::findOrFail($id);
-        $url = env('APP_URL')."/admin/equipments/history/".$equipment->id;
-        $qr_content=__('equicare.equipment_id').": ".$equipment->unique_id." \n\n".
-                    __('equicare.details').": ".$url;
-        $image=QrCode::format('png')->size(150)->generate($qr_content);
-        return response($image)->header('Content-type','image/png');
+    public function qr_image($id)
+    {
+        $equipment = Equipment::findOrFail($id);
+        $url = env('APP_URL') . "/admin/equipments/history/" . $equipment->id;
+        $qr_content = __('equicare.equipment_id') . ": " . $equipment->unique_id . " \n\n" .
+            __('equicare.details') . ": " . $url;
+        $image = QrCode::format('png')->size(150)->generate($qr_content);
+        return response($image)->header('Content-type', 'image/png');
     }
 
     public function edit($id)
@@ -154,7 +158,7 @@ class EquipmentController extends Controller
         $index['equipment'] = Equipment::findOrFail($id);
         $index['hospitals'] = Hospital::all();
         $index['departments'] =
-        Department::select('id', DB::raw('CONCAT(short_name," (" , name ,")") as full_name'))
+            Department::select('id', DB::raw('CONCAT(short_name," (" , name ,")") as full_name'))
             ->pluck('full_name', 'id')
             ->toArray();
         return view('equipments.edit', $index);
@@ -192,10 +196,10 @@ class EquipmentController extends Controller
         $equipment->notes = $request->notes;
 
         $equipment->save();
-        if(extension_loaded('imagick')){
+        if (extension_loaded('imagick')) {
             // Generate QR Code
-            $url = env('APP_URL')."/equipments/history/".$id;
-            $image=QrCode::format('png')->size(300)->generate($url, 'uploads/qrcodes/'.$id.'.png');
+            $url = env('APP_URL') . "/equipments/history/" . $id;
+            $image = QrCode::format('png')->size(300)->generate($url, 'uploads/qrcodes/' . $id . '.png');
         }
 
         return redirect('admin/equipments')->with('flash_message', 'Equipment "' . $equipment->name . '" updated');
@@ -215,7 +219,7 @@ class EquipmentController extends Controller
 
         return redirect('admin/equipments')->with('flash_message', 'Equipment "' . $equipment->name . '" deleted');
     }
-    
+
     public static function availibility($method)
     {
         $r_p = \Auth::user()->getPermissionsViaRoles()->pluck('name')->toArray();
@@ -228,29 +232,53 @@ class EquipmentController extends Controller
         }
     }
 
-    public function history($id){
+    public function history($id)
+    {
         $index['page'] = 'equipments history';
-        $index['equipment'] = Equipment::find($id);             
+        $index['equipment'] = Equipment::find($id);
 
         $history = collect();
-        $h1 = CallEntry::where('equip_id',$id)->with('user')->with('user_attended_fn')->get();
-        foreach($h1 as $h){
+        $h1 = CallEntry::where('equip_id', $id)->with('user')->with('user_attended_fn')->get();
+        foreach ($h1 as $h) {
             $h2 = collect($h);
             $h2->put('type', 'Call');
             $history[] = $h2;
         }
 
         $calibration = collect();
-        $c1 = Calibration::where('equip_id',$id)->with('user')->get();
-        foreach($c1 as $c){
+        $c1 = Calibration::where('equip_id', $id)->with('user')->get();
+        foreach ($c1 as $c) {
             $c2 = collect($c);
             $c2->put('type', 'Calibration');
             $calibration[] = $c2;
         }
-        
+
         $collection = new Collection();
         $index['data'] = $collection->merge($history)->merge($calibration)->sortByDesc('created_at');
-        
-        return view('equipments.history',$index);
+
+        return view('equipments.history', $index);
     }
+
+    public function downloadZip()
+    {
+
+        $zip = new ZipArchive;
+
+        $fileName = 'qrcodes.zip';
+
+        if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE) {
+            
+            $files = File::files(public_path('qrcodes'));
+
+            foreach ($files as $key => $value) {
+                $relativeNameInZipFile = basename($value);
+                $zip->addFile($value, $relativeNameInZipFile);
+            }
+
+            $zip->close();
+        }
+
+        return response()->download(public_path($fileName));
+    }
+
 }
