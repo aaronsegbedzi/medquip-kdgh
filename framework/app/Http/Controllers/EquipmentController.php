@@ -268,14 +268,15 @@ class EquipmentController extends Controller
 
         if ($zip->open(public_path($fileName), (ZipArchive::CREATE | ZipArchive::OVERWRITE)) === TRUE) {
 
-            $equipments = Equipment::select('id','sr_no')->get();
+            $equipments = Equipment::select('equipments.id','equipments.sr_no','equipments.name','departments.name as depname')
+            ->join('departments', 'department', '=', 'departments.id')->get();
 
             foreach ($equipments as $key => $equipment) {
-                $zip->addFile(public_path('qrcodes/'.$equipment->id.'.png'), $equipment->sr_no.'.png');
+                $zip->addFile(public_path('qrcodes/'.$equipment->id.'.png'), $equipment->depname.'/'.$equipment->name.'/'.$equipment->sr_no.'.png');
             }
 
             $zip->close();
-            
+
         }
 
         return response()->download(public_path($fileName));
