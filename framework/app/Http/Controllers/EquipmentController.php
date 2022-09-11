@@ -264,15 +264,16 @@ class EquipmentController extends Controller
 
         $zip = new ZipArchive;
 
-        $fileName = 'qrcodes.zip';
+        $fileName = 'qrcodes-'.date("Y_m_d_h_m_s").'.zip';
 
         if ($zip->open(public_path($fileName), (ZipArchive::CREATE | ZipArchive::OVERWRITE)) === TRUE) {
 
-            $equipments = Equipment::select('equipments.id','equipments.sr_no','equipments.name','departments.name as depname')
-            ->join('departments', 'department', '=', 'departments.id')->get();
+            $equipments = Equipment::select('equipments.id','equipments.sr_no','equipments.name','departments.name as depname', 'hospitals.name as hospname')
+            ->join('departments', 'department', '=', 'departments.id')
+            ->join('hospitals', 'hospital_id', '=', 'hospitals.id')->get();
 
             foreach ($equipments as $key => $equipment) {
-                $zip->addFile(public_path('qrcodes/'.$equipment->id.'.png'), $equipment->depname.'/'.$equipment->name.'/'.$equipment->sr_no.'.png');
+                $zip->addFile(public_path('qrcodes/'.$equipment->id.'.png'), $equipment->hospname.'/'.$equipment->depname.'/'.$equipment->name.'/'.$equipment->sr_no.'.png');
             }
 
             $zip->close();
