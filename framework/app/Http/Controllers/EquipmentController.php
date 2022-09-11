@@ -259,12 +259,18 @@ class EquipmentController extends Controller
         return view('equipments.history', $index);
     }
 
+    /**
+     * Return Zip Archive File of all QR Codes.
+     *
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function downloadZip()
     {
 
         $zip = new ZipArchive;
 
-        $fileName = 'qrcodes-'.date("Y_m_d_h_m_s").'.zip';
+        $fileName = 'qrcodes_'.date("Y_m_d_h_m_s").'.zip';
 
         if ($zip->open(public_path($fileName), (ZipArchive::CREATE | ZipArchive::OVERWRITE)) === TRUE) {
 
