@@ -71,7 +71,7 @@
 				<div class="export-btns">
 					{!! Form::label('excel_hidden',__('equicare.export_excel'),['class' => 'btn btn-success btn-flat excel','name'=>'action','tabindex'=>1]) !!}
 					{!! Form::label('pdf_hidden',__('equicare.export_pdf'),['class' => 'btn btn-primary btn-flat pdf','name'=>'action','tabindex'=>2]) !!}
-					<a href="{{ url('/admin/qrzip') }}" class="btn btn-danger btn-flat">Download QR Codes</a>
+					<a href="{{ url('/admin/qrzip') }}" class="btn bg-purple btn-flat">@lang('equicare.qr_download_zip')</a>
 				</div>
 			</div>
 			<div class="box-body">

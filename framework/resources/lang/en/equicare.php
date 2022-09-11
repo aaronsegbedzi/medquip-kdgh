@@ -265,6 +265,7 @@ return [
     'calendar_title' => 'Maintenance/Calibration Event Calender',
     'cost_Type' => 'Cost Type',
     'wokring_status' => 'Working Status',
-    'equipment_report_pdf' => 'KDGH EMS Equipment Report'
+    'equipment_report_pdf' => 'KDGH EMS Equipment Report',
+    'qr_download_zip' => 'Export QR Codes'
 
 ];

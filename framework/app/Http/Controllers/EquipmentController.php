@@ -266,16 +266,16 @@ class EquipmentController extends Controller
 
         $fileName = 'qrcodes.zip';
 
-        if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE) {
-            
-            $files = File::files(public_path('qrcodes'));
+        if ($zip->open(public_path($fileName), (ZipArchive::CREATE | ZipArchive::OVERWRITE)) === TRUE) {
 
-            foreach ($files as $key => $value) {
-                $relativeNameInZipFile = basename($value);
-                $zip->addFile($value, $relativeNameInZipFile);
+            $equipments = Equipment::select('id','sr_no')->get();
+
+            foreach ($equipments as $key => $equipment) {
+                $zip->addFile(public_path('qrcodes/'.$equipment->id.'.png'), $equipment->sr_no.'.png');
             }
 
             $zip->close();
+            
         }
 
         return response()->download(public_path($fileName));
