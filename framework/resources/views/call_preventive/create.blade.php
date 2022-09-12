@@ -36,7 +36,7 @@
 					<div class="form-group col-md-4">
 						<label for="unique_id"> @lang('equicare.serial_number') </label>
 						{!! Form::select('unique_id',$serial_no??[],null,['class'=>'form-control
-						unique_id_select2','placeholder'=>'Select Unique Id']) !!}
+						unique_id_select2','placeholder'=>'Select Serial No.']) !!}
 					</div>
 					<div class="form-group col-md-4">
 						<label for="equip_name"> @lang('equicare.equipment_name') </label>
@@ -49,11 +49,15 @@
 					</div>
 					<div class="form-group col-md-4">
 						<label for="company"> @lang('equicare.company') </label>
-						<input type="text" name="company" class=" company form-control" value="" disabled />
+						<input type="text" name="company" class="company form-control" value="" disabled />
 					</div>
 					<div class="form-group col-md-4">
 						<label for="model"> @lang('equicare.model') </label>
-						<input type="text" name="model" class=" company form-control" value="" disabled />
+						<input type="text" name="model" class="model form-control" value="" disabled />
+					</div>
+					<div class="form-group col-md-4">
+						<label for="short_name"> @lang('equicare.short_name_eq') </label>
+						<input type="text" name="short_name" class="short_name form-control" value="" disabled />
 					</div>
 
 				</div>
@@ -176,12 +180,14 @@
 		var company = $('.company');
 		var model = $('.model');
 		var department = $('.department_select2');
+		var short_name = $('.short_name');
 		if (value == "") {
 			equip_name.val("");
 			sr_no.val("");
 			company.val("");
 			model.val("");
 			department.val("");
+			short_name.val("");
 		}
 		if (value != "") {
 			$.ajax({
@@ -199,12 +205,13 @@
 					company.val(data.success.company);
 					model.val(data.success.model);
 					department.val(data.success.department);
+					short_name.val(data.success.short_name);
 
 					new PNotify({
 						title: ' Success!',
 						text: "{{__('equicare.equipment_data_fetched')}}",
 						type: 'success',
-						delay: 3000,
+						delay: 1000,
 						nonblock: {
 							nonblock: true
 						}
@@ -237,12 +244,14 @@
 		var sr_no = $('.sr_no');
 		var company = $('.company');
 		var model = $('.model');
+		var short_name = $('.short_name');
 		if (value == "") {
 			equip_name.val("");
 			sr_no.val("");
 			company.val("");
 			model.val("");
 			department.val("");
+			short_name.val("");
 			unique_id.trigger("change");
 			unique_id.val("");
 
@@ -308,11 +317,13 @@
 		var sr_no = $('.sr_no');
 		var company = $('.company');
 		var model = $('.model');
+		var short_name = $('.short_name');
 		if (value == "") {
 			equip_name.val("");
 			sr_no.val("");
 			company.val("");
 			model.val("");
+			short_name.val("");
 			$(this).val("");
 			unique_id.trigger("change");
 			unique_id.val("");

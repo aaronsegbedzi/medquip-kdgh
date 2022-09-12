@@ -134,11 +134,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="text-left">
-                    <span class="text-bold">Event Types: &nbsp;</span>
-                    <label class="label bg-olive">Preventice Maintenance (PM) Due Dates</label>
-                    <label class="label bg-gray">Calibration Due Dates</label>
-                    <label class="label bg-blue">Breadown Maintenance (BM) Due Dates</label>
-                    <label class="label bg-red">Warranty Due Dates</label>
+                    <span class="text-bold">@lang('equicare.calendar_event_title'):&nbsp;</span>
+                    <label class="label bg-olive">@lang('equicare.preventive_event')</label>
+                    <label class="label bg-gray">@lang('equicare.calibration_event')</label>
+                    <label class="label bg-blue">@lang('equicare.breakdown_event')</label>
+                    <label class="label bg-red">@lang('equicare.warranty_event')</label>
                 </div>
                 <br/>
                 <div id='custom-calendar'></div>

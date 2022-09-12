@@ -69,8 +69,8 @@ class PreventiveController extends Controller {
 
 		$index['preventive'] = CallEntry::find($id);
 
-		$index['unique_ids'] = Equipment::withTrashed()->where('hospital_id', $index['preventive']->equipment->hospital_id)
-			->pluck('unique_id', 'id')
+		$index['serial_no'] = Equipment::withTrashed()->where('hospital_id', $index['preventive']->equipment->hospital_id)
+			->pluck('sr_no', 'id')
 			->toArray();
 		$h_id = $index['preventive']->equipment->hospital_id;
 		$index['departments'] = Department::select('id', \DB::raw('CONCAT(short_name,"(",name,")") as department'))

@@ -54,7 +54,7 @@
   </style>
 </head>
 
-<body class="hold-transition skin-black-light sidebar-mini fixed">
+<body class="hold-transition skin-yellow sidebar-dark-blue sidebar-mini fixed sidebar-collapse">
   <div class="wrapper">
 
     <header class="main-header">
@@ -93,6 +93,9 @@
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
           <span class="sr-only">@lang('equicare.toggle_navigation')</span>
         </a>
+        <ul class="nav navbar-nav collapse navbar-collapse">
+          <li><a href="#" class="text-bold app-title">@lang('equicare.app_title')</a></li>
+        </ul>
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav pull-right">
             <li class="nav-item dropdown">
