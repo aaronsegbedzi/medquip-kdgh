@@ -28,7 +28,7 @@ class PreventiveController extends Controller {
 		$this->availibility('Create Preventive Maintenance');
 
 		$index['page'] = 'preventive_maintenance';
-		$index['unique_ids'] = Equipment::pluck('unique_id', 'id')->toArray();
+		$index['serial_no'] = Equipment::pluck('sr_no', 'id')->toArray();
 		$index['departments'] = Department::select('id', \DB::raw('CONCAT(short_name,"(",name,")") as department'))->pluck('department', 'id')->toArray();
 		$index['hospitals'] = Hospital::withTrashed()->pluck('name', 'id')->toArray();
 
@@ -128,7 +128,7 @@ class PreventiveController extends Controller {
 	public function ajax_hospital_change(Request $request) {
 		if ($request->ajax()) {
 			$unique_id = Equipment::where('hospital_id', $request->id)
-				->pluck('unique_id', 'id')
+				->pluck('sr_no', 'id')
 				->toArray();
 
 			$department = Equipment::where('hospital_id', $request->id)
@@ -151,11 +151,11 @@ class PreventiveController extends Controller {
 
 				$unique_id = Equipment::where('department', $request->department)
 					->where('hospital_id', $request->hospital_id)
-					->pluck('unique_id', 'id')
+					->pluck('sr_no', 'id')
 					->toArray();
 			} else {
 				$unique_id = Equipment::where('department', $request->department)
-					->pluck('unique_id', 'id')
+					->pluck('sr_no', 'id')
 					->toArray();
 			}
 		}

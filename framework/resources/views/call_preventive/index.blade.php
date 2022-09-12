@@ -29,7 +29,7 @@
 								<th> @lang('equicare.user') </th>
 								<th> @lang('equicare.call_handle') </th>
 								<th> @lang('equicare.working_status') </th>
-								<th> @lang('equicare.report_number') </th>
+								<th> @lang('equicare.serial_number') </th>
 								<th> @lang('equicare.next_due_date')</th>
 								<th> @lang('equicare.call_registration_date_time')</th>
 								<th> @lang('equicare.attended_by') </th>
@@ -49,7 +49,7 @@
 								<td> {{ $preventive->user->name ?? '-'}}</td>
 								<td> {{ $preventive->call_handle?ucfirst($preventive->call_handle): '-' }} </td>
 								<td> {{ $preventive->working_status?ucfirst($preventive->working_status): '-' }}</td>
-								<td> {{ $preventive->report_no?sprintf("%04d",$preventive->report_no):'-'  }} </td>
+								<td> {{ $preventive->equipment->sr_no?? '-' }} </td>
 								<td>
 									{{ $preventive->call_register_date_time? date('Y-m-d h:i A', strtotime($preventive->call_register_date_time)) : '-' }}
 								</td>
@@ -123,7 +123,7 @@
 								<th> @lang('equicare.user') </th>
 								<th> @lang('equicare.call_handle') </th>
 								<th> @lang('equicare.working_status') </th>
-								<th> @lang('equicare.report_number') </th>
+								<th> @lang('equicare.serial_number') </th>
 								<th> @lang('equicare.next_due_date')</th>
 								<th> @lang('equicare.call_registration_date_time')</th>
 								<th> @lang('equicare.attended_by') </th>
