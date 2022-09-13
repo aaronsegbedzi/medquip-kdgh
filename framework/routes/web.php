@@ -21,7 +21,6 @@ Route::post('installed', 'LaravelWebInstaller@install');
 Route::get('installed', 'LaravelWebInstaller@index');
 Route::get('migrate', 'LaravelWebInstaller@db_migration');
 Route::get('migration', 'LaravelWebInstaller@migration');
-Route::get('/equipments/history/{equipment}', 'EquipmentController@history')->name('equipments.history');
 
 Route::group(['middleware' => ['installed_or_not', 'auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
@@ -50,7 +49,7 @@ Route::group(['middleware' => ['installed_or_not', 'auth']], function () {
     Route::patch('/admin/equipments/{equipment}', 'EquipmentController@update')->name('equipments.update');
     Route::get('/admin/equipments/{equipment}/edit', 'EquipmentController@edit')->name('equipments.edit');
     Route::get('/admin/qrzip', 'EquipmentController@downloadZip');
-    
+    Route::get('/equipments/history/{equipment}', 'EquipmentController@history')->name('equipments.history');
 	 
     Route::resource('admin/departments', 'DepartmentController');
     Route::resource('admin/call/breakdown_maintenance', 'BreakdownController');

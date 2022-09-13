@@ -71,7 +71,7 @@ return [
     'call_complete_date_time' => 'Call Complete Date &amp; Time',
     'enter_service' => 'Enter New Service',
     'sign_of_engineer' => 'Signature of Engineer',
-    'sign_stamp_of_incharge' => 'Signature Stamp of Supervisor',
+    'sign_stamp_of_incharge' => 'Signature of Supervisor',
     'manage_departments' => 'Manage Departments',
     'name' => 'Name',
     'short_name' => 'Short Name',

@@ -26,7 +26,7 @@
 							<tr>
 								<th class="text-center">#</th>
 								<th> @lang('equicare.equipment_name') </th>
-								<th> @lang('equicare.user') </th>
+								<!-- <th> @lang('equicare.user') </th> -->
 								<th> @lang('equicare.call_handle') </th>
 								<th> @lang('equicare.working_status') </th>
 								<th> @lang('equicare.serial_number') </th>
@@ -46,7 +46,7 @@
 							<tr>
 								<td class="text-center"> {{ $count }} </td>
 								<td> {{ $preventive->equipment->name?? '-' }} </td>
-								<td> {{ $preventive->user->name ?? '-'}}</td>
+								<!-- <td> {{ $preventive->user->name ?? '-'}}</td> -->
 								<td> {{ $preventive->call_handle?ucfirst($preventive->call_handle): '-' }} </td>
 								<td> {{ $preventive->working_status?ucfirst($preventive->working_status): '-' }}</td>
 								<td> {{ $preventive->equipment->sr_no?? '-' }} </td>
@@ -120,7 +120,7 @@
 							<tr>
 								<th class="text-center">#</th>
 								<th> @lang('equicare.equipment_name') </th>
-								<th> @lang('equicare.user') </th>
+								<!-- <th> @lang('equicare.user') </th> -->
 								<th> @lang('equicare.call_handle') </th>
 								<th> @lang('equicare.working_status') </th>
 								<th> @lang('equicare.serial_number') </th>
@@ -167,10 +167,7 @@
 					</div>
 				</div>
 				@endif
-
-
 				<div class="row">
-
 					<div class="form-group col-md-6">
 						{!! Form::label('call_attend_date_time',__('equicare.call_attend_date_time')) !!}
 						{!! Form::text('call_attend_date_time',null,['class'=>'form-control call_attend_date_time']) !!}
@@ -181,13 +178,11 @@
 						{!! Form::select('user_attended',$users,null,['placeholder'=>'select user','class'=>'form-control
 						user_attended']) !!}
 					</div>
+				</div>
+				<div class="row">
 					<div class="form-group col-md-6">
 						{!! Form::label('service_rendered',__('equicare.service_rendered')) !!}
 						{!! Form::text('service_rendered', null, ['class'=>'form-control service_rendered']) !!}
-					</div>
-					<div class="form-group col-md-6">
-						{!! Form::label('remarks',__('equicare.remarks')) !!}
-						{!! Form::textarea('remarks', null, ['class'=>'form-control remarks','rows'=>2]) !!}
 					</div>
 					<div class="form-group col-md-6">
 						<label>@lang('equicare.working_status')</label>
@@ -196,12 +191,18 @@
 						'not working' => __("equicare.not_working"),
 						'pending' => __("equicare.pending")
 						],null,['placeholder' => '--select--','class' => 'form-control test working_status']) !!}
+					</div>	
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						{!! Form::label('remarks',__('equicare.remarks')) !!}
+						{!! Form::textarea('remarks', null, ['class'=>'form-control remarks','rows'=>4]) !!}
 					</div>
 					<input type="hidden" name="id" class="id" value="">
 				</div>
 			</div>
 			<div class="modal-footer">
-				{!! Form::submit(__('equicare.submit'),['class'=>'btn btn-primary submit_attend btn-sm']) !!}
+				{!! Form::submit(__('equicare.submit'),['class'=>'btn btn-primary submit_attend']) !!}
 				<button type="button" class="btn btn-default" data-dismiss="modal">@lang('equicare.close')</button>
 			</div>
 			{!! Form::close() !!}
@@ -247,6 +248,8 @@
 							</span>
 						</div>
 					</div>
+				</div>
+				<div class="row">
 					<div class="form-group col-md-6">
 						{!! Form::label('service_rendered',__('equicare.service_rendered')) !!}
 						{!! Form::select('service_rendered',[
@@ -261,14 +264,6 @@
 						!!}
 					</div>
 					<div class="form-group col-md-6">
-						<label>&nbsp;</label>
-						<input type="text" name="new_item" value="" class="new_item form-control none-display"
-							placeholder="@lang('equicare.enter_service')" />
-					</div>
-				</div>
-				<div class="row">
-
-					<div class="form-group col-md-6">
 						<label>@lang('equicare.wokring_status')</label>
 						{!! Form::select('working_status',[
 						'working' => __("equicare.working"),
@@ -276,10 +271,19 @@
 						'pending' => __("equicare.pending")
 						],null,['placeholder' => '--select--','class' => 'form-control test working_status']) !!}
 					</div>
+				</div>
+				<div class="row">
 					<div class="form-group col-md-6">
-						{!! Form::label('remarks',__('equicare.remarks')) !!}
-						{!! Form::textarea('remarks', null, ['class'=>'form-control remarks','rows'=>2]) !!}
+						<label>&nbsp;</label>
+						<input type="text" name="new_item" value="" class="new_item form-control none-display"
+							placeholder="@lang('equicare.enter_service')" />
 					</div>
+					<div class="form-group col-md-12">
+						{!! Form::label('remarks',__('equicare.remarks')) !!}
+						{!! Form::textarea('remarks', null, ['class'=>'form-control remarks','rows'=>4]) !!}
+					</div>
+				</div>
+				<div class="row">
 					<div class="form-group col-md-6">
 						{!! Form::label('sign_of_engineer', __('equicare.sign_of_engineer')) !!}
 						{!! Form::file('sign_of_engineer',[
@@ -302,11 +306,10 @@
 						</a>
 					</div>
 					<input type="hidden" name="id" class="id" value="">
-
 				</div>
 			</div>
 			<div class="modal-footer">
-				{!! Form::submit(__('equicare.submit'),['class'=>'btn btn-primary submit_call btn-sm']) !!}
+				{!! Form::submit(__('equicare.submit'),['class'=>'btn btn-primary submit_call']) !!}
 				<button type="button" class="btn btn-default" data-dismiss="modal">@lang('equicare.close')</button>
 			</div>
 			{!! Form::close() !!}
@@ -321,16 +324,19 @@
 </script>
 <script type="text/javascript">
 	$(document).ready(function(){
+
 		$('.service_rendered_select2').select2({
 			placeholder: '{{__("equicare.select_option")}}',
 			allowClear: true,
 			tags: true,
 
 		});
+
 		$('.next_due_date').datepicker({
 			todayHighlight: true,
 			format: 'yyyy-mm-dd'
-		})
+		});
+		
 		$('.service_rendered_select2').on('change',function(){
 			var val = $(this).val();
 			if(val == 'add_new'){
