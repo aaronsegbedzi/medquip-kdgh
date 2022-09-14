@@ -197,11 +197,6 @@
 	#data_table_equipment {
 		border-collapse: collapse !important;
 	}
-
-	.export-btns {
-		display: inline-block;
-		float: right;
-	}
 </style>
 <div class="modal fade" id="qr-modal" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">

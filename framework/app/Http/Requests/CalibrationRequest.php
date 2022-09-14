@@ -30,9 +30,9 @@ class CalibrationRequest extends FormRequest {
 	}
 	public function messages() {
 		return [
-			'unique_id.required' => 'The Unique Id field is required.',
+			'unique_id.required' => 'The Unique ID field is required.',
 			'date_of_calibration.required' => 'The Calibration Date field is required.',
-			'due_date.required' => 'The Due date field is required',
+			'due_date.required' => 'The Due Date field is required',
 		];
 	}
 }

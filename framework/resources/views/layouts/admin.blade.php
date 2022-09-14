@@ -96,7 +96,7 @@
         <ul class="nav navbar-nav collapse navbar-collapse">
           <li><a href="#" class="text-bold app-title">@lang('equicare.app_title')</a></li>
         </ul>
-        <div class="navbar-custom-menu">
+        <div class="navbar-custom-menu" style="color: black !important;">
           <ul class="nav navbar-nav pull-right">
             <li class="nav-item dropdown">
               <a href="#" class=" nav-link familyfont" data-toggle="dropdown" area-expanded="false">

@@ -14,7 +14,7 @@
 // use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Route;
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('install', 'LaravelWebInstaller@index');
 Route::post('installed', 'LaravelWebInstaller@install');

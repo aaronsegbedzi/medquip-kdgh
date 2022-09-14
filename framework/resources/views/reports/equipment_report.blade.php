@@ -52,8 +52,10 @@
 		<div class="box box-primary">
 			<div class="box-header">
 				<h4 class="box-title">@lang('equicare.equipment_report')</h4>
-				{!! Form::label('excel_hidden',__('equicare.export_excel'),['class' => 'btn btn-success btn-flat excel','name'=>'action','tabindex'=>1]) !!}
-				{!! Form::label('pdf_hidden',__('equicare.export_pdf'),['class' => 'btn btn-primary btn-flat pdf','name'=>'action','tabindex'=>2]) !!}
+				<div class="export-btns">
+					{!! Form::label('excel_hidden',__('equicare.export_excel'),['class' => 'btn btn-success btn-flat excel','name'=>'action','tabindex'=>1]) !!}
+					{!! Form::label('pdf_hidden',__('equicare.export_pdf'),['class' => 'btn btn-primary btn-flat pdf','name'=>'action','tabindex'=>2]) !!}
+				</div>
 			</div>
 			<div class="box-body table-responsive">
 				<table class="table table-bordered table-hover">

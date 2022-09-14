@@ -26,7 +26,8 @@ class CallCompleteRequest extends FormRequest {
 			'service_rendered' => 'required',
 			'remarks' => 'required',
 			'working_status' => 'required',
-			'sign_of_engineer' => 'required|file|mimes:jpg,jpeg,png,pdf',
+			'sign_of_engineer' => 'file|mimes:jpg,jpeg,png,pdf',
+			'sign_stamp_of_incharge' => 'file|mimes:jpg,jpeg,png,pdf',
 		];
 	}
 }

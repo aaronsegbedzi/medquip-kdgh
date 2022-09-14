@@ -121,10 +121,21 @@
     }
 }
 
+@media (max-width: 767px) {
+    .skin-yellow .main-header .navbar .dropdown-menu li a {
+        color: #000;
+    }
+}
+
 .sidebar-menu {
     padding-top: 5px !important;
 }
 
 .app-title {
     font-size: 1.1em !important;
+}
+
+.export-btns {
+    display: inline-block;
+    float: right;
 }

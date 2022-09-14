@@ -28,18 +28,22 @@ class EquipmentRequest extends FormRequest {
 			'model' => 'required',
 			'department' => 'required',
 			'company' => 'required',
-			'date_of_purchase' => 'required|date',
 			'service_engineer_no' => 'required|numeric',
 		];
 	}
 	public function messages() {
 		return [
+			'name.required' => 'The Name field is required.',
+			'short_name.required' => 'The Short Name field is required.',
 			'hospital_id.required' => 'The Hospital field is required.',
 			'sr_no.required' => 'The Serial Number field is required.',
-			'date_of_purchase.required' => 'The Purchase Date field is required.',
+			'model.required' => 'The Model field is required.',
+			'department.required' => 'The Department field is required',
+			'company.required' => 'The Company field is required.',
 			'service_engineer_no.required' => 'The Service Engineer number field is required.',
-			'sr_no.regex' => 'The Serial number field not allowed blank space.',
-			'service_engineer_no.numeric' => 'The Service Engineer (Mobile no.) must be a Number.',
+			'date_of_purchase.required' => 'The Purchase Date field is required.',
+			'sr_no.regex' => 'The Serial number field not allowed blank spaces.',
+			'service_engineer_no.numeric' => 'The Service Engineer (Mobile No.) must be a number.'
 		];
 	}
 }

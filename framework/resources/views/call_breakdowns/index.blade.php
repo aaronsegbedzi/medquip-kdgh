@@ -21,14 +21,14 @@
 			</div>
 			<div class="box-body">
 				<div class="table-responsive overflow_x_unset">
-					<table id="data_table" class="table table-hover table-bordered table-striped">
+					<table id="data_table" class="table table-hover table-bordered table-striped table-lg">
 						<thead>
 							<tr>
 								<th class="text-center">#</th>
 								<th> @lang('equicare.equipment_name') </th>
-								<th> @lang('equicare.user') </th>
 								<th> @lang('equicare.call_handle') </th>
 								<th> @lang('equicare.working_status') </th>
+								<th> @lang('equicare.serial_number') </th>
 								<th> @lang('equicare.report_number') </th>
 								<th> @lang('equicare.call_registration_date_time')</th>
 								<th> @lang('equicare.attended_by') </th>
@@ -44,10 +44,24 @@
 							@php $count++; @endphp
 							<tr>
 								<td class="text-center"> {{ $count }} </td>
-								<td> {{ $breakdown->equipment->name?? '-' }} </td>
-								<td> {{ $breakdown->user->name ?? '-'}}</td>
+								<td> {{ $breakdown->equipment->name.' ('.$breakdown->equipment->short_name.') ('.$breakdown->equipment->model.')'?? '-' }} </td>
 								<td> {{ $breakdown->call_handle?ucfirst($breakdown->call_handle): '-' }} </td>
-								<td> {{ $breakdown->working_status?ucfirst($breakdown->working_status): '-' }}</td>
+								<td> 
+									@php
+										switch ($breakdown->working_status) {
+											case 'working':
+												echo '<label class="label label-success">'.ucwords($breakdown->working_status).'</label>';
+												break;
+											case 'not working':
+												echo '<label class="label label-danger">'.ucwords($breakdown->working_status).'</label>';
+												break;
+											default:
+												echo '<label class="label label-default">'.ucwords($breakdown->working_status).'</label>';
+												break;
+										}
+									@endphp
+								</td>
+								<td> {{ $breakdown->equipment->sr_no?? '-' }} </td>
 								<td> {{ $breakdown->report_no?sprintf("%04d",$breakdown->report_no):'-'  }} </td>
 								<td>
 									{{ $breakdown->call_register_date_time? date('Y-m-d h:i A', strtotime($breakdown->call_register_date_time)) : '-' }}
@@ -59,9 +73,9 @@
 								<td>
 									{{$breakdown->call_complete_date_time?date('Y-m-d H:i A',strtotime($breakdown->call_complete_date_time)):'-'}}
 								</td>
-								<td>
+								<td class="text-center">
 									<div class="btn-group">
-										<button type="button" class="btn btn-primary dropdown-toggle btn-sm"
+										<button type="button" class="btn btn-flat btn-primary dropdown-toggle btn-sm"
 											data-toggle="dropdown" aria-expanded="true">
 											<span class="fa fa-cogs"></span>
 											<span class="sr-only">Toggle Dropdown</span>
@@ -76,8 +90,7 @@
 											@endcan
 											<li>
 												@if(is_null($breakdown->call_attend_date_time))
-												<a href="#attend_modal" data-target="#attend_modal" data-toggle="modal"
-													title="@lang('equicare.attend_call')" class="attend_btn"
+												<a href="#attend_modal" title="@lang('equicare.attend_call')" class="attend_btn"
 													data-status="{{ $breakdown->working_status  }}" data-id="{{ $breakdown->id }}">
 													<i class="fa fa-list-alt yellow-color"></i>
 													@lang('equicare.attend_call')
@@ -121,9 +134,9 @@
 							<tr>
 								<th class="text-center">#</th>
 								<th> @lang('equicare.equipment_name') </th>
-								<th> @lang('equicare.user') </th>
 								<th> @lang('equicare.call_handle') </th>
 								<th> @lang('equicare.working_status') </th>
+								<th> @lang('equicare.serial_number') </th>
 								<th> @lang('equicare.report_number') </th>
 								<th> @lang('equicare.call_registration_date_time')</th>
 								<th> @lang('equicare.attended_by') </th>
@@ -152,11 +165,10 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">@lang('equicare.attend_call')</h4>
 			</div>
-
 			<div class="modal-body">
 				@if (count($errors->attend_call) > 0)
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-md-12">
 						<div class="alert alert-danger">
 							<ul class=" mb-0">
 								@foreach ($errors->attend_call->all() as $error)
@@ -167,11 +179,7 @@
 					</div>
 				</div>
 				@endif
-
-
-
 				<div class="row">
-
 					<div class="form-group col-md-6">
 						{!! Form::label('call_attend_date_time',__('equicare.call_attend_date_time')) !!}
 						{!! Form::text('call_attend_date_time',null,['class'=>'form-control call_attend_date_time']) !!}
@@ -179,16 +187,14 @@
 					</div>
 					<div class="form-group col-md-6">
 						{!! Form::label('user',__('equicare.user_attended')) !!}
-						{!! Form::select('user_attended',$users,null,['placeholder'=>'select user','class'=>'form-control
+						{!! Form::select('user_attended',$users,Auth::user()->id??null,['placeholder'=>'select user','class'=>'form-control
 						user_attended']) !!}
 					</div>
+				</div>
+				<div class="row">
 					<div class="form-group col-md-6">
 						{!! Form::label('service_rendered',__('equicare.service_rendered')) !!}
-						{!! Form::text('service_rendered', null, ['class'=>'form-control service_rendered']) !!}
-					</div>
-					<div class="form-group col-md-6">
-						{!! Form::label('remarks',__('equicare.remarks')) !!}
-						{!! Form::textarea('remarks', null, ['class'=>'form-control remarks','rows'=>2]) !!}
+						{!! Form::select('service_rendered',$services??[],null,['placeholder'=>__('equicare.select_option'),'class' => 'form-control test service_rendered_select2']) !!}
 					</div>
 					<div class="form-group col-md-6">
 						<label>@lang('equicare.working_status')</label>
@@ -198,13 +204,19 @@
 						'pending' => __("equicare.pending")
 						],null,['placeholder' => '--select--','class' => 'form-control test working_status']) !!}
 					</div>
+					
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						{!! Form::label('remarks',__('equicare.remarks')) !!}
+						{!! Form::textarea('remarks', null, ['class'=>'form-control remarks','rows'=>4]) !!}
+					</div>
 					<input type="hidden" name="id" class="id" value="">
-
 				</div>
 
 			</div>
 			<div class="modal-footer">
-				{!! Form::submit(__('equicare.submit'),['class'=>'btn btn-flat btn-primary submit_attend btn-sm']) !!}
+				{!! Form::submit(__('equicare.submit'),['class'=>'btn btn-primary submit_attend']) !!}
 				<button type="button" class="btn btn-default" data-dismiss="modal">@lang('equicare.close')</button>
 			</div>
 			{!! Form::close() !!}
@@ -223,7 +235,7 @@
 			<div class="modal-body">
 				@if (count($errors->complete_call) > 0)
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-md-12">
 						<div class="alert alert-danger">
 							<ul class=" mb-0">
 								@foreach ($errors->complete_call->all() as $error)
@@ -234,23 +246,18 @@
 					</div>
 				</div>
 				@endif
-
-
 				<div class="row">
-
 					<div class="form-group col-md-6">
 						{!! Form::label('call_complete_date_time',__('equicare.call_complete_date_time')) !!}
 						{!! Form::text('call_complete_date_time',null,['class'=>'form-control call_complete_date_time']) !!}
 					</div>
 					<div class="form-group col-md-6">
 						{!! Form::label('service_rendered',__('equicare.service_rendered')) !!}
-						{!! Form::text('service_rendered', null, ['class'=>'form-control service_rendered']) !!}
+						{!! Form::select('service_rendered',$services??[],null,['placeholder'=>__('equicare.select_option'),'class' => 'form-control test service_rendered_select2']) !!}
 					</div>
-					<div class="form-group col-md-6">
-						{!! Form::label('remarks',__('equicare.remarks')) !!}
-						{!! Form::textarea('remarks', null, ['class'=>'form-control remarks','rows'=>2]) !!}
-					</div>
-					<div class="form-group col-md-6">
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
 						<label>@lang('equicare.working_status')</label>
 						{!! Form::select('working_status',[
 						'working' => __("equicare.working"),
@@ -258,6 +265,14 @@
 						'pending' => __("equicare.pending")
 						],null,['placeholder' => '--select--','class' => 'form-control test working_status']) !!}
 					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						{!! Form::label('remarks',__('equicare.remarks')) !!}
+						{!! Form::textarea('remarks', null, ['class'=>'form-control remarks','rows'=>4]) !!}
+					</div>
+				</div>
+				<div class="row">
 					<div class="form-group col-md-6">
 						{!! Form::label('sign_of_engineer', __('equicare.sign_of_engineer')) !!}
 						{!! Form::file('sign_of_engineer',[
@@ -265,7 +280,6 @@
 						'id' => 'sign_of_engineer'
 						]) !!}
 						{{ Form::hidden('b_id',null,['class'=>'b_id']) }}
-
 						<a class="view_image_sign_of_engineer"
 							href="{{ isset($breakdown_c) && $breakdown_c->sign_of_engineer !=null?url('uploads/',$breakdown_c->sign_of_engineer) :'' }}"
 							target="_blank">
@@ -278,20 +292,16 @@
 						'class'=>'form-control sign_stamp_of_incharge',
 						'id' => 'sign_stamp_of_incharge'
 						]) !!}
-
-
 						<a class="view_image_sign_stamp_of_incharge" href="" target="_blank">
 							view
 						</a>
-
 					</div>
 					<input type="hidden" name="id" class="id" value="">
-
 				</div>
 
 			</div>
 			<div class="modal-footer">
-				{!! Form::submit(__('equicare.submit'),['class'=>'btn btn-flat btn-primary submit_call btn-sm']) !!}
+				{!! Form::submit(__('equicare.submit'),['class'=>'btn btn-primary submit_call']) !!}
 				<button type="button" class="btn btn-default" data-dismiss="modal">@lang('equicare.close')</button>
 			</div>
 			{!! Form::close() !!}
@@ -307,108 +317,141 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 
-						@if(count($errors->attend_call) > 0)
+		$('.service_rendered_select2').select2({
+			placeholder: '{{__("equicare.select_option")}}',
+			allowClear: true,
+			tags: true,
+		});
 
-								$('#attend_modal').modal('show');
+		@if(count($errors->attend_call) > 0)
+			$('#attend_modal').modal('show');
+		@endif
 
-						@endif
-						@if(count($errors->complete_call) > 0)
+		@if(count($errors->complete_call) > 0)
+			$('#call_complete_modal').modal('show');
+		@endif
 
-								$('#call_complete_modal').modal('show');
+		$('.call_complete_date_time').datetimepicker({
+			format: 'Y-MM-D hh:mm A',
+		});
 
-						@endif
+	});
 
-							$('.call_complete_date_time').datetimepicker({
-									format: 'Y-MM-D hh:mm A',
-								});
+	$('.attend_btn').on('click',function(){
 
+		var id = $(this).attr('data-id');
 
-					});
+		$('.test').val($(this).attr('data-status'));
 
-					$('.attend_btn').on('click',function(){
-						var id = $(this).attr('data-id');
-						$('.test').val($(this).attr('data-status'));
-						$.ajax({
-							url:'{{ url('admin/call/breakdown_maintenance/attend') }}'+'/'+id ,
-							method: 'get',
-							data: {
-								id: id,
-							},
-							success:function(response){
-								$('.call_attend_date_time').datetimepicker({
-									format: 'Y-MM-D hh:mm A',
-								});
-								$('.call_attend_date_time').datetimepicker('destroy');
-								$('.call_attend_date_time').val(response.b_m.call_attend_date_time);
-								$('.call_attend_date_time').datetimepicker({
-									format: 'Y-MM-D hh:mm A',
-								});
-								$('.user_attended').val(response.b_m.user_attended);
-								$('.service_rendered').val(response.b_m.service_rendered);
-								$('.remarks').text(response.b_m.remarks);
-								$('.working_status').val(response.b_m.working_status);
-								$('.b_id').val(response.b_m.id);
-							}
+		$.ajax({
+			url:'{{ url('admin/call/breakdown_maintenance/attend') }}'+'/'+id ,
+			method: 'get',
+			data: {
+				id: id,
+			},
+			success:function(response){
 
-						});
-						$('.id').val($(this).attr('data-id'));
+				$('.call_attend_date_time').datetimepicker({
+					format: 'Y-MM-D hh:mm A',
+				});
 
-					});
-					$('.call_complete_btn').on('click',function(){
-						var id = $(this).attr('data-id');
-						$('.test').val($(this).attr('data-status'));
-						$.ajax({
-							url:'{{ url('admin/call/breakdown_maintenance/call_complete') }}'+'/'+id ,
-							method: 'get',
-							data: {
-								id: id,
-							},
-							success:function(response){
-								$('.call_complete_date_time').datetimepicker({
-									format: 'Y-MM-D hh:mm A',
-								});
-								$('.call_complete_date_time').datetimepicker('destroy');
-								$('.call_complete_date_time').val(response.b_m.call_complete_date_time);
-								$('.call_complete_date_time').datetimepicker({
-									format: 'Y-MM-D hh:mm A',
-								});
-								$('.service_rendered').val(response.b_m.service_rendered);
-								$('.remarks').text(response.b_m.remarks);
+				$('.call_attend_date_time').datetimepicker('destroy');
 
-								$('.working_status').val(response.b_m.working_status);
-								$('.b_id').val(response.b_m.id);
+				$('.call_attend_date_time').val(response.b_m.call_attend_date_time);
 
-								$('.view_image_sign_stamp_of_incharge').attr('href',"{{ url('uploads') }}"+'/'+response.b_m.sign_stamp_of_incharge);
-								if(response.b_m.sign_stamp_of_incharge != null){
-									$('.view_image_sign_stamp_of_incharge').show();
-								}else{
-									$('.view_image_sign_stamp_of_incharge').hide();
-								}
+				$('.call_attend_date_time').datetimepicker({
+					format: 'Y-MM-D hh:mm A',
+				});
 
+				if (response.b_m.user_attended !== null){
+					$('.user_attended').val(response.b_m.user_attended);
+				}
 
-								$('.view_image_sign_of_engineer').attr('href',"{{ url('uploads') }}"+'/'+response.b_m.sign_of_engineer);
-								if(response.b_m.sign_of_engineer != null){
-									$('.view_image_sign_of_engineer').show();
-								}else{
-									$('.view_image_sign_of_engineer').hide();
-								}
+				$(".service_rendered_select2").val(response.b_m.service_rendered).trigger('change');
 
-							}
-						});
+				$('.remarks').text(response.b_m.remarks);
 
-        });
+				$('.working_status').val(response.b_m.working_status);
 
+				$('.b_id').val(response.b_m.id);
 
+				$('#attend_modal').modal('show');
+
+			}
+		});
+
+		$('.id').val($(this).attr('data-id'));
+
+	});
+
+	$('.call_complete_btn').on('click',function(){
+
+		var id = $(this).attr('data-id');
+
+		$('.test').val($(this).attr('data-status'));
+
+		$.ajax({
+			url:'{{ url('admin/call/breakdown_maintenance/call_complete') }}'+'/'+id ,
+			method: 'get',
+			data: {
+				id: id,
+			},
+			success:function(response){
+
+				$('.call_complete_date_time').datetimepicker({
+					format: 'Y-MM-D hh:mm A',
+				});
+
+				$('.call_complete_date_time').datetimepicker('destroy');
+
+				$('.call_complete_date_time').val(response.b_m.call_complete_date_time);
+
+				$('.call_complete_date_time').datetimepicker({
+					format: 'Y-MM-D hh:mm A',
+				});
+
+				$(".service_rendered_select2").val(response.b_m.service_rendered).trigger('change');
+
+				$('.remarks').text(response.b_m.remarks);
+
+				$('.working_status').val(response.b_m.working_status);
+
+				$('.b_id').val(response.b_m.id);
+
+				$('.view_image_sign_stamp_of_incharge').attr('href',"{{ url('uploads') }}"+'/'+response.b_m.sign_stamp_of_incharge);
+
+				if(response.b_m.sign_stamp_of_incharge != null){
+					$('.view_image_sign_stamp_of_incharge').show();
+				}else{
+					$('.view_image_sign_stamp_of_incharge').hide();
+				}
+
+				$('.view_image_sign_of_engineer').attr('href',"{{ url('uploads') }}"+'/'+response.b_m.sign_of_engineer);
+
+				if(response.b_m.sign_of_engineer != null){
+					$('.view_image_sign_of_engineer').show();
+				}else{
+					$('.view_image_sign_of_engineer').hide();
+				}
+
+			}
+		});
+	});
 
 </script>
 <script type="text/javascript">
 	$.ajaxSetup({
-						headers: {
-							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-						}
-					});
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
 </script>
 @endsection
 @section('styles')
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/datetimepicker/bootstrap-datetimepicker.min.css') }}">
+<style type="text/css">
+	.select2-container {
+		display: block;
+	}
+</style>
 @endsection

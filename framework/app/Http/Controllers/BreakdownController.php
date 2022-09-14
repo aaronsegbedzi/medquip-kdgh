@@ -5,6 +5,7 @@ use App\CallEntry;
 use App\Department;
 use App\Equipment;
 use App\Hospital;
+use App\ServiceRenderedItem;
 use App\Http\Requests\BreakdownCreateRequest;
 use App\User;
 use Auth;
@@ -18,6 +19,7 @@ class BreakdownController extends Controller {
 		$this->availibility('View Breakdown Maintenance');
 		$index['page'] = 'breakdown_maintenance';
 		$index['b_maintenance'] = CallEntry::where('call_type', 'breakdown')->latest()->get();
+		$index['services'] = ServiceRenderedItem::pluck('new_item', 'new_item')->toArray();
 		$index['users'] = User::pluck('name', 'id');
 		return view('call_breakdowns.index', $index);
 	}
@@ -25,7 +27,7 @@ class BreakdownController extends Controller {
 	public function create() {
 		$this->availibility('Create Breakdown Maintenance');
 		$index['page'] = 'breakdown_maintenance';
-		$index['unique_ids'] = Equipment::pluck('unique_id', 'id')->toArray();
+		$index['serial_no'] = Equipment::pluck('sr_no', 'id')->toArray();
 		$index['departments'] = Department::select('id', \DB::raw('CONCAT(short_name,"(",name,")") as department'))->pluck('department', 'id')->toArray();
 		$index['hospitals'] = Hospital::pluck('name', 'id')->toArray();
 		return view('call_breakdowns.create', $index);
@@ -58,16 +60,12 @@ class BreakdownController extends Controller {
 	public function edit($id) {
 		$this->availibility('Edit Breakdown Maintenance');
 		$index['page'] = 'breakdown_maintenance';
-
 		$index['breakdown'] = CallEntry::find($id);
 		$index['hospitals'] = Hospital::pluck('name', 'id')->toArray();
-
-		$index['unique_ids'] = Equipment::where('hospital_id', $index['breakdown']->equipment->hospital_id)
-			->pluck('unique_id', 'id')
+		$index['serial_no'] = Equipment::where('hospital_id', $index['breakdown']->equipment->hospital_id)
+			->pluck('sr_no', 'id')
 			->toArray();
-
 		$h_id = $index['breakdown']->equipment->hospital_id;
-
 		$index['departments'] = Department::select('id', \DB::raw('CONCAT(short_name,"(",name,")") as department'))
 			->whereHas('equipments', function ($q) use ($h_id) {
 				$q->where('hospital_id', $h_id);
@@ -113,7 +111,7 @@ class BreakdownController extends Controller {
 	public function ajax_hospital_change(Request $request) {
 		if ($request->ajax()) {
 			$unique_id = Equipment::where('hospital_id', $request->id)
-				->pluck('unique_id', 'id')
+				->pluck('sr_no', 'id')
 				->toArray();
 
 			$department = Equipment::where('hospital_id', $request->id)
@@ -136,11 +134,11 @@ class BreakdownController extends Controller {
 
 				$unique_id = Equipment::where('department', $request->department)
 					->where('hospital_id', $request->hospital_id)
-					->pluck('unique_id', 'id')
+					->pluck('sr_no', 'id')
 					->toArray();
 			} else {
 				$unique_id = Equipment::where('department', $request->department)
-					->pluck('unique_id', 'id')
+					->pluck('sr_no', 'id')
 					->toArray();
 			}
 

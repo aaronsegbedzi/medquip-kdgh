@@ -31,8 +31,14 @@ class HospitalRequest extends FormRequest {
 	}
 	public function messages() {
 		return [
-			'mobile_no.required' => 'The Mobile number field is required.',
+			'name.required' => 'The Name field is required.',
+			'email.required' => 'The Email field is required.',
+			'contact_person' => 'The Contact Person field is required.',
 			'phone_no.required' => 'The Phone number field is required.',
+			'mobile_no.required' => 'The Mobile number field is required.',
+			'address.required' => 'The Address field is required.',
+			'phone_no.numeric' => 'The Phone number can be numeric only.',
+			'mobile.numeric' => 'The Mobile number can be numeric only.'
 		];
 	}
 }

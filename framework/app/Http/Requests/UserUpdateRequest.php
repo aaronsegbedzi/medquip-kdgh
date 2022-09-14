@@ -23,14 +23,19 @@ class UserUpdateRequest extends FormRequest {
 		return [
 			'name' => 'required|max:150',
 			'email' => 'required|unique:users,email,' . $this->id,
-			'phone' => 'required|max:15',
+			'phone' => 'required|numeric|max:15',
 			'role' => 'required',
 
 		];
 	}
 	public function messages() {
 		return [
-			'role.required' => 'Role field is Required',
+			'name.required' => 'The Name field is required.',
+			'email.required' => 'The Email field is required.',
+			'password.required' => 'The Password field is required.',
+			'phone.required' => 'The Phone field is required.',
+			'role.required' => 'The Role field is Required',
+			'phone.numeric' => 'The Phone number can be numeric only'
 		];
 	}
 }

@@ -27,12 +27,10 @@
 				<div class="row">
 					<div class="form-group col-md-4">
 						<label for="department"> @lang('equicare.hospital') </label>
-
 						{!! Form::select('hospital',array_unique($hospitals)??[],null,['class'=>'form-control hospital_select2','placeholder'=>'Select', 'disabled' => true]) !!}
 					</div>
 					<div class="form-group col-md-4">
 						<label for="department"> @lang('equicare.department') </label>
-
 						{!! Form::select('department',array_unique($departments)??[],null,['class'=>'form-control department_select2','placeholder'=>'Select', 'disabled' => true]) !!}
 					</div>
 					<div class="form-group col-md-4">
@@ -43,7 +41,6 @@
 						<label for="equip_name"> @lang('equicare.equipment_name') </label>
 						<input type="text" name="" class="equip_name form-control" value="{{ $preventive->equipment->name?? '' }}" disabled />
 					</div>
-
 					<div class="form-group col-md-4">
 						<label for="sr_no"> @lang('equicare.unique_id') </label>
 						<input type="text" name="sr_no" class="form-control sr_no" value="{{ $preventive->equipment->unique_id?? '' }}" disabled />
@@ -60,7 +57,6 @@
 						<label for="short_name"> @lang('equicare.short_name_eq') </label>
 						<input type="text" name="short_name" class="short_name form-control" value="{{ $preventive->equipment->short_name?? '' }}" disabled />
 					</div>
-
 					<div class="form-group col-md-4">
 						<label>@lang('equicare.call_handle'):</label>
 						<div class="radio iradio">
@@ -132,6 +128,7 @@
 <script src="{{ asset('assets/js/datetimepicker.js') }}" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+
 		$('.unique_id_select2').trigger('change');
 
 		// $('.unique_id_select2').select2({
@@ -153,21 +150,25 @@
 		if ($('#external').attr('checked') == 'checked') {
 			$('.report_no').css('display', 'block');
 		}
+
 		$('#external').on('ifChecked ifUnchecked', function(e) {
 			if (e.type == 'ifChecked') {
 				$('.report_no').show();
 			} else {
 				$('.report_no').hide();
 			}
-		})
+		});
+
 		$('.next_due_date').datepicker({
 			todayHighlight: true,
 			format: 'yyyy-mm-dd'
-		})
+		});
+
 		$('.call_register_date_time').datetimepicker({
 			format: 'Y-MM-D hh:mm A',
 			sideBySide: true,
-		})
+		});
+
 	});
 	
 	$('#equip_id').val({{ $preventive->equip_id }});
@@ -265,7 +266,6 @@
 					'id': value
 				},
 				success: function(data) {
-					console.log(data);
 					department.empty();
 					unique_id.empty();
 					if (data.department) {

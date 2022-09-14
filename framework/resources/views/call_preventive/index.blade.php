@@ -26,12 +26,11 @@
 							<tr>
 								<th class="text-center">#</th>
 								<th> @lang('equicare.equipment_name') </th>
-								<!-- <th> @lang('equicare.user') </th> -->
 								<th> @lang('equicare.call_handle') </th>
 								<th> @lang('equicare.working_status') </th>
 								<th> @lang('equicare.serial_number') </th>
-								<th> @lang('equicare.next_due_date')</th>
 								<th> @lang('equicare.call_registration_date_time')</th>
+								<th> @lang('equicare.next_due_date')</th>
 								<th> @lang('equicare.attended_by') </th>
 								<th> @lang('equicare.first_attended_on') </th>
 								<th> @lang('equicare.completed_on') </th>
@@ -45,10 +44,23 @@
 							@php $count++; @endphp
 							<tr>
 								<td class="text-center"> {{ $count }} </td>
-								<td> {{ $preventive->equipment->name?? '-' }} </td>
-								<!-- <td> {{ $preventive->user->name ?? '-'}}</td> -->
+								<td> {{ $preventive->equipment->name.' ('.$preventive->equipment->short_name.') ('.$preventive->equipment->model.')'?? '-' }} </td>
 								<td> {{ $preventive->call_handle?ucfirst($preventive->call_handle): '-' }} </td>
-								<td> {{ $preventive->working_status?ucfirst($preventive->working_status): '-' }}</td>
+								<td> 
+									@php
+										switch ($preventive->working_status) {
+											case 'working':
+												echo '<label class="label label-success">'.ucwords($preventive->working_status).'</label>';
+												break;
+											case 'not working':
+												echo '<label class="label label-danger">'.ucwords($preventive->working_status).'</label>';
+												break;
+											default:
+												echo '<label class="label label-default">'.ucwords($preventive->working_status).'</label>';
+												break;
+										}
+									@endphp
+								</td>
 								<td> {{ $preventive->equipment->sr_no?? '-' }} </td>
 								<td>
 									{{ $preventive->call_register_date_time? date('Y-m-d h:i A', strtotime($preventive->call_register_date_time)) : '-' }}
@@ -57,10 +69,10 @@
 								<td>{{$preventive->user_attended?$preventive->user_attended_fn->name:'-'}}</td>
 								<td>{{$preventive->user_attended?date('Y-m-d H:i A',strtotime($preventive->call_attend_date_time)):'-'}}</td>
 								<td>{{$preventive->call_complete_date_time?date('Y-m-d H:i A',strtotime($preventive->call_complete_date_time)):'-'}}</td>
-								<td>
+								<td class="text-center">
 
 									<div class="btn-group">
-										<button type="button" class="btn btn-primary dropdown-toggle btn-sm"
+										<button type="button" class="btn btn-flat btn-primary dropdown-toggle btn-sm"
 											data-toggle="dropdown" aria-expanded="true">
 											<span class="fa fa-cogs"></span>
 											<span class="sr-only">Toggle Dropdown</span>
@@ -73,27 +85,24 @@
 													title="@lang('equicare.edit')"><i class="fa fa-edit purple-color"></i> @lang('equicare.edit') </a>
 											</li>
 											@endcan
+											@if(is_null($preventive->call_attend_date_time))
 											<li>
-												@if(is_null($preventive->call_attend_date_time))
-												<a href="#attend_modal" data-target="#attend_modal" data-toggle="modal"
-													title="@lang('equicare.attend_call')" class="attend_btn"
+												<a href="#attend_modal" title="@lang('equicare.attend_call')" class="attend_btn"
 													data-status="{{ $preventive->working_status  }}" data-id="{{ $preventive->id }}">
 													<i class="fa fa-list-alt yellow-color"></i>
 													@lang('equicare.attend_call')
 												</a>
-												@endif
 											</li>
+											@endif
 											@if(!is_null($preventive->call_attend_date_time) && is_null($preventive->call_complete_date_time))
 											<li>
-												<a href="#call_complete_modal" data-target="#call_complete_modal"
-													data-toggle="modal" title="@lang('equicare.call_complete')" class="call_complete_btn"
+												<a href="#call_complete_modal" title="@lang('equicare.call_complete')" class="call_complete_btn"
 													data-status="{{ $preventive->working_status  }}" data-id="{{ $preventive->id }}">
 													<i class="fa fa-thumbs-o-up green-color"></i>
 													@lang('equicare.call_complete')
 												</a>
 											</li>
 											@endif
-
 											@can('Delete Preventive Maintenance')
 											<li>
 												<a class="" href="javascript:document.getElementById('form1').submit();"
@@ -120,7 +129,6 @@
 							<tr>
 								<th class="text-center">#</th>
 								<th> @lang('equicare.equipment_name') </th>
-								<!-- <th> @lang('equicare.user') </th> -->
 								<th> @lang('equicare.call_handle') </th>
 								<th> @lang('equicare.working_status') </th>
 								<th> @lang('equicare.serial_number') </th>
@@ -148,7 +156,6 @@
 			'class' => 'attend_call_form',
 			'id' => 'attend_call_form'
 			]) !!}
-
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">@lang('equicare.attend_call')</h4>
@@ -156,7 +163,7 @@
 			<div class="modal-body">
 				@if (count($errors->attend_call) > 0)
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-md-12">
 						<div class="alert alert-danger">
 							<ul class=" mb-0">
 								@foreach ($errors->attend_call->all() as $error)
@@ -175,14 +182,15 @@
 					</div>
 					<div class="form-group col-md-6">
 						{!! Form::label('user',__('equicare.user_attended')) !!}
-						{!! Form::select('user_attended',$users,null,['placeholder'=>'select user','class'=>'form-control
+						{!! Form::select('user_attended',$users,Auth::user()->id??null,['placeholder'=>'select user','class'=>'form-control
 						user_attended']) !!}
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group col-md-6">
 						{!! Form::label('service_rendered',__('equicare.service_rendered')) !!}
-						{!! Form::text('service_rendered', null, ['class'=>'form-control service_rendered']) !!}
+						{!! Form::select('service_rendered',$services??[],null,['placeholder'=>__('equicare.select_option'),'class' => 'form-control test service_rendered_select2'])
+						!!}
 					</div>
 					<div class="form-group col-md-6">
 						<label>@lang('equicare.working_status')</label>
@@ -221,7 +229,7 @@
 			<div class="modal-body">
 				@if (count($errors->complete_call) > 0)
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-md-12">
 						<div class="alert alert-danger">
 							<ul class=" mb-0">
 								@foreach ($errors->complete_call->all() as $error)
@@ -252,15 +260,7 @@
 				<div class="row">
 					<div class="form-group col-md-6">
 						{!! Form::label('service_rendered',__('equicare.service_rendered')) !!}
-						{!! Form::select('service_rendered',[
-						'Cleaning of filters' => __('equicare.cleaning_filters'),
-						'Check electrics and wiring' => __('equicare.electrics_wiring'),
-						'Internal Cleaning' => __('equicare.internal_cleaning'),
-						'Display Working' => __('equicare.display_working'),
-						'Parts replaced accounrding to the manufacturer guidlines' => __('equicare.parts_replaced_accounrding_manufacturer_guidlines'),
-						'Other Parameters' => __('equicare.other_parameters'),
-						'add_new' => '+'.__('equicare.add_new')
-						],null,['placeholder'=>__('equicare.select_option'),'class' => 'form-control test service_rendered_select2'])
+						{!! Form::select('service_rendered',$services??[],null,['placeholder'=>__('equicare.select_option'),'class' => 'form-control test service_rendered_select2'])
 						!!}
 					</div>
 					<div class="form-group col-md-6">
@@ -273,11 +273,6 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="form-group col-md-6">
-						<label>&nbsp;</label>
-						<input type="text" name="new_item" value="" class="new_item form-control none-display"
-							placeholder="@lang('equicare.enter_service')" />
-					</div>
 					<div class="form-group col-md-12">
 						{!! Form::label('remarks',__('equicare.remarks')) !!}
 						{!! Form::textarea('remarks', null, ['class'=>'form-control remarks','rows'=>4]) !!}
@@ -323,151 +318,142 @@
 
 </script>
 <script type="text/javascript">
-	$(document).ready(function(){
 
+	$(document).ready(function() {
 		$('.service_rendered_select2').select2({
 			placeholder: '{{__("equicare.select_option")}}',
 			allowClear: true,
 			tags: true,
-
 		});
-
 		$('.next_due_date').datepicker({
 			todayHighlight: true,
 			format: 'yyyy-mm-dd'
 		});
-		
-		$('.service_rendered_select2').on('change',function(){
-			var val = $(this).val();
-			if(val == 'add_new'){
-    		$('.new_item').show();
-    	}
-    	else{
-    		$('.new_item').hide();
-    	}
-    		$('.new_item').on('blur',function(){
-    			var result = $('.new_item').val();
-    			$.ajax({
-    				url: '{{ url("call_complete_preventive_new_item") }}',
-    				method:'post',
-    				data: { 'new_item': result},
-    				success:function(response){
-    					if ($(".service_rendered_select2").find("option[value='" + response.new_item_db.new_item + "']").length) {
-    						$(".service_rendered_select2").val(response.new_item_db.new_item).trigger("change");
-    					} else {
-    						var newItem = new Option(response.new_item_db.new_item, response.new_item_db.new_item, true, true);
-// Append it to the select
-$(".service_rendered_select2 option:last").before(newItem).trigger('change');
-}
-$('.service_rendered_select2').next(".select2-container").show();
-$('.new_item').hide();
-}
-});
-
-    		});
-});
-
 		@if(count($errors->attend_call) > 0)
-		$('#attend_modal').modal('show');
+			$('#attend_modal').modal('show');
 		@endif
 		@if(count($errors->complete_call) > 0)
-		$('#call_complete_modal').modal('show');
+			$('#call_complete_modal').modal('show');
 		@endif
 		$('.call_complete_date_time').datetimepicker({
 			format: 'Y-MM-D hh:mm A',
-
 		});
-
 	});
-	$('.attend_btn').on('click',function(){
+
+	$('.attend_btn').on('click', function() {
+
 		var id = $(this).attr('data-id');
+
 		$('.test').val($(this).attr('data-status'));
+		
 		$.ajax({
-			url:'{{ url('admin/call/preventive_maintenance/attend') }}'+'/'+id ,
+			url: '{{ url('admin/call/preventive_maintenance/attend') }}' + '/' + id,
 			method: 'get',
 			data: {
 				id: id,
 			},
-			success:function(response){
+			success: function(response) {
+
 				$('.call_attend_date_time').datetimepicker({
 					format: 'Y-MM-D hh:mm A',
 				});
+
 				$('.call_attend_date_time').datetimepicker('destroy');
+
 				$('.call_attend_date_time').val(response.p_m.call_attend_date_time);
 
 				$('.call_attend_date_time').datetimepicker({
 					format: 'Y-MM-D hh:mm A',
 				});
-				$('.user_attended').val(response.p_m.user_attended);
-				$('.service_rendered').val(response.p_m.service_rendered);
+
+				if (response.p_m.user_attended !== null) {
+					$('.user_attended').val(response.p_m.user_attended);
+				}
+
+				$(".service_rendered_select2").val(response.p_m.service_rendered).trigger('change');
+
 				$('.remarks').text(response.p_m.remarks);
+
 				$('.working_status').val(response.p_m.working_status);
+
 				$('.b_id').val(response.p_m.id);
+
+				$('#attend_modal').modal('show');
+
+			}
+		});
+
+	});
+
+	$('.call_complete_btn').on('click', function() {
+
+		var id = $(this).attr('data-id');
+
+		$('.test').val($(this).attr('data-status'));
+
+		$.ajax({
+			url: '{{ url('admin/call/preventive_maintenance/call_complete') }}' + '/' + id,
+			method: 'get',
+			data: {
+				id: id,
+			},
+			success: function(response) {
+
+				$('.call_complete_date_time').datetimepicker({
+					format: 'Y-MM-D hh:mm A',
+				});
+
+				$('.next_due_date').datepicker({
+					todayHighlight: true,
+					format: 'yyyy-mm-dd'
+				});
+
+				$('.next_due_date').datepicker('destroy');
+
+				$('.call_complete_date_time').datetimepicker('destroy');
+
+				$('.call_complete_date_time').val(response.p_m.call_complete_date_time);
+
+				$('.call_complete_date_time').datetimepicker({
+					format: 'Y-MM-D hh:mm A',
+				});
+
+				$('.next_due_date').val(response.p_m.next_due_date);
+
+				$('.next_due_date').datepicker({
+					todayHighlight: true,
+					format: 'yyyy-mm-dd'
+				});
+
+				$(".service_rendered_select2").val(response.p_m.service_rendered).trigger('change');
+
+				$('.remarks').text(response.p_m.remarks);
+
+				$('.working_status').val(response.p_m.working_status);
+
+				$('.b_id').val(response.p_m.id);
+
+				$('.view_image_sign_stamp_of_incharge').attr('href', "{{ url('uploads') }}" + '/' + response.p_m.sign_stamp_of_incharge);
+
+				if (response.p_m.sign_stamp_of_incharge != null) {
+					$('.view_image_sign_stamp_of_incharge').show();
+				} else {
+					$('.view_image_sign_stamp_of_incharge').hide();
+				}
+
+				$('.view_image_sign_of_engineer').attr('href', "{{ url('uploads') }}" + '/' + response.p_m.sign_of_engineer);
+
+				if (response.p_m.sign_of_engineer != null) {
+					$('.view_image_sign_of_engineer').show();
+				} else {
+					$('.view_image_sign_of_engineer').hide();
+				}
+
+				$('#call_complete_modal').modal('show');
 			}
 		});
 	});
-	$('.call_complete_btn').on('click',function(){
-		var id = $(this).attr('data-id');
-		$('.test').val($(this).attr('data-status'));
-$.ajax({
-url:'{{ url('admin/call/preventive_maintenance/call_complete') }}'+'/'+id ,
-method: 'get',
-data: {
-id: id,
-},
-success:function(response){
-$('.call_complete_date_time').datetimepicker({
-	format: 'Y-MM-D hh:mm A',
-});
-$('.next_due_date').datepicker({
-	todayHighlight: true,
-	format: 'yyyy-mm-dd'
-});
-$('.next_due_date').datepicker('destroy');
-$('.call_complete_date_time').datetimepicker('destroy');
-$('.call_complete_date_time').val(response.p_m.call_complete_date_time);
-$('.call_complete_date_time').datetimepicker({
-	format: 'Y-MM-D hh:mm A',
-});
-$('.service_rendered_select2').val(response.p_m.service_rendered);
-$('.next_due_date').val(response.p_m.next_due_date);
-$('.next_due_date').datepicker({
-	todayHighlight: true,
-	format: 'yyyy-mm-dd'
-});
-$('.service_rendered_select2').val(response.p_m.service_rendered);
-$.each( response.n_i, function( key, value ) {
 
-	if ($(".service_rendered_select2").find("option[value='" + value.new_item + "']").length) {
-		$(".service_rendered_select2").val(value.new_item).trigger('change');
-	} else {
-		var newItem = new Option(value.new_item, value.new_item,false,false );
-		$('.service_rendered_select2 option:last').before(newItem).trigger('change');
-
-	}
-
-});
-$('.service_rendered_select2').val(response.p_m.service_rendered);
-$('.remarks').text(response.p_m.remarks);
-
-$('.working_status').val(response.p_m.working_status);
-$('.b_id').val(response.p_m.id);
-
-$('.view_image_sign_stamp_of_incharge').attr('href',"{{ url('uploads') }}"+'/'+response.p_m.sign_stamp_of_incharge);
-if(response.p_m.sign_stamp_of_incharge != null){
-	$('.view_image_sign_stamp_of_incharge').show();
-}else{
-	$('.view_image_sign_stamp_of_incharge').hide();
-}
-$('.view_image_sign_of_engineer').attr('href',"{{ url('uploads') }}"+'/'+response.p_m.sign_of_engineer);
-if(response.p_m.sign_of_engineer != null){
-	$('.view_image_sign_of_engineer').show();
-}else{
-	$('.view_image_sign_of_engineer').hide();
-}
-}
-});
-});
 </script>
 <script type="text/javascript">
 	$.ajaxSetup({

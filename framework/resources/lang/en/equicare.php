@@ -183,7 +183,7 @@ return [
     'attend_to_complete_time' => 'Attend to Complete Time',
     'time_report' => 'Time Indicator Report',
     'breakdown' => 'Breakdown',
-    'Preventive' => 'Preventive',
+    'preventive' => 'Preventive',
     'date_filter' => 'Date Filter On',
     'from_date' => 'From Date',
     'to_date' => 'To Date',

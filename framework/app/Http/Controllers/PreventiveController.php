@@ -19,19 +19,17 @@ class PreventiveController extends Controller {
 		$this->availibility('View Preventive Maintenance');
 		$index['page'] = 'preventive_maintenance';
 		$index['p_maintenance'] = CallEntry::where('call_type', 'preventive')->latest()->get();
+		$index['services'] = ServiceRenderedItem::pluck('new_item', 'new_item')->toArray();
 		$index['users'] = User::pluck('name', 'id');
 		return view('call_preventive.index', $index);
 	}
 
 	public function create() {
-
 		$this->availibility('Create Preventive Maintenance');
-
 		$index['page'] = 'preventive_maintenance';
 		$index['serial_no'] = Equipment::pluck('sr_no', 'id')->toArray();
 		$index['departments'] = Department::select('id', \DB::raw('CONCAT(short_name,"(",name,")") as department'))->pluck('department', 'id')->toArray();
 		$index['hospitals'] = Hospital::withTrashed()->pluck('name', 'id')->toArray();
-
 		return view('call_preventive.create', $index);
 	}
 
@@ -64,11 +62,8 @@ class PreventiveController extends Controller {
 
 	public function edit($id) {
 		$this->availibility('Edit Preventive Maintenance');
-
 		$index['page'] = 'preventive_maintenance';
-
 		$index['preventive'] = CallEntry::find($id);
-
 		$index['serial_no'] = Equipment::withTrashed()->where('hospital_id', $index['preventive']->equipment->hospital_id)
 			->pluck('sr_no', 'id')
 			->toArray();
@@ -79,7 +74,6 @@ class PreventiveController extends Controller {
 			})
 			->pluck('department', 'id')
 			->toArray();
-
 		$index['hospitals'] = Hospital::withTrashed()->pluck('name', 'id')->toArray();
 		return view('call_preventive.edit', $index);
 	}
@@ -164,8 +158,10 @@ class PreventiveController extends Controller {
 
 	public function attend_call_get($id) {
 		$preventive_c = CallEntry::findOrFail($id);
-		return response()->json(['p_m' => $preventive_c->toArray()], 200);
+		$new_item = ServiceRenderedItem::select('new_item')->get();
+		return response()->json(['p_m' => $preventive_c->toArray(), 'n_i' => $new_item], 200);
 	}
+
 	public function attend_call(Request $request) {
 		$preventive = CallEntry::findOrFail($request->b_id);
 

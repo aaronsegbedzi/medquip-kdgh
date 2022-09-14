@@ -59,7 +59,6 @@
 						<label for="short_name"> @lang('equicare.short_name_eq') </label>
 						<input type="text" name="short_name" class="short_name form-control" value="" disabled />
 					</div>
-
 				</div>
 			</div>
 			<div class="box-body">
@@ -193,12 +192,10 @@
 			$.ajax({
 				url: "{{ url('unique_id_preventive')}}",
 				type: 'get',
-
 				data: {
 					'id': value
 				},
 				success: function(data) {
-					// console.log(data);
 					equip_name.val(data.success.name);
 					hospitals.val(data.success.hospital_id);
 					sr_no.val(data.success.unique_id);
@@ -254,7 +251,6 @@
 			short_name.val("");
 			unique_id.trigger("change");
 			unique_id.val("");
-
 		}
 		if (value != "") {
 			$.ajax({
@@ -265,7 +261,7 @@
 					'id': value
 				},
 				success: function(data) {
-					console.log(data);
+					// console.log(data);
 					department.empty();
 					unique_id.empty();
 					if (data.department) {
@@ -301,7 +297,6 @@
 						placeholder: '{{__("equicare.select_option")}}',
 						allowClear: true
 					});
-
 				}
 			});
 		}
@@ -380,5 +375,4 @@
 @endsection
 @section('styles')
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/datetimepicker/bootstrap-datetimepicker.min.css') }}">
-
 @endsection
