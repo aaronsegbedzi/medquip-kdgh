@@ -100,4 +100,7 @@ Route::group(['middleware' => ['installed_or_not', 'auth']], function () {
     Route::get('admin/calibrations_sticker', 'StickerController@index');
     Route::get('admin/calibrations_sticker2', 'StickerController@post');
     Route::get('admin/calibrations_sticker/{id}', 'StickerController@single_sticker');
+
+    Route::post('admin/qr_sticker', 'QRController@post')->name('qr.generate');
+
 });

@@ -33,6 +33,10 @@ class EquipmentController extends Controller
         $index['companies'] = Equipment::distinct()->get(['company']);
         $index['hospital_id'] = isset($request->hospital_id) ? $request->hospital_id : "";
         $index['companyy'] = isset($request->company) ? $request->company : "";
+        
+        $index['qr_hospitals'] = Hospital::pluck('name', 'id')->toArray();
+
+        $index['qr_departments'] = Department::pluck('name', 'id')->toArray();
 
         $equipments = Equipment::select('*');
         if (isset($index['hospital_id']) && $index['hospital_id'] != "") {
