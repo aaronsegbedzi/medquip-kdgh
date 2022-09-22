@@ -273,6 +273,10 @@ return [
     'calibration_event' => 'Calibration Due Dates',
     'warranty_event' => 'Warranty Due Dates',
     'app_title' => 'KDGH Equipment Maintenance Management Software (EMS)',
-    'qr_sticker_generate' => 'Equipment QR Codes'
+    'qr_sticker_generate' => 'Equipment QR Codes',
+    'qr_print_modal_header' => 'Download and Print QR Codes Stickers',
+    'download' => 'Download',
+    'qr_print_modal_header_note' => 'To download all the equipment in a Hospital (e.g. UGMC), the Department field should remain blank.',
+    'qr_modal_btn' => 'Print QR Codes'
 
 ];

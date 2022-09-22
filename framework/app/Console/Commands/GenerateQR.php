@@ -42,12 +42,14 @@ class GenerateQR extends Command
         $equipments = Equipment::select('id')->get();
         if ($equipments->count()) {
             $count = 1;
+            $this->info('Generating QR Codes for Equipments');
             foreach ($equipments as $equipment) {
                 $url = env('APP_URL') . "/equipments/history/" . $equipment->id;
                 $image = QrCode::format('png')->size(300)->generate($url, public_path('qrcodes/'.$equipment->id.'.png'));
                 $this->info('Finished '.$count.'/'.$equipment->count());
                 $count++;
             }
+            $this->info('Completed!');
         }
     }
 }
