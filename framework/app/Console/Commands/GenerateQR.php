@@ -46,6 +46,7 @@ class GenerateQR extends Command
                 $url = env('APP_URL') . "/equipments/history/" . $equipment->id;
                 $image = QrCode::format('png')->size(300)->generate($url, public_path('qrcodes/'.$equipment->id.'.png'));
                 $this->info('Finished '.$count.'/'.$equipment->count());
+                $count++;
             }
         }
     }
