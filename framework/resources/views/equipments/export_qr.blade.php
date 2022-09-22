@@ -104,7 +104,7 @@
                             <tr>
                                 <td class="card-body" colspan="2">
                                     <img class="company-logo" src="{{ asset('/uploads/qrcodes/'.$equipment->id.'.png') }}" width="130px">
-                                    <p style="font-size: 15px;">{{ $equipment->sr_no }} <br> {{ $equipment->name }} <br> ({{ $equipment->model }})</p>
+                                    <p style="font-size: 12px;">{{ $equipment->sr_no }} <br> {{ $equipment->name }} <br> ({{ $equipment->model }})</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -112,7 +112,7 @@
                 </div>
                 @if($page == 9)
                     <div class="page-break"></div>
-                    @php($page = 1)
+                    @php($page = 0)
                 @endif
                 @php($page++)
             @endforeach
