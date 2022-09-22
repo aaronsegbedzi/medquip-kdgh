@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Equipment;
+use QrCode;
 
 class GenerateQR extends Command
 {
