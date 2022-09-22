@@ -13,6 +13,8 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected $commands = [
 		//'App\Console\Commands\ReminderEmailCommand',
+		'App\Console\Commands\GenerateQR',
+
 	];
 
 	/**
