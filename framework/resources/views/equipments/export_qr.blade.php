@@ -12,23 +12,20 @@
             font-family: Arial !important;
         }
 
-        @media print {
-            div {
-                break-inside: avoid;
-            }
+        div {
+            break-inside: avoid !important;
         }
 
         .container:after {
             content: "";
             display: table;
             clear: both;
+            width: 3508px;
         }
 
         .card {
             float: left;
             width: 33.33%;
-            padding: 10px;
-            /* Should be removed. Only for demonstration */
         }
 
         .card>span {
@@ -39,59 +36,89 @@
         .page-break {
             page-break-after: always;
         }
+
+        .card-header {
+            background: #FF8039 !important;
+        }
+
+        table {
+            width: 100%;
+            border: none;
+        }
+
+        .slogan {
+            text-align: left !important;
+            font-weight: 800;
+            color: #FFF;
+            vertical-align: middle;
+            font-size: 8px;
+            padding: 8px;
+        }
+
+        .logo {
+            text-align: right !important;
+            padding-right: 20px !important;
+            
+        }
+
+        img {
+            vertical-align: middle;
+        }
+
+        .card-body {
+            text-align: center !important;
+        }
+
+        .company-logo {
+            margin-top: 20px !important;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         @php
-        $count = 0;
-        $card_count = 0;
-        $page = 1;
-        $t_page = 12;
+            $count = 0;
+            $card_count = 0;
+            $page = 1;
         @endphp
 
         @if($equipments->count())
-
-        @foreach ($equipments as $equipment)
-
-        @if($count == 3 )
-        @php
-        $count = 0;
-        @endphp
-        <div style="clear: both;"></div>
-        @endif
-
-        @php
-        $count++;
-        @endphp
-        <div class="card">
-            <table style="width: 100%" border="0" cellspacing="0" cellpadding="0">
-                <tbody>
-                    <tr style="background: rgb(255 128 57);">
-                        <td style="text-align: left !important; font-weight: 600; color: #FFF; vertical-align: middle; font-size: 8px; padding: 8px;">NEVER<br>alone...<br>ALWAYS<br>by your side</td>
-                        <td style="text-align: right !important; padding-right: 10px !important;"><img style="vertical-align: middle;" src="{{ asset('assets/1x/logo.png') }}" width="100px"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: center !important; padding: 20px;">
-                            <img src="{{ asset('/uploads/qrcodes/'.$equipment->id.'.png') }}" width="120px">
-                            <h5>{{ $equipment->sr_no }} <br> {{ $equipment->name }} <br> ({{ $equipment->model }})</h5>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        @if($page % 12 == 0)
-        <div class="page-break"></div>
-        @endif
-        @php($page = 0)
-        @php($page++)
-        @endforeach
+            @foreach ($equipments as $equipment)
+                @if($count == 3 )
+                    @php
+                        $count = 0;
+                    @endphp
+                    <div style="clear: both;"></div>
+                @endif
+                @php
+                    $count++;
+                @endphp
+                <div class="card">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr class="card-header">
+                                <td class="slogan card-header">NEVER<br>alone...<br>ALWAYS<br>by your side</td>
+                                <td class="logo card-header"><img src="{{ asset('assets/1x/logo.png') }}" width="130px"></td>
+                            </tr>
+                            <tr>
+                                <td class="card-body" colspan="2">
+                                    <img class="company-logo" src="{{ asset('/uploads/qrcodes/'.$equipment->id.'.png') }}" width="130px">
+                                    <p style="font-size: 15px;">{{ $equipment->sr_no }} <br> {{ $equipment->name }} <br> ({{ $equipment->model }})</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                @if($page == 9)
+                    <div class="page-break"></div>
+                    @php($page = 1)
+                @endif
+                @php($page++)
+            @endforeach
         @else
-        <div style="text-align: center;"><strong><span>No equipments</span></strong>
-        </div>
+        <div style="text-align: center;"><strong><span>No @lang('equicare.equipments')</span></strong></div>
         @endif
     </div>
 </body>
-
 </html>
