@@ -151,7 +151,7 @@
 						</div>
 						@endforeach
 						@else
-						@foreach(json_decode($maintenance_cost->costs, TRUE) as $key => $cost)
+						<!-- @foreach(json_decode($maintenance_cost->costs, TRUE) as $key => $cost)
 						<div class="row no-gutters">
 							<div class="form-group col-md-3">
 								{!! Form::select('equipments[]',$equipments??[],json_decode($maintenance_cost->equipments,TRUE)[$key],['class'=>'form-control select2_equipments','id'=>'equipments1']) !!}
@@ -166,7 +166,7 @@
 								{!! Form::text('cost[]',$cost,['class'=>'form-control','placeholder'=>__('equicare.enter_cost')]) !!}
 							</div>
 						</div>
-						@endforeach
+						@endforeach -->
 						@endif
 					</div>
 					<div class="form-group col-md-12 login-padding">
