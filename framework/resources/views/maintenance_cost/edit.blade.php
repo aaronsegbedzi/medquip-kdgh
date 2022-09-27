@@ -282,7 +282,7 @@
 							<?php $key = 0?>
 						for(n in data.equipments){
 							console.log(n);
-							$('.select2_equipments').select2('destroy');
+							// $('.select2_equipments').select2('destroy');
 							if(n == {{ json_decode($maintenance_cost->equipment_ids,TRUE)[$key] }}){
 							$('.select2_equipments').append(
 								'<option value='+n+' selected>'+data.equipments[n]+'</option>'
