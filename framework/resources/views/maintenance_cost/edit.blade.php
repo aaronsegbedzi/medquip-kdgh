@@ -151,22 +151,7 @@
 						</div>
 						@endforeach
 						@else
-						<!-- @foreach(json_decode($maintenance_cost->costs, TRUE) as $key => $cost)
-						<div class="row no-gutters">
-							<div class="form-group col-md-3">
-								{!! Form::select('equipments[]',$equipments??[],json_decode($maintenance_cost->equipments,TRUE)[$key],['class'=>'form-control select2_equipments','id'=>'equipments1']) !!}
-							</div>
-							<div class="form-group col-md-3">
-								{!! Form::text('start_dates[]',date('Y-m-d',strtotime(json_decode($maintenance_cost->start_dates,TRUE)[$key])),['class'=>'form-control start_dates','placeholder'=>__('equicare.enter_start_date'),'id'=>'start_dates1','autocomplete'=>'off']) !!}
-							</div>
-							<div class="form-group col-md-3">
-								{!! Form::text('end_dates[]',date('Y-m-d',strtotime(json_decode($maintenance_cost->end_dates,TRUE)[$key])),['class'=>'form-control end_dates','placeholder'=>__('equicare.enter_end_date'),'id'=>'end_dates1','autocomplete'=>'off']) !!}
-							</div>
-							<div class="form-group col-md-3">
-								{!! Form::text('cost[]',$cost,['class'=>'form-control','placeholder'=>__('equicare.enter_cost')]) !!}
-							</div>
-						</div>
-						@endforeach -->
+
 						@endif
 					</div>
 					<div class="form-group col-md-12 login-padding">
