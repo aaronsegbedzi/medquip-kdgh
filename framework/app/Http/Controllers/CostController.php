@@ -47,9 +47,7 @@ class CostController extends Controller {
 		$page = 'maintenance_cost';
 		$hospitals = Hospital::pluck('name', 'id');
 		$equipments = Equipment::where('hospital_id', $maintenance_cost->hospital_id)->pluck('unique_id', 'id')->toArray();
-		// return view('maintenance_cost.edit', compact('maintenance_cost', 'page', 'equipments', 'hospitals'));
-		var_dump($maintenance_cost);
-		var_dump($equipments);
+		return view('maintenance_cost.edit', compact('maintenance_cost', 'page', 'equipments', 'hospitals'));
 	}
 
 	public function update(CreateCostRequest $request, Cost $maintenance_cost) {
