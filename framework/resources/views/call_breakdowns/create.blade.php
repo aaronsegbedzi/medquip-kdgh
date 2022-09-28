@@ -34,7 +34,7 @@
 						department_select2','placeholder'=>'Select']) !!}
 					</div>
 					<div class="form-group col-md-4">
-						<label for="unique_id"> @lang('equicare.serial_number') </label>
+						<label for="unique_id"> @lang('equicare.serial_number')<span class="text-red">&nbsp;*</span></label>
 						{!! Form::select('unique_id',$serial_no??[],null,['class'=>'form-control
 						unique_id_select2','placeholder'=>'Select Serial No.']) !!}
 					</div>
@@ -66,7 +66,7 @@
 					{{ method_field('POST') }}
 					<div class="row">
 						<div class="form-group col-md-4">
-							<label>@lang('equicare.call_handle'):</label>
+							<label>@lang('equicare.call_handle')<span class="text-red">&nbsp;*</span>:</label>
 							<div class="radio iradio">
 								<label class="login-padding">
 									{!! Form::radio('call_handle', 'internal')!!} @lang('equicare.internal')
@@ -77,13 +77,13 @@
 							</div>
 						</div>
 						<div class="form-group col-md-4 report_no none-display">
-							<label for="department"> @lang('equicare.report_number')  </label>
+							<label for="department"> @lang('equicare.report_number')<span class="text-red">&nbsp;*</span></label>
 							<input type="text" name="report_no" class="form-control" value="" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-md-4">
-							<label for="department"> @lang('equicare.call_registration_date_time') </label>
+							<label for="department"> @lang('equicare.call_registration_date_time')<span class="text-red">&nbsp;*</span></label>
 							<div class="input-group">
 								<input type="text" name="call_register_date_time" class="form-control call_register_date_time"
 									value="" />
@@ -93,7 +93,7 @@
 							</div>
 						</div>
 						<div class="form-group col-md-4">
-							<label>@lang('equicare.working_status')</label>
+							<label>@lang('equicare.working_status')<span class="text-red">&nbsp;*</span></label>
 							{!! Form::select('working_status',[
 							'working' => __("equicare.working"),
 							'not working' => __("equicare.not_working"),

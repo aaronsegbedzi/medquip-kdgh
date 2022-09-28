@@ -31,7 +31,7 @@
 		<div class="col-md-12">
 			<div class="box box-primary">
 			<div class="box-header">
-				<h4 class="box-title">@lang('equicare.edit_role')</h4>
+				<h4 class="box-title">@lang('equicare.edit_role')<span class="text-red">&nbsp;*</span></h4>
 				</div>
 				<div class="box-body ">
 					@include ('errors.list')

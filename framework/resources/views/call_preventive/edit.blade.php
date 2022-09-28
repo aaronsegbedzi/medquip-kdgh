@@ -34,7 +34,7 @@
 						{!! Form::select('department',array_unique($departments)??[],null,['class'=>'form-control department_select2','placeholder'=>'Select', 'disabled' => true]) !!}
 					</div>
 					<div class="form-group col-md-4">
-						<label for="unique_id"> @lang('equicare.serial_number') </label>
+						<label for="unique_id"> @lang('equicare.serial_number')<span class="text-red">&nbsp;*</span></label>
 						{!! Form::select('unique_id',$serial_no??[],$preventive->equip_id??null,['class'=>'form-control unique_id_select2','placeholder'=>'Select Serial No.', 'disabled' => true]) !!}
 					</div>
 					<div class="form-group col-md-4">
@@ -58,7 +58,7 @@
 						<input type="text" name="short_name" class="short_name form-control" value="{{ $preventive->equipment->short_name?? '' }}" disabled />
 					</div>
 					<div class="form-group col-md-4">
-						<label>@lang('equicare.call_handle'):</label>
+						<label>@lang('equicare.call_handle')<span class="text-red">&nbsp;*</span>:</label>
 						<div class="radio iradio">
 							<label class="login-padding">
 								{!! Form::radio('call_handle', 'internal',null)!!} @lang('equicare.internal')
@@ -69,13 +69,13 @@
 						</div>
 					</div>
 					<div class="form-group col-md-4 report_no none-display">
-						<label for="department"> @lang('equicare.report_number') </label>
+						<label for="department"> @lang('equicare.report_number')<span class="text-red">&nbsp;*</span></label>
 						{!! Form::text('report_no',sprintf('%04d',$preventive->report_no),['class'=>'form-control',$preventive->call_handle=='internal'?'disabled':'']) !!}
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group col-md-4">
-						<label for="department"> @lang('equicare.call_registration_date_time') </label>
+						<label for="department"> @lang('equicare.call_registration_date_time')<span class="text-red">&nbsp;*</span></label>
 						<div class="input-group">
 							{!! Form::text('call_register_date_time',null,['class'=>['form-control','call_register_date_time']]) !!}
 							<span class="input-group-addon">
@@ -84,7 +84,7 @@
 						</div>
 					</div>
 					<div class="form-group col-md-4">
-						<label for="next_due_date"> @lang('equicare.next_due_date') </label>
+						<label for="next_due_date"> @lang('equicare.next_due_date')<span class="text-red">&nbsp;*</span></label>
 						<div class="input-group">
 							{!! Form::text('next_due_date',null,['class'=>['form-control','next_due_date']]) !!}
 							<span class="input-group-addon">
@@ -93,7 +93,7 @@
 						</div>
 					</div>
 					<div class="form-group col-md-4">
-						<label>@lang('equicare.working_status')</label>
+						<label>@lang('equicare.working_status')<span class="text-red">&nbsp;*</span></label>
 						{!! Form::select('working_status',[
 						'working' => __("equicare.working"),
 						'not working' => __("equicare.not_working"),

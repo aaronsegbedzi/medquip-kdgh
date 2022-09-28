@@ -24,32 +24,32 @@
 						{{ method_field('POST') }}
 						<div class="row">
 						<div class="form-group col-md-6">
-							<label for="name"> @lang('equicare.name') </label>
+							<label for="name"> @lang('equicare.name')<span class="text-red">&nbsp;*</span></label>
 							<input type="text" name="name" class="form-control"
 							value="{{ old('name') }}" />
 						</div>
 						<div class="form-group col-md-6">
-							<label for="short_name"> @lang('equicare.short_name_eq') </label>
+							<label for="short_name"> @lang('equicare.short_name_eq')<span class="text-red">&nbsp;*</span></label>
 							<input type="text" name="short_name" class="form-control"
 							value="{{ old('short_name') }}" />
 						</div>
 						<div class="form-group col-md-6">
-							<label for="company"> @lang('equicare.company') </label>
+							<label for="company"> @lang('equicare.company')<span class="text-red">&nbsp;*</span></label>
 							<input type="text" name="company" class="form-control"
 							value="{{ old('company') }}" />
 						</div>
 						<div class="form-group col-md-6">
-							<label for="model"> @lang('equicare.model') </label>
+							<label for="model"> @lang('equicare.model')<span class="text-red">&nbsp;*</span></label>
 							<input type="text" name="model" class="form-control"
 							value="{{ old('model') }}" />
 						</div>
 						<div class="form-group col-md-6">
-							<label for="sr_no"> @lang('equicare.serial_number') </label>
+							<label for="sr_no"> @lang('equicare.serial_number')<span class="text-red">&nbsp;*</span></label>
 							<input type="text" name="sr_no" class="form-control"
 							value="{{ old('sr_no') }}" />
 						</div>
 						<div class="form-group col-md-6">
-							<label for="hospital_id"> @lang('equicare.hospital') </label>
+							<label for="hospital_id"> @lang('equicare.hospital')<span class="text-red">&nbsp;*</span></label>
 							<select name="hospital_id" class="form-control">
 								<option value="">---select---</option>
 								@if(isset($hospitals))
@@ -64,7 +64,7 @@
 						</div>
 
 						<div class="form-group col-md-6">
-							<label for="department"> @lang('equicare.department') </label>
+							<label for="department"> @lang('equicare.department')<span class="text-red">&nbsp;*</span></label>
 							{!! Form::select('department',$departments??[],null,['class'=>'form-control','placeholder'=>'--select--']) !!}
 						</div>
 						<div class="form-group col-md-6">
@@ -112,7 +112,7 @@
 							</div>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="service_engineer_no"> @lang('equicare.service_engineer_number')</label>
+							<label for="service_engineer_no"> @lang('equicare.service_engineer_number')<span class="text-red">&nbsp;*</span></label>
 							<input type="text" name="service_engineer_no" class="form-control"
 							value="{{ old('service_engineer_no') }}" />
 						</div>

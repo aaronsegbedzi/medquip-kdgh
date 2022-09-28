@@ -3,13 +3,11 @@
 
 <head>
     <title>@lang('equicare.qr_sticker_generate')</title>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/fonts/Lato/latofonts.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/fonts/Lato/latostyle.css') }}">
     <style type="text/css" media="all">
         * {
             box-sizing: border-box;
-        }
-
-        html * {
-            font-family: Arial !important;
         }
 
         div {
@@ -26,6 +24,7 @@
         .card {
             float: left;
             width: 33.33%;
+            margin-right: 2px;
         }
 
         .card>span {
@@ -53,12 +52,16 @@
             vertical-align: middle;
             font-size: 8px;
             padding: 8px;
+            font-family: 'LatoWeb' !important;
+            font-style: italic !important;
+            font-weight: normal !important;
+            text-rendering: optimizeLegibility !important;
+            line-height: 7px !important;
         }
 
         .logo {
             text-align: right !important;
             padding-right: 20px !important;
-            
         }
 
         img {
@@ -104,7 +107,11 @@
                             <tr>
                                 <td class="card-body" colspan="2">
                                     <img class="company-logo" src="{{ asset('/uploads/qrcodes/'.$equipment->id.'.png') }}" width="130px">
-                                    <p style="font-size: 12px;">{{ $equipment->sr_no }} <br> {{ $equipment->name }} <br> ({{ $equipment->model }})</p>
+                                    <p class="size20" style="margin-top: 10px;">
+                                        <span style="font-family: 'LatoWebHeavy';">{{ $equipment->sr_no }}</span>
+                                        <br>
+                                        <span style="font-family: 'LatoWebSemibold';" class="size12">Hotline: +233 20 187 3099</span>
+                                    </p>
                                 </td>
                             </tr>
                         </tbody>

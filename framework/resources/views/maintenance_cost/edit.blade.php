@@ -27,6 +27,7 @@
 					<div class="row">
 						<div class="form-group col-md-4">
 							{!! Form::label('hospital_id',__('equicare.hospital')) !!}
+							<span class="text-red">&nbsp;*</span>
 							{!! Form::select('hospital_id',$hospitals??[],$maintenance_cost->hospital_id,['class' => $errors->has('hospital_id')?'is-invalid form-control select2_hospital':'form-control select2_hospital','placeholder'=>'Select Hospital']) !!}
 							@if ($errors->has('hospital_id'))
 							<strong class="invalid-feedback">
@@ -36,7 +37,7 @@
 							@endif
 						</div>
 						<div class="form-group col-md-6">
-							<label>@lang('equicare.type'):</label>
+							<label>@lang('equicare.type')<span class="text-red">&nbsp;*</span>:</label>
 							<div class="radio iradio">
 								<label class="login-padding">
 									{!! Form::radio('type', 'amc',$maintenance_cost->type=='amc'?true:false,['class'=>$errors->has('type')?'is-invalid':''])!!} @lang('equicare.annual_cost')
@@ -54,7 +55,7 @@
 							</div>
 						</div>
 						<div class="form-group col-md-3">
-							<label class="margintop">@lang('equicare.cost_by'):</label>
+							<label class="margintop">@lang('equicare.cost_by')<span class="text-red">&nbsp;*</span>:</label>
 							<div class="radio iradio zmargin">
 								<label class="login-padding">
 									{!! Form::radio('cost_by', 'us',$maintenance_cost->cost_by=='us'?true:false)!!} @lang('equicare.own_company')

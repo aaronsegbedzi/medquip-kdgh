@@ -182,11 +182,13 @@
 				<div class="row">
 					<div class="form-group col-md-6">
 						{!! Form::label('call_attend_date_time',__('equicare.call_attend_date_time')) !!}
+						<span class="text-red">&nbsp;*</span>
 						{!! Form::text('call_attend_date_time',null,['class'=>'form-control call_attend_date_time']) !!}
 						{{ Form::hidden('b_id',null,['class'=>'b_id']) }}
 					</div>
 					<div class="form-group col-md-6">
 						{!! Form::label('user',__('equicare.user_attended')) !!}
+						<span class="text-red">&nbsp;*</span>
 						{!! Form::select('user_attended',$users,Auth::user()->id??null,['placeholder'=>'select user','class'=>'form-control
 						user_attended']) !!}
 					</div>
@@ -194,10 +196,11 @@
 				<div class="row">
 					<div class="form-group col-md-6">
 						{!! Form::label('service_rendered',__('equicare.service_rendered')) !!}
+						<span class="text-red">&nbsp;*</span>
 						{!! Form::select('service_rendered',$services??[],null,['placeholder'=>__('equicare.select_option'),'class' => 'form-control test service_rendered_select2']) !!}
 					</div>
 					<div class="form-group col-md-6">
-						<label>@lang('equicare.working_status')</label>
+						<label>@lang('equicare.working_status')<span class="text-red">&nbsp;*</span></label>
 						{!! Form::select('working_status',[
 						'working' => __("equicare.working"),
 						'not working' => __("equicare.not_working"),
@@ -209,6 +212,7 @@
 				<div class="row">
 					<div class="form-group col-md-12">
 						{!! Form::label('remarks',__('equicare.remarks')) !!}
+						<span class="text-red">&nbsp;*</span>
 						{!! Form::textarea('remarks', null, ['class'=>'form-control remarks','rows'=>4]) !!}
 					</div>
 					<input type="hidden" name="id" class="id" value="">
@@ -249,16 +253,18 @@
 				<div class="row">
 					<div class="form-group col-md-6">
 						{!! Form::label('call_complete_date_time',__('equicare.call_complete_date_time')) !!}
+						<span class="text-red">&nbsp;*</span>
 						{!! Form::text('call_complete_date_time',null,['class'=>'form-control call_complete_date_time']) !!}
 					</div>
 					<div class="form-group col-md-6">
 						{!! Form::label('service_rendered',__('equicare.service_rendered')) !!}
+						<span class="text-red">&nbsp;*</span>
 						{!! Form::select('service_rendered',$services??[],null,['placeholder'=>__('equicare.select_option'),'class' => 'form-control test service_rendered_select2']) !!}
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group col-md-12">
-						<label>@lang('equicare.working_status')</label>
+						<label>@lang('equicare.working_status')<span class="text-red">&nbsp;*</span></label>
 						{!! Form::select('working_status',[
 						'working' => __("equicare.working"),
 						'not working' => __("equicare.not_working"),
@@ -269,6 +275,7 @@
 				<div class="row">
 					<div class="form-group col-md-12">
 						{!! Form::label('remarks',__('equicare.remarks')) !!}
+						<span class="text-red">&nbsp;*</span>
 						{!! Form::textarea('remarks', null, ['class'=>'form-control remarks','rows'=>4]) !!}
 					</div>
 				</div>

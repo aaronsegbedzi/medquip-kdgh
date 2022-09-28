@@ -15,7 +15,9 @@ framework/public/hot
 framework/public_html/storage
 framework/public_html/hot
 
+framework/storage/fonts/*
 framework/storage/*.key
+framework/storage/font/*
 .env
 framework/Homestead.yaml
 framework/Homestead.json

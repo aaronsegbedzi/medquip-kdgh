@@ -32,13 +32,13 @@
 <div class="col-md-3">
    <b>@lang('equicare.department')</b> : {{ ($equipment->get_department->short_name)??"-" }} ({{ ($equipment->get_department->name) ??'-' }})
 </div>
-<div class="col-md-3">
+<!-- <div class="col-md-3">
    <b>@lang('equicare.purchase_date')</b> : {{ $equipment->date_of_purchase?? '-' }}
-</div>
+</div> -->
 
-<div class="col-md-3">
+<!-- <div class="col-md-3">
    <b>@lang('equicare.order_date')</b> : {{ $equipment->order_date?? '-' }}
-</div>
+</div> -->
 
 <div class="col-md-3">
    <b>@lang('equicare.installation_date')</b> : {{ $equipment->date_of_installation??'-' }}

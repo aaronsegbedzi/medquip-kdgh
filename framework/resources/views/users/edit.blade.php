@@ -23,21 +23,21 @@
 						<input type="hidden" name="_method" value="PATCH"/>
 						<div class="row">
 						<div class="form-group col-md-6">
-							<label for="name"> @lang('equicare.name') </label>
+							<label for="name"> @lang('equicare.name')<span class="text-red">&nbsp;*</span></label>
 							<input type="text" name="name" value="{{ $user->name }}" class="form-control"/>
 							<input type="hidden" name="id" value="{{ $user->id }}">
 						</div>
 						<div class="form-group col-md-6">
-							<label for="email"> @lang('equicare.email') </label>
+							<label for="email"> @lang('equicare.email')<span class="text-red">&nbsp;*</span></label>
 							<input type="email" name="email" value="{{ $user->email }}" class="form-control"/>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="phone"> @lang('equicare.phone') </label>
+							<label for="phone"> @lang('equicare.phone')<span class="text-red">&nbsp;*</span></label>
 							<input type="phone" name="phone" value="{{ $user->phone }}" class="form-control"/>
 						</div>
 
 						<div class="form-group col-md-6">
-							<label for="role"> @lang('equicare.role') </label>
+							<label for="role"> @lang('equicare.role')<span class="text-red">&nbsp;*</span></label>
 							<select name="role" class="form-control ">
 								<option value=""> </option>
 								@foreach ($roles as $role)
@@ -49,7 +49,7 @@
 							</select>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="password"> @lang('equicare.password') </label>
+							<label for="password"> @lang('equicare.password')</label>
 							<input type="password" value="" name="password" class="form-control col-md-6"/>
 						</div>
 						@if (isset($permissions) && $permissions->count() > 0)

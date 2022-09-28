@@ -239,7 +239,7 @@
 				</div>
 				<div class="row">
 					<div class="form-group col-md-6">
-						<label for="qr_hospital">@lang('equicare.hospital')</label>
+						<label for="qr_hospital">@lang('equicare.hospital')<span class="text-red">&nbsp;*</span></label>
 						{!! Form::select('qr_hospital',$qr_hospitals??[],null,['placeholder'=>__('equicare.select_option'),'class' => 'form-control qr_hospital', 'required' => true])
 						!!}
 					</div>

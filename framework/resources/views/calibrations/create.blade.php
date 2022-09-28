@@ -25,7 +25,7 @@
 				{!! Form::open(['route'=>'calibration.store', 'method'=>'POST']) !!}
 				<div class="row">
 					<div class="form-group col-md-4">
-						<label for="department"> @lang('equicare.hospital') </label>
+						<label for="department"> @lang('equicare.hospital')</label>
 
 						{!! Form::select('hospital',array_unique($hospitals)??[],null,['class'=>'form-control hospital_select2','placeholder'=>'Select']) !!}
 					</div>
@@ -59,10 +59,12 @@
 
 					<div class="form-group col-md-4">
 						{!! Form::label('date_of_calibration',__('equicare.calibration_date')) !!}
+						<span class="text-red">&nbsp;*</span>
 						{!! Form::text('date_of_calibration',null,['class' => 'date_of_calibration form-control']) !!}
 					</div>
 					<div class="form-group col-md-4">
 						{!! Form::label('due_date',__('equicare.due_date')) !!}
+						<span class="text-red">&nbsp;*</span>
 						{!! Form::text('due_date',null,['class' => 'due_date form-control']) !!}
 					</div>
 					<div class="form-group col-md-4">
@@ -79,10 +81,12 @@
 					</div>
 					<div class="form-group col-md-4">
 						{!! Form::label('contact_person_no',__('equicare.contact_person_no')) !!}
+						<span class="text-red">&nbsp;*</span>
 						{!! Form::text('contact_person_no',null,['class' => 'form-control']) !!}
 					</div>
 					<div class="form-group col-md-4">
 						{!! Form::label('engineer_no',__('equicare.engineer_no')) !!}
+						<span class="text-red">&nbsp;*</span>
 						{!! Form::text('engineer_no',null,['class' => 'form-control']) !!}
 					</div>
 					<div class="form-group col-md-4">

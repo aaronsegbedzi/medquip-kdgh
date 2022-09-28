@@ -6,7 +6,7 @@
 	| @lang('equicare.roles')
 @endsection
 @section('breadcrumb')
-<li class="breadcrumb-item"><a href="{{ url('admin/roles') }}">@lang('equicare.roles')</a></li>
+<li class="breadcrumb-item"><a href="{{ url('admin/roles') }}">@lang('equicare.roles')<span class="text-red">&nbsp;*</span></a></li>
 <li class="breadcrumb-item active">@lang('equicare.create_new')</li>
 @endsection
 @section('styles')

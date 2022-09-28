@@ -32,10 +32,12 @@
 							{!! Form::hidden('id',null) !!}
 							<div class="form-group col-md-6">
 								{!! Form::label('name',__('equicare.name')) !!}
+								<span class="text-red">&nbsp;*</span>
 								{!! Form::text('name',null,['class' => 'form-control']) !!}
 							</div>
 							<div class="form-group col-md-6">
 								{!! Form::label('short_name',__('equicare.short_name_e')) !!}
+								<span class="text-red">&nbsp;*</span>
 								{!! Form::text('short_name',null,['class' => 'form-control']) !!}
 							</div>
 
