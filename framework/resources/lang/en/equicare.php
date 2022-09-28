@@ -258,7 +258,7 @@ return [
     'reset_password' => 'Reset Password',
     'forgot_your_password' => 'Reset My Password',
     'history' => 'History',
-    'equipment_history' => 'Equipments History',
+    'equipment_history' => 'Equipment History',
     'qr_code' => 'QR Code',
     'response_time' => 'Response Time',
     'no_data_around' => 'No Data Available',

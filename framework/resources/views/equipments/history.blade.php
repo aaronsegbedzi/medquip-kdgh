@@ -52,7 +52,7 @@
                @foreach($data as $d)
                <!-- timeline time label -->
                <li class="time-label">
-                  <span class="bg-gray">
+                  <span class="bg-black">
                      {{date('Y-m-d',strtotime($d['created_at']))}}
                   </span>
                </li>
