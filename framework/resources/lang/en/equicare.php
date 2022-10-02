@@ -3,7 +3,7 @@ return [
     'calibrations' => 'Calibrations',
     'create' => 'Create',
     'create_calibration' => 'Create Calibration',
-    'hospital' => 'Hospitals',
+    'hospital' => 'Hospital',
     'department' => 'Department',
     'unique_id' => 'Unique ID',
     'equipment_name' => 'Equipment Name',

@@ -51,6 +51,11 @@
 							<input type="password" name="password" class="form-control"/>
 						</div>
 						<div class="form-group col-md-6">
+						{!! Form::label('hospital_id',__('equicare.hospital')) !!}
+						{!! Form::select('hospital_id',$hospitals??[],null,['placeholder'=>__('equicare.select_option'),'class' => 'form-control'])
+						!!}
+						</div>
+						<div class="form-group col-md-6">
 							<label for="password_confirmation"> @lang('equicare.confirm_password')<span class="text-red">&nbsp;*</span></label>
 							<input type="password" name="password_confirmation" class="form-control"/>
 						</div>

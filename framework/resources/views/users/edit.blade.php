@@ -52,6 +52,11 @@
 							<label for="password"> @lang('equicare.password')</label>
 							<input type="password" value="" name="password" class="form-control col-md-6"/>
 						</div>
+						<div class="form-group col-md-6">
+						{!! Form::label('hospital_id',__('equicare.hospital')) !!}
+						{!! Form::select('hospital_id',$hospitals??[],$user->hospital_id,['placeholder'=>__('equicare.select_option'),'class' => 'form-control'])
+						!!}
+						</div>
 						@if (isset($permissions) && $permissions->count() > 0)
 						<div class="form-group col-md-12">
 							<label for="permissions[]" > @lang('equicare.permissions') </label>

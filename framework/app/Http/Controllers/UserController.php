@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Hospital;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Permission;
@@ -31,6 +33,7 @@ class UserController extends Controller {
 	public function create() {
 		$index['page'] = 'users';
 		$index['roles'] = Role::all();
+		$index['hospitals'] = Hospital::pluck('name', 'id')->toArray();
 
 		$this->availibility('Create Users');
 		return view('users.create', $index);
@@ -43,7 +46,7 @@ class UserController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(UserCreateRequest $request) {
-		$user = User::create($request->only('name', 'email', 'phone'));
+		$user = User::create($request->only('name', 'email', 'phone', 'hospital_id'));
 		$user->password = bcrypt($request->password);
 		$user->assignRole($request->role);
 		$user->save();
@@ -63,6 +66,7 @@ class UserController extends Controller {
 		$index['page'] = 'users';
 		$index['user'] = User::findOrFail($id);
 		$index['roles'] = Role::all();
+		$index['hospitals'] = Hospital::pluck('name', 'id')->toArray();
 		$this->availibility('Edit Users');
 		$permissions = Permission::all();
 		$role_p = $index['user']->getPermissionsViaRoles()->pluck('id')->toArray();
@@ -82,7 +86,7 @@ class UserController extends Controller {
 	 */
 	public function update(UserUpdateRequest $request, $id) {
 		$user = User::findOrFail($id);
-		$user->update($request->only('name', 'email', 'phone'));
+		$user->update($request->only('name', 'email', 'phone', 'hospital_id'));
 		$user->password = bcrypt($request->password);
 		if ($request->role) {
 			$user->roles()->sync($request->role);

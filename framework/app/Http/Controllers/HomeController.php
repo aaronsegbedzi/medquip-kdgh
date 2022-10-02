@@ -7,6 +7,7 @@ use App\CallEntry;
 use App\Equipment;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller {
 	/**
@@ -24,6 +25,11 @@ class HomeController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
+
+		if (Auth::user()->hasRole('Customer')) {
+			return redirect('customer/hospital/'.Auth::user()->hospital_id);
+		}
+
 		$index['page'] = '/home';
 		$breakdown_totals = $preventive_totals = $total_days = [];
 

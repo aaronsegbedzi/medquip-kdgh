@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Symfony\Component\HttpFoundation\Request;
 
-class LoginController extends Controller {
+class LoginController extends Controller
+{
 	/*
 		    |--------------------------------------------------------------------------
 		    | Login Controller
@@ -31,12 +33,23 @@ class LoginController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 
 		$this->middleware('guest')->except('logout');
 	}
 
-	public function alreadyInstalled() {
+	public function alreadyInstalled()
+	{
 		return file_exists(storage_path('installed'));
+	}
+
+	protected function authenticated(Request $request, $user)
+	{
+		if ($user->hasRole('Customer')) {
+			return redirect('/customer/hospital/'.$user->hospital_id);
+		} else {
+			return redirect('/');
+		}
 	}
 }

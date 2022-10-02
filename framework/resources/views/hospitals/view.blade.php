@@ -73,7 +73,8 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#equipments" aria-controls="equipments" role="tab" data-toggle="tab">Equipment</a></li>
-                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Maintenance Calendar</a></li>
+                <li role="presentation"><a href="#pm_maintenance" aria-controls="pm_maintenance" role="tab" data-toggle="tab">Preventive Maintenance Calls</a></li>
+                <li role="presentation"><a href="#b_maintenance" aria-controls="b_maintenance" role="tab" data-toggle="tab">Breakdown Maintenance Calls</a></li>
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
@@ -97,42 +98,143 @@
                             <tbody>
                                 @php $i=1 @endphp
                                 @foreach ($equipments as $equipment)
-                                    <tr>
-                                        <td class="text-center">{{ $i++ }}</td>
-                                        <td>{{ $equipment->name }}</td>
-                                        <td class="text-center">{{ $equipment->short_name }}</td>
-                                        <td class="text-center">{{ $equipment->sr_no }}</td>
-                                        <td>{{ $equipment->department }}</td>
-                                        <td class="text-center">
-                                            @php
-                                                switch ($equipment->working_status) {
-                                                    case 'working':
-                                                        echo '<label class="label label-success">'.ucwords($equipment->working_status).'</label>';
-                                                    break;
-                                                    case 'not working':
-                                                        echo '<label class="label label-danger">'.ucwords($equipment->working_status).'</label>';
-                                                    break;
-                                                    default:
-                                                        echo '<label class="label label-default">'.ucwords($equipment->working_status).'</label>';
-                                                    break;
-                                                }
-                                            @endphp                             
-                                        </td>
-                                        <td class="text-center">{{ $equipment->call_register_date_time?date("d M Y",strtotime($equipment->call_register_date_time)):'-' }}</td>
-                                        <td class="text-center">{{ $equipment->call_attend_date_time?date("d M Y",strtotime($equipment->call_attend_date_time)):'-' }}</td>
-                                        <td class="text-center">{{ $equipment->call_complete_date_time?date("d M Y",strtotime($equipment->call_complete_date_time)):'-' }}</td>
-                                        <td class="text-center">
-                                            <a target="_blank" href="{{ route('equipments.history',$equipment->id) }}" class="btn bg-olive btn-sm btn-flat marginbottom" title="@lang('equicare.history')"><i class="fa fa-history"></i></a>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td class="text-center">{{ $i++ }}</td>
+                                    <td>{{ $equipment->name }}</td>
+                                    <td class="text-center">{{ $equipment->short_name }}</td>
+                                    <td class="text-center">{{ $equipment->sr_no }}</td>
+                                    <td>{{ $equipment->department }}</td>
+                                    <td class="text-center">
+                                        @php
+                                        switch ($equipment->working_status) {
+                                        case 'working':
+                                        echo '<label class="label label-success">'.ucwords($equipment->working_status).'</label>';
+                                        break;
+                                        case 'not working':
+                                        echo '<label class="label label-danger">'.ucwords($equipment->working_status).'</label>';
+                                        break;
+                                        default:
+                                        echo '<label class="label label-default">'.ucwords($equipment->working_status).'</label>';
+                                        break;
+                                        }
+                                        @endphp
+                                    </td>
+                                    <td class="text-center">{{ $equipment->call_register_date_time?date("d M Y",strtotime($equipment->call_register_date_time)):'-' }}</td>
+                                    <td class="text-center">{{ $equipment->call_attend_date_time?date("d M Y",strtotime($equipment->call_attend_date_time)):'-' }}</td>
+                                    <td class="text-center">{{ $equipment->call_complete_date_time?date("d M Y",strtotime($equipment->call_complete_date_time)):'-' }}</td>
+                                    <td class="text-center">
+                                        <a target="_blank" href="{{ route('equipments.history',$equipment->id) }}" class="btn bg-olive btn-sm btn-flat marginbottom" title="@lang('equicare.history')"><i class="fa fa-history"></i></a>
+                                    </td>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="profile">...</div>
-                <div role="tabpanel" class="tab-pane" id="messages">...</div>
-                <div role="tabpanel" class="tab-pane" id="settings">...</div>
+                <div role="tabpanel" class="tab-pane" id="pm_maintenance">
+                    <div class="table-responsive" style="margin-top: 20px;">
+                        <table class="table table-condensed table-bordered table-striped table-hover dataTable bottom-padding" id="data_table_preventive">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th>Call Type</th>
+                                    <th>Current Status</th>
+                                    <th>Next Due Date</th>
+                                    <th>Call Register Date</th>
+                                    <th>Call Attend Date</th>
+                                    <th>Call Complete Date</th>
+                                    <th>Assigned Engineer</th>
+                                    <th>Service Rendered</th>
+                                    <th>Nature of Problem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php $i=1 @endphp
+                                @foreach ($calls as $call)
+                                    @if($call->call_type == 'preventive')
+                                        <tr>
+                                            <td class="text-center">{{ $i++ }}</td>
+                                            <td>{{ strtoupper($call->call_type) }}</td>
+                                            <td class="text-center">
+                                                @php
+                                                switch ($call->working_status) {
+                                                case 'working':
+                                                echo '<label class="label label-success">'.ucwords($call->working_status).'</label>';
+                                                break;
+                                                case 'not working':
+                                                echo '<label class="label label-danger">'.ucwords($call->working_status).'</label>';
+                                                break;
+                                                default:
+                                                echo '<label class="label label-default">'.ucwords($call->working_status).'</label>';
+                                                break;
+                                                }
+                                                @endphp
+                                            </td>
+                                            <td class="text-center">{{ $call->next_due_date?date("d M Y",strtotime($call->next_due_date)):'-' }}</td>
+                                            <td class="text-center">{{ $call->call_register_date_time?date("d M Y",strtotime($call->call_register_date_time)):'-' }}</td>
+                                            <td class="text-center">{{ $call->call_attend_date_time?date("d M Y",strtotime($call->call_attend_date_time)):'-' }}</td>
+                                            <td class="text-center">{{ $call->call_complete_date_time?date("d M Y",strtotime($call->call_complete_date_time)):'-' }}</td>
+                                            <td class="text-center">{{ $call->engineer }}</td>
+                                            <td class="text-center">{{ $call->service_rendered }}</td>
+                                            <td class="text-center">{{ $call->nature_of_problem }}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="b_maintenance">
+                    <div class="table-responsive" style="margin-top: 20px;">
+                        <table class="table table-condensed table-bordered table-striped table-hover dataTable bottom-padding" id="data_table_breakdown">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th>Call Type</th>
+                                    <th>Current Status</th>
+                                    <th>Call Register Date</th>
+                                    <th>Call Attend Date</th>
+                                    <th>Call Complete Date</th>
+                                    <th>Assigned Engineer</th>
+                                    <th>Service Rendered</th>
+                                    <th>Nature of Problem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php $i=1 @endphp
+                                @foreach ($calls as $call)
+                                    @if($call->call_type == 'breakdown')
+                                        <tr>
+                                            <td class="text-center">{{ $i++ }}</td>
+                                            <td>{{ strtoupper($call->call_type) }}</td>
+                                            <td class="text-center">
+                                                @php
+                                                switch ($call->working_status) {
+                                                case 'working':
+                                                echo '<label class="label label-success">'.ucwords($call->working_status).'</label>';
+                                                break;
+                                                case 'not working':
+                                                echo '<label class="label label-danger">'.ucwords($call->working_status).'</label>';
+                                                break;
+                                                default:
+                                                echo '<label class="label label-default">'.ucwords($call->working_status).'</label>';
+                                                break;
+                                                }
+                                                @endphp
+                                            </td>
+                                            <td class="text-center">{{ $call->call_register_date_time?date("d M Y",strtotime($call->call_register_date_time)):'-' }}</td>
+                                            <td class="text-center">{{ $call->call_attend_date_time?date("d M Y",strtotime($call->call_attend_date_time)):'-' }}</td>
+                                            <td class="text-center">{{ $call->call_complete_date_time?date("d M Y",strtotime($call->call_complete_date_time)):'-' }}</td>
+                                            <td class="text-center">{{ $call->engineer }}</td>
+                                            <td class="text-center">{{ $call->service_rendered }}</td>
+                                            <td class="text-center">{{ $call->nature_of_problem }}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -144,7 +246,19 @@
         $('#data_table_equipment').DataTable({
             dom: 'Bfrtip',
             buttons: [
-                'print','copy', 'excel', 'pdf'
+                'print', 'copy', 'excel', 'pdf'
+            ]
+        });
+        $('#data_table_preventive').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'print', 'copy', 'excel', 'pdf'
+            ]
+        });
+        $('#data_table_breakdown').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'print', 'copy', 'excel', 'pdf'
             ]
         });
     });

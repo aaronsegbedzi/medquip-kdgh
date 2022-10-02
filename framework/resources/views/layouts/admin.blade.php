@@ -133,42 +133,51 @@
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-
+          @unlessrole('Customer')
           <li class="{{ $page=='/home'?'active':'' }}">
             <a href="{{ url('/admin/dashboard') }}">
               <i class="fa fa-dashboard"></i> <span>@lang('equicare.dashboard')</span>
             </a>
           </li>
+          @endunlessrole
 
-
+          @can('View Hospitals')
           <li class="{{ $page=='hospitals'?'active':'' }}">
             <a href="{{ url('/admin/hospitals') }}">
               <i class="fa fa-hospital-o"></i> <span>@lang('equicare.hospital')</span>
             </a>
           </li>
+          @endcan
 
+          @can('View Departments')
           <li class="{{ $page=='departments'?'active':'' }}">
             <a href="{{ url('/admin/departments') }}">
               <i class="fa fa-building-o"></i> <span>@lang('equicare.departments')</span>
             </a>
           </li>
+          @endcan
 
-          <li class="{{ $page=='equipments'?'active':'' }}">
-            <a href="{{ url('/admin/equipments') }}">
-              <i class="fa fa-heartbeat"></i> <span>@lang('equicare.equipments')</span>
-            </a>
-          </li>
+          @can('View Equipments')
+            @unlessrole('Customer')
+            <li class="{{ $page=='equipments'?'active':'' }}">
+              <a href="{{ url('/admin/equipments') }}">
+                <i class="fa fa-heartbeat"></i> <span>@lang('equicare.equipments')</span>
+              </a>
+            </li>
+            @endunlessrole
+          @endcan
 
           @if($page == "breakdown_maintenance" || $page == "preventive_maintenance")
-          @php($class="treeview menu-open")
-          @php($active = "active")
-          @php($menu="style=display:block;")
+            @php($class="treeview menu-open")
+            @php($active = "active")
+            @php($menu="style=display:block;")
           @else
-          @php($class="treeview")
-          @php($active = "")
-          @php($menu="")
+            @php($class="treeview")
+            @php($active = "")
+            @php($menu="")
           @endif
 
+          @can('View Preventive Maintenance')
           <li class="{{ $class }} {{ $active }}">
             <a href="#" class="">
               <i class="fa fa-phone"></i> <span>@lang('equicare.call_entries')</span>
@@ -189,18 +198,24 @@
               </li>
             </ul>
           </li>
+          @endcan
 
+          @can('View Calibrations')
           <li class="{{ $page=='calibrations'?'active':'' }}">
             <a href="{{ url('admin/calibration') }}">
               <i class="fa fa-balance-scale"></i> <span>@lang('equicare.calibrations')</span>
             </a>
           </li>
+          @endcan
 
+          @can('View Maintenance Cost')
           <li class="{{ $page=='maintenance_cost'?'active':'' }}">
             <a href="{{ url('admin/maintenance_cost') }}">
               <i class="fa fa-money"></i> <span>@lang('equicare.maintenance_cost')</span>
             </a>
           </li>
+          @endcan
+
           @if($page == "reports/time_indicator" || $page == "reports/equipments")
           @php($class="treeview menu-open")
           @php($active = "active")
@@ -210,6 +225,8 @@
           @php($active = "")
           @php($menu="")
           @endif
+
+          @can('View Time Indicator Report')
           <li class="{{ $class }} {{ $active }}">
             <a href="#" class="">
               <i class="fa fa-th"></i> <span>@lang('equicare.reports')</span>
@@ -230,6 +247,8 @@
               </li>
             </ul>
           </li>
+          @endcan
+          
           @php($date = date('Y-m-d',strtotime('+14 days')))
           @php($preventive_reminder_count = \App\CallEntry::where('call_type','preventive')->where('next_due_date','<=',$date)->count())
             @php($calibrations_reminder_count = \App\Calibration::where('due_date','<=',$date)->count())
@@ -242,6 +261,8 @@
               @php($active = "")
               @php($menu="")
               @endif
+
+              @can('View Preventive Maintenance')
               <li class="{{ $class }} {{ $active }}">
                 <a href="#" class="">
                   <i class="fa fa-clock-o"></i> <span>@lang('equicare.reminder')</span>
@@ -268,11 +289,15 @@
                   </li>
                 </ul>
               </li>
+              @endcan
+
+              @can('View Calibrations')
               <li class="{{ $page=='calibrations_sticker'?'active':'' }}">
                 <a href="{{ url('admin/calibrations_sticker') }}">
                   <i class="fa fa-tags"></i> <span>@lang('equicare.calibrations_sticker')</span>
                 </a>
               </li>
+              @endcan
 
               @role('Admin')
               <li class="{{ $page=='settings'?'active':'' }}">
@@ -310,6 +335,13 @@
                     </a>
                   </li>
                 </ul>
+              </li>
+              @endrole
+              @role('Customer')
+              <li class="{{ $page=='hospitals'?'active':'' }}">
+                <a href="{{ url('/customer/hospital/'.Auth::user()->hospital_id) }}">
+                  <i class="fa fa-hospital-o"></i> <span>My Hospital</span>
+                </a>
               </li>
               @endrole
         </ul>
