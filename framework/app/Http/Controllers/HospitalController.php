@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Equipment;
 use App\Hospital;
 use App\Http\Requests\HospitalRequest;
 use Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class HospitalController extends Controller {
@@ -18,6 +21,14 @@ class HospitalController extends Controller {
 		$index['hospitals'] = Hospital::all();
 
 		return view('hospitals.index', $index);
+	}
+
+	public function view($id) {
+		$index['page'] = 'hospitals';
+		$index['hospital'] = Hospital::findOrFail($id);
+		$index['counts'] = DB::select("SELECT IFNULL(c.working_status,'pending') as status, count(*) AS total FROM equipments e LEFT JOIN call_entries c ON e.id = c.equip_id AND c.id = (SELECT MAX(id) FROM call_entries d WHERE d.equip_id = c.equip_id) WHERE e.hospital_id = ? GROUP BY c.working_status", [$id]);
+		$index['equipments'] = DB::select("SELECT e.id, e.name, e.short_name, e.sr_no, x.name AS 'department', IFNULL(c.working_status,'pending') AS 'working_status', c.call_register_date_time, c.call_attend_date_time, c.call_complete_date_time FROM equipments e LEFT JOIN departments x ON x.id = e.department LEFT JOIN call_entries c ON e.id = c.equip_id AND c.id = (SELECT MAX(id) FROM call_entries d WHERE d.equip_id = c.equip_id) WHERE e.hospital_id = ?", [$id]); 
+		return view('hospitals.view', $index);
 	}
 
 	/**

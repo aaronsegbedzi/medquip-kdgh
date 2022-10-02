@@ -133,8 +133,8 @@
 									{!! Form::open(['url' => 'admin/equipments/'.$equipment->id,'method'=>'DELETE','class'=>'form-inline']) !!}
 									@can('Edit Equipments')
 									<a href="{{ route('equipments.edit',$equipment->id) }}" class="btn btn-warning btn-sm btn-flat marginbottom" title="@lang('equicare.edit')"><i class="fa fa-edit"></i></a>
-									<a target="_blank" href="{{ route('equipments.history',$equipment->id) }}" class="btn bg-olive btn-sm btn-flat marginbottom" title="@lang('equicare.history')"><i class="fa fa-history"></i></a>
 									@endcan
+									<a target="_blank" href="{{ route('equipments.history',$equipment->id) }}" class="btn bg-olive btn-sm btn-flat marginbottom" title="@lang('equicare.history')"><i class="fa fa-history"></i></a>
 									<a href="#" class="btn bg-purple btn-sm btn-flat marginbottom" title="@lang('equicare.qr_code')" data-srno="{{$equipment->sr_no}}" data-uniqueid="{{$equipment->unique_id}}" data-url="{{ asset('uploads/qrcodes/'.$equipment->id.'.png') }}" data-toggle="modal" data-target="#qr-modal"><i class="fa fa-qrcode"></i></a>
 									<input type="hidden" name="id" value="{{ $equipment->id }}">
 									@can('Delete Equipments')

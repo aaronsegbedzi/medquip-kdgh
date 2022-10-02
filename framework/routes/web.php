@@ -39,6 +39,8 @@ Route::group(['middleware' => ['installed_or_not', 'auth']], function () {
     Route::resource('admin/permissions', 'PermissionController');
     Route::resource('admin/hospitals', 'HospitalController');
 
+    Route::get('/customer/hospital/{id}', 'HospitalController@view')->name('hospitals.view');
+
     Route::get('/admin/equipment/qr/{id}', 'EquipmentController@qr')->name('equipments.qr');
     Route::get('/admin/equipment/qr-image/{id}', 'EquipmentController@qr_image')->name('equipments.qrimage');
 

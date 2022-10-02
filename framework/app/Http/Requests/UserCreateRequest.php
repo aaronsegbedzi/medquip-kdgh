@@ -24,7 +24,7 @@ class UserCreateRequest extends FormRequest {
 			'name' => 'required|max:150',
 			'email' => 'required|unique:users,email,' . $this->id,
 			'password' => 'required|confirmed',
-			'phone' => 'required|numeric|max:16',
+			'phone' => 'required|numeric',
 			'role' => 'required',
 		];
 	}

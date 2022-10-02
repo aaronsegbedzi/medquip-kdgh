@@ -22,7 +22,7 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{ asset('assets/dist/css/skins/_all-skins.min.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/datatables/datatables.min.css') }}">
 
   <!-- Full Calender JS -->
   <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/fullcalendar/main.min.css') }}">
@@ -378,8 +378,8 @@
   <script src="{{ asset('assets/bower_components/fastclick/lib/fastclick.js') }}"></script>
   <!-- AdminLTE App -->
   <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
-  <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}" type="text/javascript"></script>
-  <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('assets/plugins/datatables/datatables.min.js') }}"></script>
+
   <script src="{{ asset('assets/bower_components/select2/dist/js/select2.full.min.js') }}" type="text/javascript"></script>
   {{-- PNotify --}}
   <script src="{{ asset('assets/js/pnotify.custom.min.js') }}" type="text/javascript"></script>
