@@ -41,7 +41,7 @@
     <div class="col-md-3">
         <div class="small-box bg-gray">
             <div class="inner">
-                <h3>{{ $counts[2]->total??0 }}</h3>
+                <h3>{{ $counts[1]->total??0 }}</h3>
                 <p>Pending @lang('equicare.equipments')</p>
             </div>
             <div class="icon">
@@ -55,7 +55,7 @@
     <div class="col-md-3">
         <div class="small-box bg-red">
             <div class="inner">
-                <h3>{{ $counts[1]->total??0 }}</h3>
+                <h3>{{ $counts[2]->total??0 }}</h3>
                 <p>Not Working @lang('equicare.equipments')</p>
             </div>
             <div class="icon">
