@@ -24,4 +24,7 @@ class CallEntry extends Model {
 	public function user_attended_fn() {
 		return $this->belongsTo('App\User', 'user_attended');
 	}
+	public function user_attended_2_fn() {
+		return $this->belongsTo('App\User', 'user_attended_2');
+	}
 }

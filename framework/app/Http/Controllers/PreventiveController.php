@@ -20,7 +20,9 @@ class PreventiveController extends Controller {
 		$index['page'] = 'preventive_maintenance';
 		$index['p_maintenance'] = CallEntry::where('call_type', 'preventive')->latest()->get();
 		$index['services'] = ServiceRenderedItem::pluck('new_item', 'new_item')->toArray();
-		$index['users'] = User::pluck('name', 'id');
+		$index['users'] = User::whereHas('roles', function ($query) {
+			return $query->where('name', 'Engineer');
+		})->pluck('name', 'id')->toArray();
 		return view('call_preventive.index', $index);
 	}
 
@@ -183,6 +185,7 @@ class PreventiveController extends Controller {
 		$call_attend_date_time = \Carbon\Carbon::parse($request->call_attend_date_time);
 		$preventive->call_attend_date_time = $call_attend_date_time;
 		$preventive->user_attended = $request->user_attended;
+		$preventive->user_attended_2 = $request->user_attended_2;
 		$preventive->service_rendered = $request->service_rendered;
 		$preventive->remarks = $request->remarks;
 		$preventive->working_status = $request->working_status;

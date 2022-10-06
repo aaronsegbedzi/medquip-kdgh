@@ -20,7 +20,9 @@ class BreakdownController extends Controller {
 		$index['page'] = 'breakdown_maintenance';
 		$index['b_maintenance'] = CallEntry::where('call_type', 'breakdown')->latest()->get();
 		$index['services'] = ServiceRenderedItem::pluck('new_item', 'new_item')->toArray();
-		$index['users'] = User::pluck('name', 'id');
+		$index['users'] = User::whereHas('roles', function ($query) {
+			return $query->where('name', 'Engineer');
+		})->pluck('name', 'id')->toArray();
 		return view('call_breakdowns.index', $index);
 	}
 
@@ -171,6 +173,7 @@ class BreakdownController extends Controller {
 		$call_attend_date_time = \Carbon\Carbon::parse($request->call_attend_date_time);
 		$breakdown->call_attend_date_time = $call_attend_date_time;
 		$breakdown->user_attended = $request->user_attended;
+		$breakdown->user_attended_2 = $request->user_attended_2;
 		$breakdown->service_rendered = $request->service_rendered;
 		$breakdown->remarks = $request->remarks;
 		$breakdown->working_status = $request->working_status;

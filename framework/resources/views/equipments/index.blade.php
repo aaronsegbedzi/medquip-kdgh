@@ -20,36 +20,13 @@
 				<form method="get" class="form" action="{{ route('equipments.index') }}">
 					<div class="row">
 						<div class="form-group col-md-3">
-							<label>@lang('equicare.hospital'): </label>
-							<select name="hospital_id" class="form-control">
-								<option value="">@lang('equicare.select')</option>
-								@if(isset($hospitals))
-								@foreach ($hospitals as $hospital)
-								<option value="{{ $hospital->id }}" @if(isset($hospital_id) && $hospital_id==$hospital->id)
-									selected
-									@endif
-									>
-									{{ ucfirst($hospital->name) }}
-								</option>
-								@endforeach
-								@endif
-							</select>
+							{!! Form::label('hospital_id',__('equicare.hospital')) !!}
+							<span class="text-red">&nbsp;*</span>
+							{!! Form::select('hospital_id',$hospitals??[],$hospital_id??null,['placeholder'=>__('equicare.select_option'),'class' => 'form-control select2 hospital']) !!}
 						</div>
 						<div class="form-group col-md-3">
-							<label>@lang('equicare.company'): </label>
-							<select name="company" class="form-control">
-								<option value="">@lang('equicare.select')</option>
-								@if(isset($companies))
-								@foreach ($companies as $company)
-								<option value="{{ $company->company }}" @if(isset($companyy) && $companyy==$company->company)
-									selected
-									@endif
-									>
-									{{ ucfirst($company->company) }}
-								</option>
-								@endforeach
-								@endif
-							</select>
+							{!! Form::label('department',__('equicare.department')) !!}
+							{!! Form::select('department',$departments??[],$department??null,['placeholder'=>__('equicare.select_option'),'class' => 'form-control select2 department']) !!}
 						</div>
 						<div class="form-group col-md-2">
 							<label class="visibility">123</label>
@@ -176,32 +153,6 @@
 		</div>
 	</div>
 </div>
-@endsection
-@section('scripts')
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#data_table_equipment').DataTable();
-		$('#qr-modal').on('show.bs.modal', function(event) {
-			var button = $(event.relatedTarget);
-			var modal = $(this)
-			modal.find('#qr-modal-iframe').attr('src', '#');
-			modal.find('.modal-title').html('QR Code for <strong>' + button.data('uniqueid') + '</strong>');
-			modal.find('#qr-image').attr('src', button.data('url'));
-			modal.find('#qr-download').attr('download', button.data('srno') + '.png');
-			modal.find('#qr-download').attr('href', button.data('url'));
-		});
-		$('.qr-bulk-btn').click(function(){
-        	$('#qr-bulk-modal').modal('show');
-    	});
-	});
-</script>
-@endsection
-@section('styles')
-<style type="text/css">
-	#data_table_equipment {
-		border-collapse: collapse !important;
-	}
-</style>
 <div class="modal fade" id="qr-modal" tabindex="-1" role="dialog">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -239,14 +190,13 @@
 				</div>
 				<div class="row">
 					<div class="form-group col-md-6">
-						<label for="qr_hospital">@lang('equicare.hospital')<span class="text-red">&nbsp;*</span></label>
-						{!! Form::select('qr_hospital',$qr_hospitals??[],null,['placeholder'=>__('equicare.select_option'),'class' => 'form-control qr_hospital', 'required' => true])
-						!!}
+						{!! Form::label('qr_hospital',__('equicare.hospital')) !!}
+						<span class="text-red">&nbsp;*</span>
+						{!! Form::select('qr_hospital',$hospitals??[],null,['placeholder'=>__('equicare.select_option'),'class' => 'form-control select2 hospital1']) !!}
 					</div>
 					<div class="form-group col-md-6">
-						<label for="qr_department">@lang('equicare.department')</label>
-						{!! Form::select('qr_department',$qr_departments??[],null,['placeholder'=>__('equicare.select_option'),'class' => 'form-control qr_department'])
-						!!}
+						{!! Form::label('qr_department',__('equicare.department')) !!}
+						{!! Form::select('qr_department',$departments??[],null,['placeholder'=>__('equicare.select_option'),'class' => 'form-control select2 department1']) !!}
 					</div>
 				</div>
 			</div>
@@ -258,4 +208,64 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+@endsection
+@section('scripts')
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#data_table_equipment').DataTable();
+		$('#qr-modal').on('show.bs.modal', function(event) {
+			var button = $(event.relatedTarget);
+			var modal = $(this)
+			modal.find('#qr-modal-iframe').attr('src', '#');
+			modal.find('.modal-title').html('QR Code for <strong>' + button.data('uniqueid') + '</strong>');
+			modal.find('#qr-image').attr('src', button.data('url'));
+			modal.find('#qr-download').attr('download', button.data('srno') + '.png');
+			modal.find('#qr-download').attr('href', button.data('url'));
+		});
+		$('.qr-bulk-btn').click(function(){
+        	$('#qr-bulk-modal').modal('show');
+    	});
+		$('.select2').select2({
+			placeholder: '{{__("equicare.select_option")}}',
+			allowClear: true,
+			tags: true
+		});
+		$('.hospital').on('change', function(e) {
+			$('.department').val(null).trigger('change');
+			var hospital_id = $(this).val();
+			$('.department').select2({
+				placeholder: '{{__("equicare.select_option")}}',
+				allowClear: true,
+				tags: true,
+				ajax: {
+					url: "{{url('department_equipment')}}/" + hospital_id,
+					dataType: 'json'
+				}
+			});
+		});
+		$('.hospital1').on('change', function(e) {
+			$('.department1').val(null).trigger('change');
+			var hospital_id = $(this).val();
+			$('.department1').select2({
+				placeholder: '{{__("equicare.select_option")}}',
+				allowClear: true,
+				tags: true,
+				ajax: {
+					url: "{{url('department_equipment')}}/" + hospital_id,
+					dataType: 'json'
+				}
+			});
+		});
+	});
+</script>
+@endsection
+@section('styles')
+<style type="text/css">
+	#data_table_equipment {
+		border-collapse: collapse !important;
+	}
+	.select2-container {
+		display: block;
+	}
+</style>
 @endsection

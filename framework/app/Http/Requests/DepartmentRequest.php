@@ -15,11 +15,13 @@ class DepartmentRequest extends FormRequest {
 			return [
 				'name' => 'required',
 				'short_name' => "bail|required|max:5|alpha_num|unique:departments,short_name,$this->id,id,deleted_at,NULL",
+				'hospital_id' => 'required'
 			];
 		} else {
 			return [
 				'name' => 'required',
 				'short_name' => 'bail|required|max:5|alpha_num|unique:departments,short_name,NULL,id,deleted_at,NULL',
+				'hospital_id' => 'required'
 			];
 
 		}

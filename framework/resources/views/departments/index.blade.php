@@ -26,6 +26,7 @@
 									<th class="text-center"> # </th>
 									<th> @lang('equicare.name') </th>
 									<th> @lang('equicare.short_name') </th>
+									<th> @lang('equicare.hospital') </th>
 									<th> @lang('equicare.created_on') </th>
 									@if (\Auth::user()->can('Edit Departments') || \Auth::user()->can('Delete Departments'))
 									<th> @lang('equicare.action')</th>
@@ -42,17 +43,20 @@
 									$count++;
 								@endphp
 								<tr>
-								<td class="text-center"> {{ $count }} </td>
-								<td> {{ ucfirst($department->name) }} </td>
+								<td class="text-center"> {{ $count }}</td>
+								<td>{{ ucfirst($department->name) }}</td>
 								<td>{{ $department->short_name ?? "-" }}</td>
-								<td> {{ $department->created_at->diffForHumans() }}</td>
+								<td>{{ $department->hospital ?? "-" }}</td>
+								<td>{{ $department->created_at->diffForHumans() }}</td>
 								@if (\Auth::user()->can('Edit Departments') || \Auth::user()->can('Delete Departments'))
 								<td class="todo-list">
 									<div class="tools">
+										
 										{!! Form::open(['url' => 'admin/departments/'.$department->id,'method'=>'DELETE','class'=>'form-inline']) !!}
+										<a href="{{ route('departments.view',$department->id) }}" class="btn btn-primary btn-flat btn-sm" title="@lang('equicare.view')"><i class="fa fa-eye"></i></a>
 										@can('Edit Departments')
-											<a href="{{ route('departments.edit',$department->id) }}" class="btn btn-warning btn-flat btn-sm" title="@lang('equicare.edit')"><i class="fa fa-edit"></i>  </a>
-										@endcan &nbsp;
+											<a href="{{ route('departments.edit',$department->id) }}" class="btn btn-warning btn-flat btn-sm" title="@lang('equicare.edit')"><i class="fa fa-edit"></i></a>
+										@endcan
 										@can('Delete Departments')
 				                            <input type="hidden" name="id" value="{{ $department->id }}">
 				                            <button class="btn btn-danger btn-flat btn-sm" type="submit" onclick="return confirm('@lang('equicare.are_you_sure')')" title="@lang('equicare.delete')"><span class="fa fa-trash-o" aria-hidden="true"></span></button>

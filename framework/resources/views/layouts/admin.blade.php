@@ -338,9 +338,14 @@
               </li>
               @endrole
               @role('Customer')
-              <li class="{{ $page=='hospitals'?'active':'' }}">
+              <li class="{{ $page=='my_hospitals'?'active':'' }}">
                 <a href="{{ url('/customer/hospital/'.Auth::user()->hospital_id) }}">
-                  <i class="fa fa-hospital-o"></i> <span>My Hospital</span>
+                  <i class="fa fa-hospital-o"></i> <span>Hospital</span>
+                </a>
+              </li>
+              <li class="{{ $page=='my_departments'?'active':'' }}">
+                <a href="{{ url('/customer/departments') }}">
+                  <i class="fa fa-building-o"></i> <span>Departments</span>
                 </a>
               </li>
               @endrole

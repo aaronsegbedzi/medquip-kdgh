@@ -66,7 +66,7 @@
 								<td>
 									{{ $breakdown->call_register_date_time? date('Y-m-d h:i A', strtotime($breakdown->call_register_date_time)) : '-' }}
 								</td>
-								<td>{{$breakdown->user_attended?$breakdown->user_attended_fn->name:'-'}}</td>
+								<td>{{$breakdown->user_attended?$breakdown->user_attended_fn->name:'-'}}{{$breakdown->user_attended_2?' & '.$breakdown->user_attended_2_fn->name:''}}</td>
 								<td>
 									{{$breakdown->user_attended?date('Y-m-d H:i A',strtotime($breakdown->call_attend_date_time)):'-'}}
 								</td>
@@ -186,11 +186,18 @@
 						{!! Form::text('call_attend_date_time',null,['class'=>'form-control call_attend_date_time']) !!}
 						{{ Form::hidden('b_id',null,['class'=>'b_id']) }}
 					</div>
+				</div>
+				<div class="row">
 					<div class="form-group col-md-6">
-						{!! Form::label('user',__('equicare.user_attended')) !!}
+						<label for="user_attended">@lang('equicare.user_attended') 1</label>
 						<span class="text-red">&nbsp;*</span>
 						{!! Form::select('user_attended',$users,Auth::user()->id??null,['placeholder'=>'select user','class'=>'form-control
 						user_attended']) !!}
+					</div>
+					<div class="form-group col-md-6">
+						<label for="user_attended_2">@lang('equicare.user_attended') 2</label>
+						{!! Form::select('user_attended_2',$users,null,['placeholder'=>'select user','class'=>'form-control
+						user_attended_2']) !!}
 					</div>
 				</div>
 				<div class="row">

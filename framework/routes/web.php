@@ -40,9 +40,13 @@ Route::group(['middleware' => ['installed_or_not', 'auth']], function () {
     Route::resource('admin/hospitals', 'HospitalController');
 
     Route::get('/customer/hospital/{id}', 'HospitalController@view')->name('hospitals.view');
+    Route::get('/customer/department/{id}', 'DepartmentController@view')->name('departments.view');
+    Route::get('/customer/departments', 'DepartmentController@customer')->name('departments.customer');
+
 
     Route::get('/admin/equipment/qr/{id}', 'EquipmentController@qr')->name('equipments.qr');
     Route::get('/admin/equipment/qr-image/{id}', 'EquipmentController@qr_image')->name('equipments.qrimage');
+    Route::get('department_equipment/{id}', 'DepartmentController@ajax_departments');
 
     Route::get('/admin/equipments', 'EquipmentController@index')->name('equipments.index');
     Route::post('/admin/equipments', 'EquipmentController@store')->name('equipments.store');

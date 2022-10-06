@@ -28,22 +28,17 @@ class EquipmentController extends Controller
     {
         $this->availibility('View Equipments');
         $index['page'] = 'equipments';
-        //$index['equipments'] = Equipment::latest()->get();
-        $index['hospitals'] = Hospital::all();
-        $index['companies'] = Equipment::distinct()->get(['company']);
+        $index['hospitals'] = Hospital::pluck('name','id')->toArray();
+        $index['departments'] = Department::pluck('name','id')->toArray();
+        // $index['departments'] = Equipment::distinct()->get(['departments']);
         $index['hospital_id'] = isset($request->hospital_id) ? $request->hospital_id : "";
-        $index['companyy'] = isset($request->company) ? $request->company : "";
-        
-        $index['qr_hospitals'] = Hospital::pluck('name', 'id')->toArray();
-
-        $index['qr_departments'] = Department::pluck('name', 'id')->toArray();
-
+        $index['department'] = isset($request->department) ? $request->department : "";
         $equipments = Equipment::select('*');
         if (isset($index['hospital_id']) && $index['hospital_id'] != "") {
             $equipments->where('hospital_id', $index['hospital_id']);
         }
-        if (isset($index['companyy']) && $index['companyy'] != "") {
-            $equipments->where('company', $index['companyy']);
+        if (isset($index['department']) && $index['department'] != "") {
+            $equipments->where('department', $index['department']);
         }
         if (isset($request->excel_hidden)) {
             $equipments = $equipments->latest()->get();
@@ -74,11 +69,8 @@ class EquipmentController extends Controller
     {
         $this->availibility('Create Equipments');
         $index['page'] = 'equipments';
-        $index['hospitals'] = Hospital::all();
-        $index['departments'] =
-            Department::select('id', DB::raw('CONCAT(short_name," (" , name ,")") as full_name'))
-            ->pluck('full_name', 'id')
-            ->toArray();
+        $index['hospitals'] = Hospital::pluck('name', 'id')->toArray();
+        $index['departments'] = Department::pluck('name', 'id')->toArray();
         return view('equipments.create', $index);
     }
 
@@ -160,11 +152,8 @@ class EquipmentController extends Controller
         $this->availibility('Edit Equipments');
         $index['page'] = 'equipments';
         $index['equipment'] = Equipment::findOrFail($id);
-        $index['hospitals'] = Hospital::all();
-        $index['departments'] =
-            Department::select('id', DB::raw('CONCAT(short_name," (" , name ,")") as full_name'))
-            ->pluck('full_name', 'id')
-            ->toArray();
+        $index['hospitals'] = Hospital::pluck('name', 'id')->toArray();
+        $index['departments'] = Department::where('hospital_id', $index['equipment']->hospital_id)->pluck('name', 'id')->toArray();
         return view('equipments.edit', $index);
     }
 

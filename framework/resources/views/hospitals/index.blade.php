@@ -57,9 +57,9 @@
 							@if(Auth::user()->can('Edit Hospitals') || Auth::user()->can('Delete Hospitals'))
                         	<td>
 								{!! Form::open(['url' => 'admin/hospitals/'.$hospital->id,'method'=>'DELETE','class'=>'form-inline']) !!}
-									<a href="{{ route('hospitals.view', $hospital->id) }}" class="btn btn-info btn-sm btn-flat" title="#"><i class="fa fa-eye"></i></a>
+									<a href="{{ route('hospitals.view', $hospital->id) }}" class="btn btn-primary btn-sm btn-flat" title="#"><i class="fa fa-eye"></i></a>
 									@can('Edit Hospitals')
-									<a href="{{ route('hospitals.edit',$hospital->id) }}" class="btn btn-warning btn-sm btn-flat" title="@lang('equicare.edit')"><i class="fa fa-edit"></i>  </a>
+									<a href="{{ route('hospitals.edit',$hospital->id) }}" class="btn btn-warning btn-sm btn-flat" title="@lang('equicare.edit')"><i class="fa fa-edit"></i></a>
 									@endcan
 		                            <input type="hidden" name="id" value="{{ $hospital->id }}">
 		                            @can('Delete Hospitals')

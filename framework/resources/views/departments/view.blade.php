@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('body-title')
-{{ $hospital->name }} - Statistics &amp; @lang('equicare.reports')
+{{ $department->name }} ({{ $department->hospital->name }}) - @lang('equicare.statistics') &amp; @lang('equicare.reports')
 @endsection
 @section('title')
-| {{ $hospital->name }}
+| {{ $department->name }}
 @endsection
 @section('breadcrumb')
-<!-- <li class="active">@lang('equicare.hospitals')</li> -->
+<li class="active">@lang('equicare.department')</li>
 @endsection
 @section('content')
 <div class="row ">
@@ -14,7 +14,7 @@
         <div class="small-box bg-purple">
             <div class="inner">
                 <h3>{{ (isset($counts[0]->total)?$counts[0]->total:0) + (isset($counts[1]->total)?$counts[1]->total:0) + (isset($counts[2]->total)?$counts[2]->total:0)  }}</h3>
-                <p>Total @lang('equicare.equipments')</p>
+                <p>@lang('equicare.total') @lang('equicare.equipments')</p>
             </div>
             <div class="icon">
                 <i class="fa fa-heartbeat"></i>
@@ -28,7 +28,7 @@
         <div class="small-box bg-green">
             <div class="inner">
                 <h3>{{ $counts[0]->total??0 }}</h3>
-                <p>Working @lang('equicare.equipments')</p>
+                <p>@lang('equicare.working') @lang('equicare.equipments')</p>
             </div>
             <div class="icon">
                 <i class="fa fa-heartbeat"></i>
@@ -42,7 +42,7 @@
         <div class="small-box bg-gray">
             <div class="inner">
                 <h3>{{ $counts[1]->total??0 }}</h3>
-                <p>Pending @lang('equicare.equipments')</p>
+                <p>@lang('equicare.pending') @lang('equicare.equipments')</p>
             </div>
             <div class="icon">
                 <i class="fa fa-heartbeat"></i>
@@ -56,7 +56,7 @@
         <div class="small-box bg-red">
             <div class="inner">
                 <h3>{{ $counts[2]->total??0 }}</h3>
-                <p>Not Working @lang('equicare.equipments')</p>
+                <p>@lang('equicare.not_working') @lang('equicare.equipments')</p>
             </div>
             <div class="icon">
                 <i class="fa fa-heartbeat"></i>
@@ -87,7 +87,6 @@
                                     <th class="text-center">@lang('equicare.name')</th>
                                     <th class="text-center">@lang('equicare.short_name')</th>
                                     <th class="text-center">@lang('equicare.serial_no')</th>
-                                    <th class="text-center">@lang('equicare.department')</th>
                                     <th class="text-center">@lang('equicare.working_status')</th>
                                     <th class="text-center">@lang('equicare.call_register_date_time')</th>
                                     <th class="text-center">@lang('equicare.call_attend_date_time')</th>
@@ -103,7 +102,6 @@
                                     <td>{{ $equipment->name }}</td>
                                     <td class="text-center">{{ $equipment->short_name }}</td>
                                     <td class="text-center">{{ $equipment->sr_no }}</td>
-                                    <td>{{ $equipment->department }}</td>
                                     <td class="text-center">
                                         @php
                                         switch ($equipment->working_status) {
@@ -174,7 +172,7 @@
                                     <td class="text-center">{{ $call->call_register_date_time?date("d M Y",strtotime($call->call_register_date_time)):'-' }}</td>
                                     <td class="text-center">{{ $call->call_attend_date_time?date("d M Y",strtotime($call->call_attend_date_time)):'-' }}</td>
                                     <td class="text-center">{{ $call->call_complete_date_time?date("d M Y",strtotime($call->call_complete_date_time)):'-' }}</td>
-                                    <td class="text-center">{{ $call->user_attended?$call->user_attended_fn->name:'-' }}{{ $call->user_attended_2?' & '.$call->user_attended_2_fn->name:'' }}</td>
+                                    <td class="text-center">{{ $call->engineer }}</td>
                                     <td class="text-center">{{ $call->service_rendered }}</td>
                                     <td class="text-center">{{ $call->nature_of_problem }}</td>
                                 </tr>
@@ -225,7 +223,7 @@
                                     <td class="text-center">{{ $call->call_register_date_time?date("d M Y",strtotime($call->call_register_date_time)):'-' }}</td>
                                     <td class="text-center">{{ $call->call_attend_date_time?date("d M Y",strtotime($call->call_attend_date_time)):'-' }}</td>
                                     <td class="text-center">{{ $call->call_complete_date_time?date("d M Y",strtotime($call->call_complete_date_time)):'-' }}</td>
-                                    <td class="text-center">{{ $call->user_attended?$call->user_attended_fn->name:'-' }}{{ $call->user_attended_2?' & '.$call->user_attended_2_fn->name:'' }}</td>
+                                    <td class="text-center">{{ $call->engineer }}</td>
                                     <td class="text-center">{{ $call->service_rendered }}</td>
                                     <td class="text-center">{{ $call->nature_of_problem }}</td>
                                 </tr>
