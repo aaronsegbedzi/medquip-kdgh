@@ -48,7 +48,7 @@
 								<td> {{ $p_reminder->next_due_date?$p_reminder->next_due_date ." ($remaining_days)":'-' }}</td>
 								<td> {{ $p_reminder->working_status?ucfirst($p_reminder->working_status): '-' }}</td>
 								<td> {{ $p_reminder->call_register_date_time? date('Y-m-d h:i A', strtotime($p_reminder->call_register_date_time)) : '-' }}</td>
-								<td> {{ $p_reminder->user_attended_fn?ucwords($p_reminder->user_attended_fn->name) : '-'}}
+								<td> {{ $p_reminder->user_attended_fn?ucwords($p_reminder->user_attended_fn->name) : '-'}}{{ $p_reminder->user_attended_2?' & '.ucwords($p_reminder->user_attended_2_fn->name) : '-'}}
 								</td>
 							</tr>
 								@endforeach

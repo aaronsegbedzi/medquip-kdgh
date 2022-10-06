@@ -279,5 +279,8 @@ return [
     'qr_print_modal_header_note' => ' The Department field should remain blank to download all the equipment in a Hospital.',
     'qr_modal_btn' => 'Print QR Codes',
     'total' => 'Total',
-    'statistics' => 'Statistics'
+    'statistics' => 'Statistics',
+    'user_guide' => 'User Guide',
+    'kb' => 'Knowledge Base',
+    'help' => 'Help'
 ];

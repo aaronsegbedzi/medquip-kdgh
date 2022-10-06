@@ -7,6 +7,8 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
+        <h5 class="text-center text-bold">Welcome to KDGH <br/> Medical Equipment Management System (MEMS)</h5>
+        <hr>
         <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
             @csrf
 

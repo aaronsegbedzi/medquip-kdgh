@@ -65,13 +65,6 @@
         @php($settings = App\Setting::first())
         @if ($settings != null)
         <span class="logo-mini">
-          <!-- <b>
-            @if($settings->company != null)
-            {{ strtoupper(substr($settings->company, 0, 1)) }}
-            @else
-            E
-            @endif
-          </b> -->
           <img class="" alt="Medical Logo" width="70%" src="{{ asset('assets/1x/favicon.png') }}"></img>
         </span>
         <span class="logo-lg">
@@ -98,8 +91,30 @@
         </ul>
         <div class="navbar-custom-menu" style="color: black !important;">
           <ul class="nav navbar-nav pull-right">
+            @unlessrole('Customer')
+            <li class="dropdown nav-item">
+              <a href="#" class="nav-link familyfont" data-toggle="dropdown" area-expanded="false">
+                <i class="fa fa-info-circle"></i>&nbsp;
+                <span class="hidden-xs">@lang('equicare.help')</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item" href="#">
+                      <i class="fa fa-book"></i>&nbsp;
+                      @lang('equicare.user_guide')
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#">
+                      <i class="fa fa-book"></i>&nbsp;
+                      @lang('equicare.kb')
+                    </a>
+                </li>
+              </ul>
+            </li>
+            @endunlessrole
             <li class="nav-item dropdown">
-              <a href="#" class=" nav-link familyfont" data-toggle="dropdown" area-expanded="false">
+              <a href="#" class="nav-link familyfont" data-toggle="dropdown" area-expanded="false">
                 <i class="fa fa-user"></i>
                 <span class="hidden-xs">&nbsp;&nbsp;{{ ucfirst(Auth::user()->name) ?? 'No User' }}</span>
               </a>
