@@ -1,6 +1,8 @@
+@unlessrole('Customer')
 <div class="col-md-4">
    <b>@lang('equicare.user') : </b> {{ucwords($d['user']['name']) ?? '' }}
 </div>
+@endunlessrole
 
 <div class="col-md-4">
    <b>@lang('equicare.calibration_date') : </b> {{$d['date_of_calibration']}}

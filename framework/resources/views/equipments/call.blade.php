@@ -1,6 +1,8 @@
+@unlessrole('Customer')
 <div class="col-md-4">
    <b>@lang('equicare.user') : </b> {{ucwords($d['user']['name']) ?? '' }}
 </div>
+@endunlessrole
 
 <div class="col-md-4">
    <b>@lang('equicare.call_handle') : </b> {{ucwords($d['call_handle'])}}
@@ -45,4 +47,12 @@
 
 <div class="col-md-4">
    <b>@lang('equicare.completed_on') : </b> {{!is_null($d['call_complete_date_time'])?date('Y-m-d h:i A',strtotime($d['call_complete_date_time'])) : '-'}}
+</div>
+
+<div class="col-md-4">
+   <b>@lang('equicare.nature_of_problem') : </b> {{$d['nature_of_problem']}}
+</div>
+
+<div class="col-md-4">
+   <b>@lang('equicare.remarks') : </b> {{$d['remarks']}}
 </div>
