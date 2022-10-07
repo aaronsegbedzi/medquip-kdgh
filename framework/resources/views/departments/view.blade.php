@@ -13,8 +13,8 @@
     <div class="col-md-3">
         <div class="small-box bg-purple">
             <div class="inner">
-                <h3>{{ (isset($counts[0]->total)?$counts[0]->total:0) + (isset($counts[1]->total)?$counts[1]->total:0) + (isset($counts[2]->total)?$counts[2]->total:0)  }}</h3>
-                <p>@lang('equicare.total') @lang('equicare.equipments')</p>
+                <h3>{{ $counts->total }}</h3>
+                <p>Total @lang('equicare.equipments')</p>
             </div>
             <div class="icon">
                 <i class="fa fa-heartbeat"></i>
@@ -27,8 +27,8 @@
     <div class="col-md-3">
         <div class="small-box bg-green">
             <div class="inner">
-                <h3>{{ $counts[0]->total??0 }}</h3>
-                <p>@lang('equicare.working') @lang('equicare.equipments')</p>
+                <h3>{{ $counts->working }}</h3>
+                <p>Working @lang('equicare.equipments')</p>
             </div>
             <div class="icon">
                 <i class="fa fa-heartbeat"></i>
@@ -41,8 +41,8 @@
     <div class="col-md-3">
         <div class="small-box bg-gray">
             <div class="inner">
-                <h3>{{ $counts[1]->total??0 }}</h3>
-                <p>@lang('equicare.pending') @lang('equicare.equipments')</p>
+                <h3>{{ $counts->pending }}</h3>
+                <p>Pending @lang('equicare.equipments')</p>
             </div>
             <div class="icon">
                 <i class="fa fa-heartbeat"></i>
@@ -55,8 +55,8 @@
     <div class="col-md-3">
         <div class="small-box bg-red">
             <div class="inner">
-                <h3>{{ $counts[2]->total??0 }}</h3>
-                <p>@lang('equicare.not_working') @lang('equicare.equipments')</p>
+                <h3>{{ $counts->not_working }}</h3>
+                <p>Not Working @lang('equicare.equipments')</p>
             </div>
             <div class="icon">
                 <i class="fa fa-heartbeat"></i>
