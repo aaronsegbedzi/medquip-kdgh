@@ -355,13 +355,28 @@
               @role('Customer')
               <li class="{{ $page=='my_hospitals'?'active':'' }}">
                 <a href="{{ url('/customer/hospital/'.Auth::user()->hospital_id) }}">
-                  <i class="fa fa-hospital-o"></i> <span>Hospital</span>
+                  <i class="fa fa-hospital-o"></i> <span>@lang('equicare.hospital')</span>
                 </a>
               </li>
               <li class="{{ $page=='my_departments'?'active':'' }}">
                 <a href="{{ url('/customer/departments') }}">
-                  <i class="fa fa-building-o"></i> <span>Departments</span>
+                  <i class="fa fa-building-o"></i> <span>@lang('equicare.department')</span>
                 </a>
+              </li>
+              <li class="{{ $class }} {{ $active }}">
+                <a href="#" class="">
+                  <i class="fa fa-pie-chart"></i> <span>@lang('equicare.reports')</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu" {{ $menu }}>
+                  <li class="{{ $page=='my_reports'?'active':'' }}">
+                    <a href="#">
+                      <i class="fa fa-pie-chart"></i> @lang('equicare.report_activity')
+                    </a>
+                  </li>
+                </ul>
               </li>
               @endrole
         </ul>

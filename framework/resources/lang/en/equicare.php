@@ -282,5 +282,6 @@ return [
     'statistics' => 'Statistics',
     'user_guide' => 'User Guide',
     'kb' => 'Knowledge Base',
-    'help' => 'Help'
+    'help' => 'Help',
+    'report_activity' => 'Monthly Activity Report'
 ];
