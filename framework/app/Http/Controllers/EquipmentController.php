@@ -16,6 +16,9 @@ use Illuminate\Support\Collection;
 use App\Http\Requests\EquipmentRequest;
 use ZipArchive;
 use File;
+use App\Http\Controllers\MovementController;
+use App\Movement;
+use Illuminate\Support\Facades\Auth;
 
 class EquipmentController extends Controller
 {
@@ -173,13 +176,19 @@ class EquipmentController extends Controller
         $equipment->company = $request->company;
         $equipment->sr_no = $request->sr_no;
         $equipment->hospital_id = $request->hospital_id;
+
+        if ($equipment->department !== $request->department) {
+            $movement = new MovementController;
+            $movement->moveEquipment($id, $request->hospital_id, Auth::user()->id, $equipment->department, $request->department);
+        }
+
         $equipment->department = $request->department;
+
         $equipment->model = $request->model;
         $date_of_purchase = !empty($request->date_of_purchase) ? date('Y-m-d', strtotime($request->date_of_purchase)) : null;
         $order_date = !empty($request->order_date) ? date('Y-m-d', strtotime($request->order_date)) : null;
         $date_of_installation = !empty($request->date_of_installation) ? date('Y-m-d', strtotime($request->date_of_installation)) : null;
         $warranty_due_date = !empty($request->warranty_due_date) ? date('Y-m-d', strtotime($request->warranty_due_date)) : null;
-
         $equipment->date_of_purchase = $date_of_purchase;
         $equipment->order_date = $order_date;
         $equipment->date_of_installation = $date_of_installation;
@@ -246,8 +255,16 @@ class EquipmentController extends Controller
             $calibration[] = $c2;
         }
 
+        $movement = collect();
+        $m1 = Movement::where('equip_id', $id)->with('fromDepartment')->with('toDepartment')->with('user')->with('hospital')->get();
+        foreach ($m1 as $m) {
+            $m2 = collect($m);
+            $m2->put('type', 'Movement');
+            $movement[] = $m2;
+        }
+
         $collection = new Collection();
-        $index['data'] = $collection->merge($history)->merge($calibration)->sortByDesc('created_at');
+        $index['data'] = $collection->merge($history)->merge($calibration)->merge($movement)->sortByDesc('created_at');
 
         return view('equipments.history', $index);
     }

@@ -61,8 +61,10 @@
                <li>
                   @if($d['type'] == 'Call')
                   <i class="fa fa-phone bg-blue"></i>
-                  @else
+                  @elseif($d['type'] == 'Calibration')
                   <i class="fa fa-balance-scale bg-red"></i>
+                  @else
+                  <i class="fa fa-truck bg-green"></i>
                   @endif
 
                   <div class="timeline-item">
@@ -79,9 +81,11 @@
                      <div class="timeline-body">
                         <div class="row">
                            @if($d['type'] == 'Call')
-                           @include('equipments.call')
+                              @include('equipments.call')
+                           @elseif($d['type'] == 'Calibration')
+                              @include('equipments.calibration')
                            @else
-                           @include('equipments.calibration')
+                              @include('equipments.movement')
                            @endif
                         </div>
                      </div>
@@ -89,11 +93,13 @@
                         @unlessrole('Customer')
                         <span class="time">
                            @if($d['type'] == 'Call' && $d['call_type'] == 'breakdown')
-                           <a href="{{ route('breakdown_maintenance.edit',$d['id']) }}" title="@lang('equicare.edit')" class="h4"><i class="fa fa-edit"></i> @lang('equicare.edit') </a>
+                              <a href="{{ route('breakdown_maintenance.edit',$d['id']) }}" title="@lang('equicare.edit')" class="h4"><i class="fa fa-edit"></i> @lang('equicare.edit') </a>
                            @elseif($d['type'] == 'Call' && $d['call_type'] == 'preventive')
-                           <a href="{{ route('preventive_maintenance.edit',$d['id']) }}" title="@lang('equicare.edit')" class="h4"><i class="fa fa-edit"></i> @lang('equicare.edit') </a>
+                              <a href="{{ route('preventive_maintenance.edit',$d['id']) }}" title="@lang('equicare.edit')" class="h4"><i class="fa fa-edit"></i> @lang('equicare.edit') </a>
+                           @elseif($d['type'] == 'Calibration')
+                              <a href="{{ route('calibration.edit',$d['id']) }}" title="@lang('equicare.edit')" class="h4"><i class="fa fa-edit"></i> @lang('equicare.edit') </a>
                            @else
-                           <a href="{{ route('calibration.edit',$d['id']) }}" title="@lang('equicare.edit')" class="h4"><i class="fa fa-edit"></i> @lang('equicare.edit') </a>
+                              &nbsp;
                            @endif
                         </span>
                         @endunlessrole

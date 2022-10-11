@@ -117,7 +117,7 @@ return [
     'dashboard' => 'Dashboard',
     'maintenance_cost' => 'Maintenance Cost',
     'reports' => 'Reports',
-    'time_indicator' => 'Time Indicator',
+    'time_indicator' => 'Time Indicator Report',
     'equipment_report' => 'Equipment Report',
     'reminder' => 'Reminders',
     'preventive_reminder' => 'Preventive Reminder',
@@ -283,5 +283,7 @@ return [
     'user_guide' => 'User Guide',
     'kb' => 'Knowledge Base',
     'help' => 'Help',
-    'report_activity' => 'Monthly Activity Report'
+    'report_activity' => 'Monthly Activity Report',
+    'movement_to' => 'To (Dep.)',
+    'movement_from' => 'From (Dep.)'
 ];
