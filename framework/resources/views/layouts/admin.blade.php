@@ -86,6 +86,11 @@
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
           <span class="sr-only">@lang('equicare.toggle_navigation')</span>
         </a>
+        <!-- <form class="navbar-form navbar-left" role="search" action="" method="GET">
+          <div class="form-group">
+            <input type="text" class="form-control" style="background-color: white;" id="navbar-search-input" placeholder="Search Serial Number">
+          </div>
+        </form> -->
         <ul class="nav navbar-nav collapse navbar-collapse">
           <li><a href="#" class="text-bold app-title">@lang('equicare.app_title')</a></li>
         </ul>
@@ -99,13 +104,13 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="{{ url('/framework/public/KDGH_MEMS_USER_GUIDE_V120.pdf') }}">
                       <i class="fa fa-book"></i>&nbsp;
                       @lang('equicare.user_guide')
                     </a>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="https://kb.kdglobalhealthcare.com" target="_blank">
                       <i class="fa fa-book"></i>&nbsp;
                       @lang('equicare.kb')
                     </a>
@@ -262,7 +267,7 @@
               </li>
               <li class="{{ $page=='reports/activity'?'active':'' }}">
                 <a href="{{ url('admin/reports/activity_report') }}">
-                  <i class="fa fa-dashboard"></i> <span>@lang('equicare.report_activity')</span>
+                  <i class="fa fa-file"></i> <span>@lang('equicare.report_activity')</span>
                 </a>
               </li>
             </ul>
@@ -378,7 +383,7 @@
                 <ul class="treeview-menu" {{ $menu }}>
                   <li class="{{ $page=='my_reports'?'active':'' }}">
                     <a href="#">
-                      <i class="fa fa-pie-chart"></i> @lang('equicare.report_activity')
+                      <i class="fa fa-file"></i> @lang('equicare.report_activity')
                     </a>
                   </li>
                 </ul>
@@ -495,6 +500,21 @@
       @endif
     });
   </script>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API = Tawk_API || {},
+    Tawk_LoadStart = new Date();
+  (function() {
+    var s1 = document.createElement("script"),
+      s0 = document.getElementsByTagName("script")[0];
+    s1.async = true;
+    s1.src = 'https://embed.tawk.to/634c89efb0d6371309c9d825/1gfhflkgj';
+    s1.charset = 'UTF-8';
+    s1.setAttribute('crossorigin', '*');
+    s0.parentNode.insertBefore(s1, s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
   @yield('scripts')
 </body>
 

@@ -283,7 +283,7 @@ return [
     'user_guide' => 'User Guide',
     'kb' => 'Knowledge Base',
     'help' => 'Help',
-    'report_activity' => 'Activity Report',
+    'report_activity' => 'PM Activity Report',
     'movement_to' => 'To (Dep.)',
     'movement_from' => 'From (Dep.)',
     'generate_report' => 'Generate Report',
