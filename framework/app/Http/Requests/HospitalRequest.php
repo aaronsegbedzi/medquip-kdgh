@@ -27,6 +27,7 @@ class HospitalRequest extends FormRequest {
 			'phone_no' => 'required|numeric|min:6',
 			'mobile_no' => 'required|numeric|min:10',
 			'address' => 'required',
+			'logo' => 'mimetypes:image/png,image/jpeg,image/jpg'
 		];
 	}
 	public function messages() {

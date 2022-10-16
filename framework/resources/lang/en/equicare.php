@@ -283,7 +283,10 @@ return [
     'user_guide' => 'User Guide',
     'kb' => 'Knowledge Base',
     'help' => 'Help',
-    'report_activity' => 'Monthly Activity Report',
+    'report_activity' => 'Activity Report',
     'movement_to' => 'To (Dep.)',
-    'movement_from' => 'From (Dep.)'
+    'movement_from' => 'From (Dep.)',
+    'generate_report' => 'Generate Report',
+    'generate' => 'Generate',
+    'logo_type' => 'Supported File Types: png jpeg jpg'
 ];

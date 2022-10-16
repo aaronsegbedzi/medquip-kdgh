@@ -133,6 +133,42 @@ class ReportController extends Controller {
 
 	}
 
+	public function activity_report() {
+		$index['page'] = 'reports/activity';
+		$index['hospitals'] = Hospital::pluck('name', 'id');
+		return view('reports.activity_report', $index);
+	}
+
+	public function activity_report_post(Request $request) {
+
+		$index['hospital'] = Hospital::findOrFail($request->hospital_id);
+		$index['from_date'] = $request->from_date;
+		$index['to_date'] = $request->to_date;
+
+		$calls = CallEntry::select('call_entries.*', 'equipments.name as ename','equipments.*','departments.name as dname');
+		$calls->join('equipments', 'call_entries.equip_id', 'equipments.id');
+		$calls->join('departments', 'equipments.department', 'departments.id');
+		$calls->where('equipments.hospital_id', $request->hospital_id);
+
+		if (isset($request->department_id)) {
+			$calls->where('equipments.department', $request->department_id);
+		}
+		
+		$calls->whereBetween('call_entries.call_complete_date_time', [$request->from_date, $request->to_date]);
+		$calls->orderBy('call_complete_date_time', 'ASC');
+		$calls = $calls->get();
+
+		if ($calls->count()) {
+			$index['calls'] = $calls;
+			$pdf = PDF::loadView('reports.export_activity_report_pdf', $index)->setPaper('a4', 'landscape');
+			// return $pdf->download(time() . '_activity_report.pdf');
+			return $pdf->stream();
+		} else {
+			return redirect('admin/reports/activity_report')->with('flash_message_error', 'No Activites Found. Please try again.');
+		}
+
+	}
+
 	public static function availibility($method) {
 		$r_p = Auth::user()->getPermissionsViaRoles()->pluck('name')->toArray();
 		if (Auth::user()->hasPermissionTo($method)) {

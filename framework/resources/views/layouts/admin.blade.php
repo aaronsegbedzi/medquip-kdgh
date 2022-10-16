@@ -231,7 +231,7 @@
           </li>
           @endcan
 
-          @if($page == "reports/time_indicator" || $page == "reports/equipments")
+          @if($page == "reports/time_indicator" || $page == "reports/equipments" || $page == "reports/activity")
           @php($class="treeview menu-open")
           @php($active = "active")
           @php($menu="style=display:block;")
@@ -258,6 +258,11 @@
               <li class="{{ $page=='reports/equipments'?'active':'' }}">
                 <a href="{{ url('admin/reports/equipments') }}">
                   <i class="fa fa-wrench"></i> <span>@lang('equicare.equipment_report')</span>
+                </a>
+              </li>
+              <li class="{{ $page=='reports/activity'?'active':'' }}">
+                <a href="{{ url('admin/reports/activity_report') }}">
+                  <i class="fa fa-dashboard"></i> <span>@lang('equicare.report_activity')</span>
                 </a>
               </li>
             </ul>

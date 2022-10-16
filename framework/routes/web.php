@@ -82,6 +82,8 @@ Route::group(['middleware' => ['installed_or_not', 'auth']], function () {
     Route::post('call_complete_preventive_new_item', 'PreventiveController@ajax_new_item_post');
 
     Route::get('admin/reports/time_indicator', 'ReportController@time_indicator');
+    Route::get('admin/reports/activity_report', 'ReportController@activity_report');
+    Route::post('admin/reports/activity_report', 'ReportController@activity_report_post');
     Route::get('admin/reports/time_indicator/filter', 'ReportController@time_indicator_filter');
     Route::get('admin/reports/time_indicator/ajax_equipment_based_on_hospital', 'ReportController@ajax_to_get_equipment');
     Route::get('admin/reports/equipments', 'ReportController@equipment_report');

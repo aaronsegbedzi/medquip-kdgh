@@ -60,6 +60,16 @@ class HospitalController extends Controller {
 		$hospital->user_id = Auth::user()->id;
 		$hospital->mobile_no = $request->mobile_no;
 		$hospital->address = $request->address;
+
+		if ($request->hasFile('logo')) {           
+            $path = $request->file('logo')->getRealPath();
+			$mime = $request->file('logo')->getClientMimeType();
+            $doc = file_get_contents($path);
+            $base64 = base64_encode($doc);
+			$hospital->logo = $base64;
+			$hospital->mime = $mime;
+		}
+		
 		$yourString = $hospital->name;
 		$result = $this->recursive($request->name);
 		$hospital->slug = $result;
@@ -100,6 +110,16 @@ class HospitalController extends Controller {
 		$hospital->phone_no = $request->phone_no;
 		$hospital->mobile_no = $request->mobile_no;
 		$hospital->address = $request->address;
+
+		if ($request->hasFile('logo')) {           
+            $path = $request->file('logo')->getRealPath();
+			$mime = $request->file('logo')->getClientMimeType();
+            $doc = file_get_contents($path);
+            $base64 = base64_encode($doc);
+			$hospital->logo = $base64;
+			$hospital->mime = $mime;
+		}
+
 		$hospital->save();
 
 		return redirect('admin/hospitals')->with('flash_message', 'Hospital "' . $hospital->name . '" updated');
