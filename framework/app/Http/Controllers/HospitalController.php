@@ -19,7 +19,7 @@ class HospitalController extends Controller {
 	public function index() {
 		$this->availibility('View Hospitals');
 		$index['page'] = 'hospitals';
-		$index['hospitals'] = Hospital::all();
+		$index['hospitals'] = Hospital::select('*')->withCount('equipments')->get();
 
 		return view('hospitals.index', $index);
 	}

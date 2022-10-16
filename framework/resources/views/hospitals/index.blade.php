@@ -28,10 +28,11 @@
 								<th class="text-center"> # </th>
 								<th> @lang('equicare.name') </th>
 								<th> @lang('equicare.email') </th>
-								<th> @lang('equicare.user') </th>
+								<!-- <th> @lang('equicare.user') </th> -->
 								<th> @lang('equicare.slug') </th>
 								<th> @lang('equicare.phone') </th>
-								<th> @lang('equicare.mobile') </th>
+								<th class="text-center"> No. @lang('equicare.equipment')</th>
+								<!-- <th> @lang('equicare.mobile') </th> -->
 								@if(Auth::user()->can('Edit Hospitals') || Auth::user()->can('Delete Hospitals'))
 								<th> @lang('equicare.action')</th>
 								@endif
@@ -50,10 +51,11 @@
 							<td class="text-center"> {{ $count }} </td>
 							<td> {{ ucfirst($hospital->name) }} </td>
 							<td> {{  $hospital->email ?? '-' }}</td>
-							<td> {{ $hospital->user ? ucfirst($hospital->user->name) : '-' }}</td>
+							<!-- <td> {{ $hospital->user ? ucfirst($hospital->user->name) : '-' }}</td> -->
 							<td> {{ $hospital->slug ?? '-' }}</td>
 							<td> {{ $hospital->phone_no ?? '-'}} </td>
-							<td> {{ $hospital->mobile_no ?? '-'}} </td>
+							<td class="text-center text-bold"> {{ $hospital->equipments_count }} </td>
+							<!-- <td> {{ $hospital->mobile_no ?? '-'}} </td> -->
 							@if(Auth::user()->can('Edit Hospitals') || Auth::user()->can('Delete Hospitals'))
                         	<td>
 								{!! Form::open(['url' => 'admin/hospitals/'.$hospital->id,'method'=>'DELETE','class'=>'form-inline']) !!}
@@ -77,10 +79,11 @@
 								<th class="text-center"> # </th>
 								<th> @lang('equicare.name') </th>
 								<th> @lang('equicare.email') </th>
-								<th> @lang('equicare.user') </th>
+								<!-- <th> @lang('equicare.user') </th> -->
 								<th> @lang('equicare.slug') </th>
 								<th> @lang('equicare.phone') </th>
-								<th> @lang('equicare.mobile') </th>
+								<!-- <th> @lang('equicare.mobile') </th> -->
+								<th class="text-center"> No. @lang('equicare.equipment')</th>
 								@if(Auth::user()->can('Edit Hospitals') || Auth::user()->can('Delete Hospitals'))
 								<th> @lang('equicare.action')</th>
 								@endif

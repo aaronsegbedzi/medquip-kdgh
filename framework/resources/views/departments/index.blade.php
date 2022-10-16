@@ -27,6 +27,7 @@
 									<th> @lang('equicare.name') </th>
 									<th> @lang('equicare.short_name') </th>
 									<th> @lang('equicare.hospital') </th>
+									<th class="text-center"> No. @lang('equicare.equipment')</th>
 									<th> @lang('equicare.created_on') </th>
 									@if (\Auth::user()->can('Edit Departments') || \Auth::user()->can('Delete Departments'))
 									<th> @lang('equicare.action')</th>
@@ -47,6 +48,7 @@
 								<td>{{ ucfirst($department->name) }}</td>
 								<td>{{ $department->short_name ?? "-" }}</td>
 								<td>{{ $department->hospital ?? "-" }}</td>
+								<td class="text-center text-bold">{{ $department->equipments_count }}</td>
 								<td>{{ $department->created_at->diffForHumans() }}</td>
 								@if (\Auth::user()->can('Edit Departments') || \Auth::user()->can('Delete Departments'))
 								<td class="todo-list">
@@ -74,6 +76,8 @@
 									<th class="text-center"> # </th>
 									<th> @lang('equicare.name') </th>
 									<th> @lang('equicare.short_name') </th>
+									<th> @lang('equicare.hospital') </th>
+									<th class="text-center"> No. @lang('equicare.equipment')</th>
 									<th> @lang('equicare.created_on') </th>
 									@if (\Auth::user()->can('Edit Departments') || \Auth::user()->can('Delete Departments'))
 									<th> @lang('equicare.action')</th>

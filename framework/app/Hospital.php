@@ -14,6 +14,11 @@ class Hospital extends Model {
 	public function user() {
 		return $this->belongsTo('App\User', 'user_id');
 	}
+
+	public function equipments() {
+		return $this->hasMany('App\Equipment', 'hospital_id');
+	}
+
 	public function setSlugAttribute($value) {
 		$this->attributes['slug'] = strtoupper($value);
 	}

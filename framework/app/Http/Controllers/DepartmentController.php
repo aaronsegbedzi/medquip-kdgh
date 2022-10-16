@@ -15,7 +15,7 @@ class DepartmentController extends Controller {
 	public function index() {
 		$data['page'] = 'departments';
 		$data['departments'] = Department::select('departments.*','hospitals.name as hospital')
-		->join('hospitals', 'departments.hospital_id', 'hospitals.id')->get();
+		->join('hospitals', 'departments.hospital_id', 'hospitals.id')->withCount('equipments')->get();
 		return view('departments.index', $data);
 	}
 
