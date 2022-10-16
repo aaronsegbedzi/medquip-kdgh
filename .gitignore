@@ -24,5 +24,7 @@ framework/Homestead.json
 /.vagrant
 .phpunit.result.cache
 
+uploads/*
 uploads/qrcodes/*
 framework/bootstrap/cache
+uploads/1665926032_logo_ic_toolbar_icon.png
