@@ -26,3 +26,6 @@ framework/Homestead.json
 
 uploads/qrcodes/*
 framework/bootstrap/cache/
+framework/bootstrap/cache/packages.php
+framework/bootstrap/cache/services.php
+framework/resources/views/layouts/admin.blade.php
