@@ -373,7 +373,7 @@
                   <i class="fa fa-building-o"></i> <span>@lang('equicare.department')</span>
                 </a>
               </li>
-              <li class="{{ $class }} {{ $active }}">
+              <!-- <li class="{{ $class }} {{ $active }}">
                 <a href="#" class="">
                   <i class="fa fa-pie-chart"></i> <span>@lang('equicare.reports')</span>
                   <span class="pull-right-container">
@@ -387,7 +387,7 @@
                     </a>
                   </li>
                 </ul>
-              </li>
+              </li> -->
               @endrole
         </ul>
       </section>
