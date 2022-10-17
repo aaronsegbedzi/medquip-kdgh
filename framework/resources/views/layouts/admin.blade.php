@@ -257,12 +257,12 @@
             <ul class="treeview-menu" {{ $menu }}>
               <li class="{{ $page=='reports/time_indicator'?'active':'' }}">
                 <a href="{{ url('admin/reports/time_indicator') }}">
-                  <i class="fa fa-clock-o"></i> <span>@lang('equicare.time_indicator')</span>
+                  <i class="fa fa-file"></i> <span>@lang('equicare.time_indicator')</span>
                 </a>
               </li>
               <li class="{{ $page=='reports/equipments'?'active':'' }}">
                 <a href="{{ url('admin/reports/equipments') }}">
-                  <i class="fa fa-wrench"></i> <span>@lang('equicare.equipment_report')</span>
+                  <i class="fa fa-file"></i> <span>@lang('equicare.equipment_report')</span>
                 </a>
               </li>
               <li class="{{ $page=='reports/activity'?'active':'' }}">
