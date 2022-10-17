@@ -25,4 +25,4 @@ framework/Homestead.json
 .phpunit.result.cache
 
 uploads/qrcodes/*
-framework/bootstrap/cache
+framework/bootstrap/cache/
