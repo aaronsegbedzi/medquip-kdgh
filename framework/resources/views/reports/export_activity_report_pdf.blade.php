@@ -25,7 +25,7 @@
             position: fixed;
             left: 0px;
             bottom: 25px;
-            right: 65px;
+            right: 0px;
         }
 
         #footer .page:after {
