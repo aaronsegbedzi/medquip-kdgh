@@ -41,4 +41,8 @@ class Equipment extends Model {
 	public function calibration() {
 		return $this->hasOne('App\Calibration', 'equip_id', 'id');
 	}
+
+	public function getTableColumns() {
+        return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
+    }
 }

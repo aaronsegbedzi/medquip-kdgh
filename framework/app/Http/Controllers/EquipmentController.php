@@ -19,6 +19,8 @@ use File;
 use App\Http\Controllers\MovementController;
 use App\Movement;
 use Illuminate\Support\Facades\Auth;
+use App\Exports\EquipmentsExport;
+use Maatwebsite\Excel\Concerns\FromCollection;
 
 class EquipmentController extends Controller
 {
@@ -45,12 +47,15 @@ class EquipmentController extends Controller
         }
         if (isset($request->excel_hidden)) {
             $equipments = $equipments->latest()->get();
-            return Excel::create(time() . '_equipment', function ($excel) use ($equipments) {
-                $excel->sheet('sheet1', function ($sheet) use ($equipments) {
-                    $sheet->loadView('equipments.export_excel')
-                        ->with('equipments', $equipments);
-                });
-            })->download('xlsx');
+            // return Excel::create(time() . '_equipment', function ($excel) use ($equipments) {
+            //     $excel->sheet('sheet1', function ($sheet) use ($equipments) {
+            //         $sheet->loadView('equipments.export_excel')
+            //             ->with('equipments', $equipments);
+            //     });
+            // })->download('xlsx');
+            return Excel::download(new EquipmentsExport($equipments), 'invoices.xlsx');
+            // return (new EquipmentsExport($equipments))->download('invoices.xlsx');
+
         } elseif (isset($request->pdf_hidden)) {
 
             $equipments = $equipments->latest()->get();
