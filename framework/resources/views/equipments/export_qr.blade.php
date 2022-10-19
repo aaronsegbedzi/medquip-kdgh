@@ -80,6 +80,7 @@
 
 <body>
     <div class="container">
+        <p style="text-align: center; font-size: 20px !important;">{{ $hospital->name }}</p>
         @php
             $count = 0;
             $card_count = 0;

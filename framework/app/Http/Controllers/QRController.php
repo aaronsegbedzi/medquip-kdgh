@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Department;
 use App\Equipment;
+use App\Hospital;
 use PDF;
 use Illuminate\Http\Request;
 
 class QRController extends Controller
 {
     public function post(Request $request) {
+
+        $index['hospital'] = Hospital::findorfail($request->qr_hospital);
        
         $equipments = Equipment::select('id','sr_no','name','model')->where('hospital_id', $request->qr_hospital);
 
