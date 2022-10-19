@@ -47,7 +47,7 @@ class GenerateQRForce extends Command
                 if (file_exists(public_path('qrcodes/' . $equipment->id . '.png'))) {
                     unlink(public_path('qrcodes/' . $equipment->id . '.png'));
                 }
-                $url = env('APP_URL') . "/equipments/history/" . $equipment->id;
+                $url = config('app.url') . "/equipments/history/" . $equipment->id;
                 $image = QrCode::format('png')->size(300)->generate($url, public_path('qrcodes/' . $equipment->id . '.png'));
                 $this->info('Finished ' . $count . '/' . $equipment->count());
                 $count++;
