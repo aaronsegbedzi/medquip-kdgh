@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use App\Equipment;
 use QrCode;
 
-class GenerateQR extends Command
+class GenerateQRForce extends Command
 {
     /**
      * The name and signature of the console command.
