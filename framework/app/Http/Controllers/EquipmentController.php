@@ -53,7 +53,7 @@ class EquipmentController extends Controller
             //             ->with('equipments', $equipments);
             //     });
             // })->download('xlsx');
-            return Excel::download(new EquipmentsExport($equipments), 'invoices.xlsx');
+            return Excel::download(new EquipmentsExport($equipments), time() . '_equipment.xlsx');
             // return (new EquipmentsExport($equipments))->download('invoices.xlsx');
 
         } elseif (isset($request->pdf_hidden)) {
