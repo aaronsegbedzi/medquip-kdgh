@@ -100,7 +100,7 @@
 									}
 								@endphp
 							</td>
-							<td>{{ $call_entry->user_attended_fn->name?? '-' }}{{ ' & '.$call_entry->user_attended_2_fn->name?? '' }}
+							<td>{{ $call_entry->user_attended_fn->name?? '-' }}{{ isset($call_entry->user_attended_2_fn)?' & '.$call_entry->user_attended_2_fn->name:''}}
 							</td>
 							<td>{{$call_entry->call_register_date_time?date('Y-m-d h:i A',strtotime($call_entry->call_register_date_time)): '-' }}</td>
 							<td>{{$call_entry->call_complete_date_time?date('Y-m-d h:i A',strtotime($call_entry->call_complete_date_time)): '-' }}</td>
