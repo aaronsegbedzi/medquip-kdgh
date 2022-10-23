@@ -126,7 +126,7 @@
               <ul class="dropdown-menu">
                 <li class="{{ $page=='Change Password'?'active':'' }}">
                   <a class="dropdown-item" href="{{ route('change-password') }}">
-                    <i class="fa fa-key"></i>&nbsp;
+                    <i class="fa fa-lock"></i>&nbsp;
                     @lang('equicare.change_password')
                   </a>
                 </li>
