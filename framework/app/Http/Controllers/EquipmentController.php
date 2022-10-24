@@ -130,7 +130,7 @@ class EquipmentController extends Controller
         if (extension_loaded('imagick')) {
             // Generate QR Code
             $url = env('APP_URL') . "/equipments/history/" . $id;
-            $image = QrCode::format('png')->size(300)->generate($url, asset('/uploads/qrcodes/' . $id . '.png'));
+            $image = QrCode::format('png')->size(300)->generate($url, public_path('/qrcodes/' . $id . '.png'));
         }
 
         return redirect('admin/equipments')->with('flash_message', 'Equipment "' . $equipment->name . '" created');
@@ -206,7 +206,7 @@ class EquipmentController extends Controller
         if (extension_loaded('imagick')) {
             // Generate QR Code
             $url = env('APP_URL') . "/equipments/history/" . $id;
-            $image = QrCode::format('png')->size(300)->generate($url, asset('/uploads/qrcodes/' . $id . '.png'));
+            $image = QrCode::format('png')->size(300)->generate($url, public_path('/qrcodes/' . $id . '.png'));
         }
 
         return redirect('admin/equipments')->with('flash_message', 'Equipment "' . $equipment->name . '" updated');
