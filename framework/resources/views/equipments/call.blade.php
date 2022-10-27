@@ -1,11 +1,11 @@
 @unlessrole('Customer')
 <div class="col-md-4">
-   <b>@lang('equicare.user') : </b> {{ucwords($d['user']['name']) ?? '' }}
+   <b>@lang('equicare.user') : </b> {{ isset($d['user']['name'])?ucwords($d['user']['name']):'-' }}
 </div>
 @endunlessrole
 
 <div class="col-md-4">
-   <b>@lang('equicare.call_handle') : </b> {{ucwords($d['call_handle'])}}
+   <b>@lang('equicare.call_handle') : </b> {{ $d['call_handle']?ucwords($d['call_handle']):'' }}
 </div>
 
 <div class="col-md-4">
@@ -13,13 +13,13 @@
    @php
       switch ($d['working_status']) {
          case 'working':
-            echo '<label class="label label-success">'.ucwords($d['working_status']).'</label>';
+            echo '<label class="label label-success">'.$d['working_status']?ucwords($d['working_status']):"-".'</label>';
             break;
          case 'not working':
-            echo '<label class="label label-danger">'.ucwords($d['working_status']).'</label>';
+            echo '<label class="label label-danger">'.$d['working_status']?ucwords($d['working_status']):"-".'</label>';
             break;
          default:
-            echo '<label class="label label-default">'.ucwords($d['working_status']).'</label>';
+            echo '<label class="label label-default">'.$d['working_status']?ucwords($d['working_status']):"-".'</label>';
             break;
       }
    @endphp
@@ -38,11 +38,11 @@
 </div>
 
 <div class="col-md-4">
-   <b>@lang('equicare.attended_by') : </b> {{ucwords($d['user_attended_fn']['name']) ?? ''}}
+   <b>@lang('equicare.attended_by') : </b> {{ isset($d['user_attended_fn']['name'])?ucwords($d['user_attended_fn']['name']):'-' }} {{ isset($d['user_attended_2_fn']['name'])?' & '.ucwords($d['user_attended_2_fn']['name']):'' }}
 </div>
 
 <div class="col-md-4">
-   <b>@lang('equicare.first_attended_on') : </b> {{$d['user_attended_fn']?date('Y-m-d h:i A',strtotime($d['call_attend_date_time'])):'-'}}
+   <b>@lang('equicare.first_attended_on') : </b> {{ isset($d['user_attended_fn'])?date('Y-m-d h:i A',strtotime($d['call_attend_date_time'])):'-' }}
 </div>
 
 <div class="col-md-4">

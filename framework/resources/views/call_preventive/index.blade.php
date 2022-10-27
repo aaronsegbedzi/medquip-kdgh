@@ -66,7 +66,10 @@
 									{{ $preventive->call_register_date_time? date('Y-m-d h:i A', strtotime($preventive->call_register_date_time)) : '-' }}
 								</td>
 								<td> {{ $preventive->next_due_date??'-' }}</td>
-								<td>{{$preventive->user_attended?$preventive->user_attended_fn->name:'-'}}{{$preventive->user_attended_2?' & '.$preventive->user_attended_2_fn->name:''}}</td>
+								<td>
+									{{ $preventive->user_attended_fn->name ?? '-' }}
+									{{ $preventive->user_attended_2_fn->name ?? '' }}
+								</td>
 								<td>{{$preventive->user_attended?date('Y-m-d H:i A',strtotime($preventive->call_attend_date_time)):'-'}}</td>
 								<td>{{$preventive->call_complete_date_time?date('Y-m-d H:i A',strtotime($preventive->call_complete_date_time)):'-'}}</td>
 								<td class="text-center">
