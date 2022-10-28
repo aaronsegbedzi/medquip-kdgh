@@ -155,19 +155,18 @@
                     <td class="text-center">{{ $call->sr_no }}</td>
                     <td class="text-center">
                         @php
-                        switch ($call->type) {
-                        case 'preventive':
+                            switch ($call->type) {
+                                case 'breakdown':
                         @endphp
-                        @lang('equicare.breakdown')
+                                    @lang('equicare.breakdown')
                         @php
-                        break;
-
-                        default:
+                                break;
+                                default:
                         @endphp
-                        @lang('equicare.preventive')
+                                    @lang('equicare.preventive')
                         @php
-                        break;
-                        }
+                                break;
+                                }
                         @endphp
                     </td>
                     <td>{{ $call->remarks }}</td>
