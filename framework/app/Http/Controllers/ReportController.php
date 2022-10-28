@@ -144,7 +144,7 @@ class ReportController extends Controller {
 		->orderBy('call_complete_date_time', 'DESC')->get();
 
 		return view('reports.activity_report', $index);
-		
+
 	}
 
 	public function activity_report_post(Request $request) {
@@ -170,7 +170,7 @@ class ReportController extends Controller {
 			$index['calls'] = $calls;
 			$pdf = PDF::loadView('reports.export_activity_report_pdf', $index)->setPaper('a4', 'landscape');
 			// return $pdf->download(time() . '_activity_report.pdf');
-			return $pdf->stream();
+			return $pdf->stream('PM_ACTIVITY_REPORT_'.time().'.pdf');
 		} else {
 			return redirect('admin/reports/activity_report')->with('flash_message_error', 'No Activites Found. Please try again.');
 		}
