@@ -97,18 +97,18 @@
 										<td class="text-center">{{ $call->equipment->model }}</td>
 										<td class="text-center">
 											@php
-												switch ($call->call_type) {
-													case 'breakdown':
+											switch ($call->call_type) {
+											case 'breakdown':
 											@endphp
 											<label class="label label-primary">@lang('equicare.breakdown')</label>
 											@php
-													break;
-													default:
+											break;
+											default:
 											@endphp
 											<label class="label label-success">@lang('equicare.preventive')</label>
 											@php
-													break;
-												}
+											break;
+											}
 											@endphp
 										</td>
 										<td>{{ $call->remarks }}</td>
@@ -135,7 +135,11 @@
 			dom: 'QBfrtip',
 			responsive: true,
 			buttons: [
-				'pageLength', 'print', 'copy', 'excel', 'pdf'
+				'pageLength', 'print', 'copy', 'excel', {
+					extend: 'pdfHtml5',
+					orientation: 'landscape',
+					pageSize: 'A4'
+				}
 			],
 			language: {
 				searchBuilder: {
