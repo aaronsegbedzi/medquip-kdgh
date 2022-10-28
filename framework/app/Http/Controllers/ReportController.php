@@ -134,10 +134,17 @@ class ReportController extends Controller {
 	}
 
 	public function activity_report() {
+
 		$index['page'] = 'reports/activity';
+
 		$index['hospitals'] = Hospital::pluck('name', 'id');
-		$index['calls'] = CallEntry::select('*')->whereNotNull('call_complete_date_time')->orderBy('call_complete_date_time', 'DESC')->get();
+
+		$index['calls'] = CallEntry::select('*')
+		->whereNotNull('call_complete_date_time')
+		->orderBy('call_complete_date_time', 'DESC')->get();
+
 		return view('reports.activity_report', $index);
+		
 	}
 
 	public function activity_report_post(Request $request) {

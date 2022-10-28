@@ -155,7 +155,7 @@
                     <td class="text-center">{{ $call->sr_no }}</td>
                     <td class="text-center">
                         @php
-                            switch ($call->type) {
+                            switch ($call->call_type) {
                                 case 'breakdown':
                         @endphp
                                     @lang('equicare.breakdown')
