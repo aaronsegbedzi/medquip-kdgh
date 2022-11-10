@@ -94,7 +94,7 @@
 										<td>{{ $call->equipment->name }}</td>
 										<td>{{ $call->equipment->get_department->name }}</td>
 										<td class="text-center">{{ $call->equipment->model }}</td>
-										<td class="text-center">{{ $call->equipment->model }}</td>
+										<td class="text-center">{{ $call->equipment->sr_no }}</td>
 										<td class="text-center">
 											@php
 											switch ($call->call_type) {
