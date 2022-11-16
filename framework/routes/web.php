@@ -22,6 +22,8 @@ Route::get('installed', 'LaravelWebInstaller@index');
 Route::get('migrate', 'LaravelWebInstaller@db_migration');
 Route::get('migration', 'LaravelWebInstaller@migration');
 
+Route::get('/download', 'DownloadController@mobileApp');
+
 Route::group(['middleware' => ['installed_or_not', 'auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/home', function () {
