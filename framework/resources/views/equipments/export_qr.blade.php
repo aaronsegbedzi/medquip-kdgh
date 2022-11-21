@@ -60,8 +60,8 @@
         }
 
         .logo {
-            text-align: right !important;
-            padding-right: 10px !important;
+            text-align: center !important;
+            padding: 8px !important;
         }
 
         img {
@@ -102,8 +102,8 @@
                     <table cellspacing="0" cellpadding="0">
                         <tbody>
                             <tr class="card-header">
-                                <td class="slogan card-header">NEVER<br>alone...<br>ALWAYS<br>by your side</td>
-                                <td class="logo card-header"><img src="{{ asset('assets/1x/logo.png') }}" width="90px"></td>
+                                <!-- <td class="slogan card-header">NEVER<br>alone...<br>ALWAYS<br>by your side</td> -->
+                                <td colspan="2" class="logo card-header"><img src="{{ asset('assets/1x/logo.png') }}" width="120px"></td>
                             </tr>
                             <tr>
                                 <td class="card-body" colspan="2">
@@ -118,7 +118,7 @@
                         </tbody>
                     </table>
                 </div>
-                @if($page == 12)
+                @if($page == 16)
                     <div class="page-break"></div>
                     @php($page = 0)
                 @endif
