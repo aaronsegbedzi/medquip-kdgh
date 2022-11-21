@@ -23,7 +23,7 @@
 
         .card {
             float: left;
-            width: 33.33%;
+            width: 25%;
             margin-right: 2px;
         }
 
@@ -61,7 +61,7 @@
 
         .logo {
             text-align: right !important;
-            padding-right: 20px !important;
+            padding-right: 10px !important;
         }
 
         img {
@@ -89,7 +89,7 @@
 
         @if($equipments->count())
             @foreach ($equipments as $equipment)
-                @if($count == 3 )
+                @if($count == 4 )
                     @php
                         $count = 0;
                     @endphp
@@ -103,7 +103,7 @@
                         <tbody>
                             <tr class="card-header">
                                 <td class="slogan card-header">NEVER<br>alone...<br>ALWAYS<br>by your side</td>
-                                <td class="logo card-header"><img src="{{ asset('assets/1x/logo.png') }}" width="130px"></td>
+                                <td class="logo card-header"><img src="{{ asset('assets/1x/logo.png') }}" width="90px"></td>
                             </tr>
                             <tr>
                                 <td class="card-body" colspan="2">
@@ -118,7 +118,7 @@
                         </tbody>
                     </table>
                 </div>
-                @if($page == 9)
+                @if($page == 12)
                     <div class="page-break"></div>
                     @php($page = 0)
                 @endif

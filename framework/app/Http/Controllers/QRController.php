@@ -28,6 +28,9 @@ class QRController extends Controller
         
             return $pdf->download(time() . '_equipment_qr_codes.pdf');
 
+            // Output the generated PDF to Browser
+            // return $pdf->stream();
+
         } else {
 
             return redirect('admin/equipments')->with('flash_message', 'No Equipments to Generate Qr Codes');
