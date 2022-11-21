@@ -118,7 +118,7 @@
                         </tbody>
                     </table>
                 </div>
-                @if($page == 16)
+                @if($page == 12)
                     <div class="page-break"></div>
                     @php($page = 0)
                 @endif
