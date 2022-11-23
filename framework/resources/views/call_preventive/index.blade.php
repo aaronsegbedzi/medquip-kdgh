@@ -108,7 +108,7 @@
 											@endif
 											@can('Delete Preventive Maintenance')
 											<li>
-												<a class="" href="javascript:document.getElementById('form1').submit();"
+												<a class="" href="javascript:document.getElementById('form1-{{$preventive->id}}').submit();"
 													onclick="return confirm('@lang('equicare.are_you_sure')')" title="@lang('equicare.delete')"><span
 														class="fa fa-trash-o red-color" aria-hidden="true" ></span>
 													@lang('equicare.delete')
@@ -118,7 +118,7 @@
 										</ul>
 									</div>
 									{!! Form::open(['url' =>
-									'admin/call/preventive_maintenance/'.$preventive->id,'method'=>'DELETE','id'=>'form1',
+									'admin/call/preventive_maintenance/'.$preventive->id,'method'=>'DELETE','id'=>'form1-'.$preventive->id,
 									'class'=>'form-horizontal'])
 									!!}
 									<input type="hidden" id="id" name="id" value="{{ $preventive->id }}">

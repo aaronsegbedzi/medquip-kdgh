@@ -109,7 +109,7 @@
 											@endif
 											@can('Delete Breakdown Maintenance')
 											<li>
-												<a class="" href="javascript:document.getElementById('form1').submit();"
+												<a class="" href="javascript:document.getElementById('form1-{{$breakdown->id}}').submit();"
 													onclick="return confirm('@lang('equicare.are_you_sure')')" title="@lang('equicare.delete')"><span
 														class="fa fa-trash-o red-color" aria-hidden="true"></span>
 														@lang('equicare.delete')
@@ -120,7 +120,7 @@
 										</ul>
 									</div>
 									{!! Form::open(['url' =>
-									'admin/call/breakdown_maintenance/'.$breakdown->id,'method'=>'DELETE','id'=>'form1',
+									'admin/call/breakdown_maintenance/'.$breakdown->id,'method'=>'DELETE','id'=>'form1-'.$breakdown->id,
 									'class'=>'form-horizontal'])
 									!!}
 									<input type="hidden" id="id" name="id" value="{{ $breakdown->id }}">
