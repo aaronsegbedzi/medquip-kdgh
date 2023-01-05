@@ -21,7 +21,7 @@ class BreakdownController extends Controller {
 		$index['b_maintenance'] = CallEntry::where('call_type', 'breakdown')->latest()->get();
 		$index['services'] = ServiceRenderedItem::pluck('new_item', 'new_item')->toArray();
 		$index['users'] = User::whereHas('roles', function ($query) {
-			return $query->where('name', 'Engineer');
+			return $query->where('name', 'Engineer')->orWhere('name', 'Manager');
 		})->pluck('name', 'id')->toArray();
 		return view('call_breakdowns.index', $index);
 	}
