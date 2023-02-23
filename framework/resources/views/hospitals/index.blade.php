@@ -54,7 +54,7 @@
 							<!-- <td> {{ $hospital->user ? ucfirst($hospital->user->name) : '-' }}</td> -->
 							<td> {{ $hospital->slug ?? '-' }}</td>
 							<td> {{ $hospital->phone_no ?? '-'}} </td>
-							<td class="text-center text-bold"> {{ $hospital->equipments_count }} </td>
+							<td class="text-center text-bold"> {{ $hospital->equipments()->count() }} </td>
 							<!-- <td> {{ $hospital->mobile_no ?? '-'}} </td> -->
 							@if(Auth::user()->can('Edit Hospitals') || Auth::user()->can('Delete Hospitals'))
                         	<td>
