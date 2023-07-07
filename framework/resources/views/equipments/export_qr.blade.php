@@ -111,7 +111,7 @@
                                     <p class="size20" style="margin-top: 10px;">
                                         <span style="font-family: 'LatoWebHeavy';">{{ $equipment->sr_no }}</span>
                                         <br>
-                                        <span style="font-family: 'LatoWebSemibold';" class="size12">Hotline: +233 20 187 3099</span>
+                                        <span style="font-family: 'LatoWebSemibold';" class="size12">Hotline: {{ env('HOTLINE_NUMBER') }}</span>
                                     </p>
                                 </td>
                             </tr>
