@@ -272,7 +272,7 @@ return [
     'breakdown_event' => 'Corrective Maintenance (BM) Dates',
     'calibration_event' => 'Calibration Due Dates',
     'warranty_event' => 'Warranty Due Dates',
-    'app_title' => 'KDGH Equipment Maintenance Management Software (EMS)',
+    'app_title' => 'KDGH Equipment Maintenance Software (EMS)',
     'qr_sticker_generate' => 'Equipment QR Codes',
     'qr_print_modal_header' => 'Download and Print QR Codes Stickers',
     'download' => 'Download',
