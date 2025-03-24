@@ -24,8 +24,9 @@ framework/Homestead.json
 /.vagrant
 .phpunit.result.cache
 
+uploads/qrcodes.back/*
 uploads/qrcodes/*
-uploads/qrcodes_back/*
+assets/*
 framework/bootstrap/cache/
 framework/bootstrap/cache/packages.php
 framework/bootstrap/cache/services.php
