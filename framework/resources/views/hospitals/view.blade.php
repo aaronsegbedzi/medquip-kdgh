@@ -174,7 +174,11 @@
                                     <td class="text-center">{{ $call->call_register_date_time?date("d M Y",strtotime($call->call_register_date_time)):'-' }}</td>
                                     <td class="text-center">{{ $call->call_attend_date_time?date("d M Y",strtotime($call->call_attend_date_time)):'-' }}</td>
                                     <td class="text-center">{{ $call->call_complete_date_time?date("d M Y",strtotime($call->call_complete_date_time)):'-' }}</td>
-                                    <td class="text-center">{{ $call->user_attended?$call->user_attended_fn->name:'-' }}{{ $call->user_attended_2?' & '.$call->user_attended_2_fn->name:'' }}</td>
+                                    <td class="text-center">
+                                        {{ $call->user_attended ? optional($call->user_attended_fn)->name : '-' }}
+                                        {{ $call->user_attended_2 ? ' & ' . optional($call->user_attended_2_fn)->name : '' }}
+                                    </td>
+
                                     <td class="text-center">{{ $call->service_rendered }}</td>
                                     <td class="text-center">{{ $call->nature_of_problem }}</td>
                                 </tr>
@@ -225,7 +229,11 @@
                                     <td class="text-center">{{ $call->call_register_date_time?date("d M Y",strtotime($call->call_register_date_time)):'-' }}</td>
                                     <td class="text-center">{{ $call->call_attend_date_time?date("d M Y",strtotime($call->call_attend_date_time)):'-' }}</td>
                                     <td class="text-center">{{ $call->call_complete_date_time?date("d M Y",strtotime($call->call_complete_date_time)):'-' }}</td>
-                                    <td class="text-center">{{ $call->user_attended?$call->user_attended_fn->name:'-' }}{{ $call->user_attended_2?' & '.$call->user_attended_2_fn->name:'' }}</td>
+                                    <td class="text-center">
+                                        {{ $call->user_attended ? optional($call->user_attended_fn)->name : '-' }}
+                                        {{ $call->user_attended_2 ? ' & ' . optional($call->user_attended_2_fn)->name : '' }}
+                                    </td>
+
                                     <td class="text-center">{{ $call->service_rendered }}</td>
                                     <td class="text-center">{{ $call->nature_of_problem }}</td>
                                 </tr>

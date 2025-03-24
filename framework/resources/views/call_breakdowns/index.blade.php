@@ -66,7 +66,11 @@
 								<td>
 									{{ $breakdown->call_register_date_time? date('Y-m-d h:i A', strtotime($breakdown->call_register_date_time)) : '-' }}
 								</td>
-								<td>{{$breakdown->user_attended?$breakdown->user_attended_fn->name:'-'}}{{$breakdown->user_attended_2?' & '.$breakdown->user_attended_2_fn->name:''}}</td>
+								<td>
+									{{ $breakdown->user_attended ? optional($breakdown->user_attended_fn)->name : '-' }}
+									{{ $breakdown->user_attended_2 ? ' & ' . optional($breakdown->user_attended_2_fn)->name : '' }}
+								</td>
+
 								<td>
 									{{$breakdown->user_attended?date('Y-m-d H:i A',strtotime($breakdown->call_attend_date_time)):'-'}}
 								</td>

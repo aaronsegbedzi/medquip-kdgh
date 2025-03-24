@@ -88,7 +88,8 @@ function calculateIntervalAverage() {
 				<td> {{ $entry->equipment->unique_id }}</td>
 				<td> {{ $entry->equipment->hospital->name }}</td>
 				<td> {{ ucfirst($entry->call_handle) }}</td>
-				<td> {{ $entry->user_attended_fn->name ?? '' }}</td>
+				<td>{{ optional($entry->user_attended_fn)->name ?? '' }}</td>
+
 				<td> {{ $entry->call_attend_date_time?$resposne_time:'-' }} </td>
 				<td> {{ $entry->call_complete_date_time?$breakdown_time:'-' }}</td>
 				<td> {{ $entry->call_complete_date_time?$attend_to_complete_time:'-' }}</td>

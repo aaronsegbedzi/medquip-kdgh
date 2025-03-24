@@ -45,8 +45,11 @@
 			<td>{{ $call_entry->equipment->unique_id }}</td>
 			<td>{{ ucwords($call_entry->working_status??'-') }}
 			</td>
-			<td>{{ $call_entry->user_attended_fn->name?? '-' }}{{ isset($call_entry->user_attended_2_fn)?' & '.$call_entry->user_attended_2_fn->name:''}}
+			<td>
+				{{ optional($call_entry->user_attended_fn)->name ?? '-' }}
+				{{ optional($call_entry->user_attended_2_fn)->name ? ' & ' . optional($call_entry->user_attended_2_fn)->name : '' }}
 			</td>
+
 			<td>{{$call_entry->call_register_date_time?date('Y-m-d h:i A',strtotime($call_entry->call_register_date_time)): '-' }}</td>
 			<td>{{$call_entry->call_complete_date_time?date('Y-m-d h:i A',strtotime($call_entry->call_complete_date_time)): '-' }}</td>
 			<!-- <td>{{ $call_entry->equipment->date_of_purchase?? '-' }}</td> -->
