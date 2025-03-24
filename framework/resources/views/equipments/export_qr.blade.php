@@ -107,7 +107,7 @@
                             </tr>
                             <tr>
                                 <td class="card-body" colspan="2">
-                                    <img class="company-logo" src="{{ asset('/uploads/qrcodes/'.$equipment->id.'.png') }}" width="130px">
+                                    <img class="company-logo" src="{{ asset('/framework/public/qrcodes/'.$equipment->id.'.png') }}" width="130px">
                                     <p class="size20" style="margin-top: 10px;">
                                         <span style="font-family: 'LatoWebHeavy';">{{ $equipment->sr_no }}</span>
                                         <br>

@@ -28,7 +28,7 @@
 <body>
 	<div class="container">
 		<div class="card">
-			<img src="{{ asset('/uploads/qrcodes/'.$calibration->equipment->id.'.png') }}" style="float:right; padding:5px; width:100px;">
+			<img src="{{ asset('/framework/public/qrcodes/'.$calibration->equipment->id.'.png') }}" style="float:right; padding:5px; width:100px;">
 			<span><b>@lang('equicare.equipment_id') </b> : {{ $calibration->equipment->unique_id}}</span><br/>
 			<span><b>@lang('equicare.equipment_name')</b> : {{ $calibration->equipment->name}}</span>
 			<br>
